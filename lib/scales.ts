@@ -69,20 +69,131 @@ export const ROOT_NOTES = [
   { note: 'B', display: 'B', enharmonic: null },
 ];
 
-// スケールパターン（半音単位のインターバル）
-export const SCALE_PATTERNS: { [key: string]: number[] } = {
-  'メジャー': [0, 2, 4, 5, 7, 9, 11],
-  'マイナー': [0, 2, 3, 5, 7, 8, 10],
-  'ドリアン': [0, 2, 3, 5, 7, 9, 10],
-  'ミクソリディアン': [0, 2, 4, 5, 7, 9, 10],
-  'フリジアン': [0, 1, 3, 5, 7, 8, 10],
-  'リディア': [0, 2, 4, 6, 7, 9, 11],
-  'ロクリアン': [0, 1, 3, 5, 6, 8, 10],
-  'ハーモニックマイナー': [0, 2, 3, 5, 7, 8, 11],
-  'メロディックマイナー': [0, 2, 3, 5, 7, 9, 11],
-  'ブルース': [0, 3, 5, 6, 7, 10],
-  'ペンタトニックメジャー': [0, 2, 4, 7, 9],
-  'ペンタトニックマイナー': [0, 3, 5, 7, 10],
+// インターバル表記から度数（0-6）を抽出
+function getDegreeFromInterval(interval: string): number {
+  const match = interval.match(/\d+/);
+  if (!match) return 0;
+  const degree = parseInt(match[0]);
+  return degree - 1; // 1度=0, 2度=1, ..., 7度=6
+}
+
+// スケールパターン（半音数とインターバル表記）
+export interface ScalePattern {
+  semitones: number;
+  interval: string;
+}
+
+export const SCALE_PATTERNS: { [key: string]: ScalePattern[] } = {
+  'メジャー': [
+    { semitones: 0, interval: 'P1' },   // Perfect 1st
+    { semitones: 2, interval: 'M2' },   // Major 2nd
+    { semitones: 4, interval: 'M3' },   // Major 3rd
+    { semitones: 5, interval: 'P4' },   // Perfect 4th
+    { semitones: 7, interval: 'P5' },   // Perfect 5th
+    { semitones: 9, interval: 'M6' },   // Major 6th
+    { semitones: 11, interval: 'M7' },  // Major 7th
+  ],
+  'マイナー': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 2, interval: 'M2' },
+    { semitones: 3, interval: 'm3' },   // minor 3rd
+    { semitones: 5, interval: 'P4' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 8, interval: 'm6' },   // minor 6th
+    { semitones: 10, interval: 'm7' },  // minor 7th
+  ],
+  'ドリアン': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 2, interval: 'M2' },
+    { semitones: 3, interval: 'm3' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 9, interval: 'M6' },
+    { semitones: 10, interval: 'm7' },
+  ],
+  'ミクソリディアン': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 2, interval: 'M2' },
+    { semitones: 4, interval: 'M3' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 9, interval: 'M6' },
+    { semitones: 10, interval: 'm7' },
+  ],
+  'フリジアン': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 1, interval: 'm2' },   // minor 2nd
+    { semitones: 3, interval: 'm3' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 8, interval: 'm6' },
+    { semitones: 10, interval: 'm7' },
+  ],
+  'リディア': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 2, interval: 'M2' },
+    { semitones: 4, interval: 'M3' },
+    { semitones: 6, interval: 'aug4' }, // augmented 4th
+    { semitones: 7, interval: 'P5' },
+    { semitones: 9, interval: 'M6' },
+    { semitones: 11, interval: 'M7' },
+  ],
+  'ロクリアン': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 1, interval: 'm2' },
+    { semitones: 3, interval: 'm3' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 6, interval: 'dim5' }, // diminished 5th
+    { semitones: 8, interval: 'm6' },
+    { semitones: 10, interval: 'm7' },
+  ],
+  'ハーモニックマイナー': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 2, interval: 'M2' },
+    { semitones: 3, interval: 'm3' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 8, interval: 'm6' },
+    { semitones: 11, interval: 'M7' },
+  ],
+  'メロディックマイナー': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 2, interval: 'M2' },
+    { semitones: 3, interval: 'm3' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 9, interval: 'M6' },
+    { semitones: 11, interval: 'M7' },
+  ],
+  'ブルース': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 3, interval: 'm3' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 6, interval: 'dim5' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 10, interval: 'm7' },
+  ],
+  'ペンタトニックメジャー': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 2, interval: 'M2' },
+    { semitones: 4, interval: 'M3' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 9, interval: 'M6' },
+  ],
+  'ペンタトニックマイナー': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 3, interval: 'm3' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 10, interval: 'm7' },
+  ],
+  '都節音階': [
+    { semitones: 0, interval: 'P1' },
+    { semitones: 1, interval: 'm2' },
+    { semitones: 5, interval: 'P4' },
+    { semitones: 7, interval: 'P5' },
+    { semitones: 8, interval: 'm6' },
+  ],
 };
 
 // スケール名の配列（表示順）
@@ -101,7 +212,7 @@ export function getPitchClass(note: string): number {
 }
 
 // メジャースケールのディグリー（度数）を基準に音名を決定
-export function getScaleNoteNames(rootNote: string, intervals: number[]): string[] {
+export function getScaleNoteNames(rootNote: string, patterns: ScalePattern[]): string[] {
   const rootPitch = getPitchClass(rootNote);
 
   // ルート音のメジャースケールを取得（これが基準となる）
@@ -111,11 +222,11 @@ export function getScaleNoteNames(rootNote: string, intervals: number[]): string
     // メジャースケールが定義されていない場合は、エンハーモニックを試す
     const enharmonic = ENHARMONIC_PAIRS[rootNote];
     if (enharmonic && MAJOR_SCALES[enharmonic]) {
-      return getScaleNoteNames(enharmonic, intervals);
+      return getScaleNoteNames(enharmonic, patterns);
     }
     // それでもない場合は、単純な変換
-    return intervals.map(interval => {
-      const pitch = (rootPitch + interval) % 12;
+    return patterns.map(pattern => {
+      const pitch = (rootPitch + pattern.semitones) % 12;
       return CHROMATIC_SCALE[pitch];
     });
   }
@@ -127,11 +238,14 @@ export function getScaleNoteNames(rootNote: string, intervals: number[]): string
   const rootNatural = rootNote.replace(/[#b]/g, '');
   const rootNaturalIndex = naturalNotes.indexOf(rootNatural);
 
-  return intervals.map((interval, index) => {
-    const targetPitch = (rootPitch + interval) % 12;
+  return patterns.map((pattern) => {
+    const targetPitch = (rootPitch + pattern.semitones) % 12;
+
+    // インターバル表記から度数を取得（例：'P1'→0, 'M2'→1, 'm3'→2）
+    const degree = getDegreeFromInterval(pattern.interval);
 
     // このディグリーで使うべき自然音名を決定
-    const degreeIndex = (rootNaturalIndex + index) % 7;
+    const degreeIndex = (rootNaturalIndex + degree) % 7;
     const expectedNatural = naturalNotes[degreeIndex];
 
     // その自然音名を持つ音名を探す

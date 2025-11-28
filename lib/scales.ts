@@ -158,6 +158,50 @@ export function getScaleNotes(rootNote: string, scaleName: string): string[] {
   return getScaleNoteNames(rootNote, pattern);
 }
 
+// キーに基づいて12音すべての正しい音名表記を取得
+export function getChromaticScaleForKey(rootNote: string): string[] {
+  // メジャースケールを基準とする
+  const majorScale = MAJOR_SCALES[rootNote] || MAJOR_SCALES[ENHARMONIC_PAIRS[rootNote] || rootNote];
+
+  if (!majorScale) {
+    // デフォルトは♯系
+    return ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  }
+
+  // メジャースケールの7音のピッチをマッピング
+  const scaleNoteMap = new Map<number, string>();
+  for (const note of majorScale) {
+    scaleNoteMap.set(getPitchClass(note), note);
+  }
+
+  // 12音すべてを埋める
+  const chromaticScale: string[] = [];
+  const naturalNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+  const isFlat = rootNote.includes('b');
+
+  for (let pitch = 0; pitch < 12; pitch++) {
+    if (scaleNoteMap.has(pitch)) {
+      // メジャースケールに含まれる音はそのまま使用
+      chromaticScale[pitch] = scaleNoteMap.get(pitch)!;
+    } else {
+      // メジャースケールに含まれない音は、キーの♭/♯系に合わせる
+      if (isFlat) {
+        const flatNotes: { [key: number]: string } = {
+          1: 'Db', 3: 'Eb', 6: 'Gb', 8: 'Ab', 10: 'Bb'
+        };
+        chromaticScale[pitch] = flatNotes[pitch] || CHROMATIC_SCALE[pitch];
+      } else {
+        const sharpNotes: { [key: number]: string } = {
+          1: 'C#', 3: 'D#', 6: 'F#', 8: 'G#', 10: 'A#'
+        };
+        chromaticScale[pitch] = sharpNotes[pitch] || CHROMATIC_SCALE[pitch];
+      }
+    }
+  }
+
+  return chromaticScale;
+}
+
 // 指板上の位置から音名を取得（キーに応じた正しい表記で）
 export function getNoteAtPosition(
   stringIndex: number,
@@ -176,33 +220,9 @@ export function getNoteAtPosition(
     }
   }
 
-  // スケール外の音の場合、キーのメジャースケールに基づいて表記を決定
-  const majorScale = MAJOR_SCALES[rootNote] || MAJOR_SCALES[ENHARMONIC_PAIRS[rootNote] || rootNote];
-  if (majorScale) {
-    for (const note of majorScale) {
-      if (getPitchClass(note) === targetPitch) {
-        return note;
-      }
-    }
-  }
-
-  // それでも見つからない場合、キーが♭系か♯系かで判定
-  const isFlat = rootNote.includes('b');
-
-  // ♭系の音名候補と♯系の音名候補
-  const flatCandidates = ALL_NOTE_NAMES.filter(n => n.includes('b') || !n.includes('#'));
-  const sharpCandidates = ALL_NOTE_NAMES.filter(n => n.includes('#') || !n.includes('b'));
-
-  const candidates = isFlat ? flatCandidates : sharpCandidates;
-
-  for (const candidate of candidates) {
-    if (getPitchClass(candidate) === targetPitch) {
-      return candidate;
-    }
-  }
-
-  // 最終フォールバック
-  return CHROMATIC_SCALE[targetPitch];
+  // スケール外の音の場合、キーのクロマティックスケール（12音）から取得
+  const chromaticScale = getChromaticScaleForKey(rootNote);
+  return chromaticScale[targetPitch];
 }
 
 // 特定の音がスケールに含まれるかチェック（ピッチで比較）

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import NoteSelector from '@/components/NoteSelector';
 import ScaleSelector from '@/components/ScaleSelector';
 import GuitarFretboard from '@/components/GuitarFretboard';
+import YoutubeSection from '@/components/YoutubeSection';
 import { getScaleNotes } from '@/lib/scales';
 
 export default function Home() {
@@ -54,6 +55,9 @@ export default function Home() {
             構成音: {scaleNotes.join(' - ')}
           </div>
         </div>
+
+        {/* YouTube参考動画セクション */}
+        <YoutubeSection rootNote={selectedNote} currentScale={selectedScale} />
 
         {/* ギター指板 */}
         <div className="mb-8">

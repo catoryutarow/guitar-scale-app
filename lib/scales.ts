@@ -173,14 +173,14 @@ export const SCALE_PATTERNS: { [key: string]: ScalePattern[] } = {
     { semitones: 7, interval: 'P5' },
     { semitones: 10, interval: 'm7' },
   ],
-  'ペンタトニックメジャー': [
+  'メジャーペンタトニック': [
     { semitones: 0, interval: 'P1' },
     { semitones: 2, interval: 'M2' },
     { semitones: 4, interval: 'M3' },
     { semitones: 7, interval: 'P5' },
     { semitones: 9, interval: 'M6' },
   ],
-  'ペンタトニックマイナー': [
+  'マイナーペンタトニック': [
     { semitones: 0, interval: 'P1' },
     { semitones: 3, interval: 'm3' },
     { semitones: 5, interval: 'P4' },

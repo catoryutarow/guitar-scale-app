@@ -5,6 +5,7 @@ import NoteSelector from '@/components/NoteSelector';
 import ScaleSelector from '@/components/ScaleSelector';
 import GuitarFretboard from '@/components/GuitarFretboard';
 import YoutubeSection from '@/components/YoutubeSection';
+import AudioAnalyzer from '@/components/AudioAnalyzer';
 import { getScaleNotes } from '@/lib/scales';
 
 export default function Home() {
@@ -12,6 +13,20 @@ export default function Home() {
   const [selectedScale, setSelectedScale] = useState('メジャー');
 
   const scaleNotes = getScaleNotes(selectedNote, selectedScale);
+
+  // 音源解析結果からのスケール切り替えハンドラー
+  const handleScaleSelectFromAnalysis = (rootNote: string, scaleName: string) => {
+    setSelectedNote(rootNote);
+    setSelectedScale(scaleName);
+
+    // スムーズスクロールで指板まで移動
+    setTimeout(() => {
+      const fretboardSection = document.getElementById('fretboard-section');
+      if (fretboardSection) {
+        fretboardSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -56,11 +71,14 @@ export default function Home() {
           </div>
         </div>
 
+        {/* 音源解析セクション */}
+        <AudioAnalyzer onScaleSelect={handleScaleSelectFromAnalysis} />
+
         {/* YouTube参考動画セクション */}
         <YoutubeSection rootNote={selectedNote} currentScale={selectedScale} />
 
         {/* ギター指板 */}
-        <div className="mb-8">
+        <div id="fretboard-section" className="mb-8">
           <GuitarFretboard
             rootNote={selectedNote}
             scaleNotes={scaleNotes}

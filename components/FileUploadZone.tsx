@@ -36,8 +36,13 @@ export default function FileUploadZone({
       };
     }
 
-    // ファイル形式チェック
-    if (!SUPPORTED_AUDIO_FORMATS.includes(file.type as any)) {
+    // ファイル形式チェック（MIMEタイプまたは拡張子）
+    const supportedExtensions = ['.mp3', '.wav', '.m4a', '.flac', '.ogg', '.aac'];
+    const fileExtension = file.name.toLowerCase().match(/\.[^.]+$/)?.[0];
+    const isMimeTypeSupported = SUPPORTED_AUDIO_FORMATS.includes(file.type as any);
+    const isExtensionSupported = fileExtension && supportedExtensions.includes(fileExtension);
+
+    if (!isMimeTypeSupported && !isExtensionSupported) {
       return {
         valid: false,
         error: 'サポートされていないファイル形式です',

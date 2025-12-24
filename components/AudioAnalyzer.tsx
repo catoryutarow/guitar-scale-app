@@ -36,14 +36,21 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
   const [error, setError] = useState<string | null>(null);
 
   // ファイル選択時の処理
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = async (file: File) => {
     setSelectedFile(file);
     setError(null);
+
+    // モバイルUX改善: ファイル選択直後に自動的に解析開始
+    setTimeout(() => {
+      handleStartAnalysis(file);
+    }, 500);
   };
 
   // 解析開始
-  const handleStartAnalysis = async () => {
-    if (!selectedFile) {
+  const handleStartAnalysis = async (fileToAnalyze?: File) => {
+    const file = fileToAnalyze || selectedFile;
+
+    if (!file) {
       setError('ファイルを選択してください');
       return;
     }
@@ -56,7 +63,7 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
       // クライアントサイドから直接Vercel Blobにアップロード
       setProgress(30);
 
-      const blob = await upload(selectedFile.name, selectedFile, {
+      const blob = await upload(file.name, file, {
         access: 'public',
         handleUploadUrl: '/api/upload',
       });
@@ -67,15 +74,15 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
       console.log('Upload completed:', {
         jobId,
         fileUrl,
-        fileName: selectedFile.name,
+        fileName: file.name,
       });
 
       setJobId(jobId);
       setUploadedFileInfo({
         jobId,
-        originalFileName: selectedFile.name,
-        mimeType: selectedFile.type,
-        size: selectedFile.size,
+        originalFileName: file.name,
+        mimeType: file.type,
+        size: file.size,
         storedFilePath: fileUrl,
         uploadedAt: new Date().toISOString(),
       });

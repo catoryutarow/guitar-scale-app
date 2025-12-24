@@ -28,13 +28,6 @@ export default function FileUploadZone({
 
   // ファイルのバリデーション
   const validateFile = useCallback((file: File): { valid: boolean; error?: string } => {
-    console.log('📱 Validating file:', {
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      maxSize: MAX_FILE_SIZE,
-    });
-
     // ファイルサイズチェック
     if (file.size > MAX_FILE_SIZE) {
       return {
@@ -50,13 +43,6 @@ export default function FileUploadZone({
     const isExtensionSupported = fileExtension && supportedExtensions.includes(fileExtension);
     const isMimeTypeSupported = file.type && SUPPORTED_AUDIO_FORMATS.includes(file.type as any);
 
-    console.log('📱 File format check:', {
-      extension: fileExtension,
-      isExtensionSupported,
-      mimeType: file.type,
-      isMimeTypeSupported,
-    });
-
     // 拡張子またはMIMEタイプのどちらかが正しければOK
     if (!isExtensionSupported && !isMimeTypeSupported) {
       return {
@@ -70,69 +56,36 @@ export default function FileUploadZone({
 
   // ファイル選択処理
   const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement> | Event) => {
-    console.log('📱 handleFileChange triggered');
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
-    console.log('📱 File selected:', {
-      name: file?.name,
-      size: file?.size,
-      type: file?.type,
-    });
 
     if (file) {
       const validation = validateFile(file);
-      console.log('📱 Validation result:', validation);
 
       if (validation.valid) {
-        console.log('📱 Calling onFileSelect...');
         onFileSelect(file);
       } else {
-        console.error('📱 Validation failed:', validation.error);
         alert(validation.error);
       }
-    } else {
-      console.log('📱 No file selected');
     }
   }, [onFileSelect, validateFile]);
 
   // iOS対策: ネイティブイベントリスナーを直接追加
+  // iOSのSafariでは'change'イベントではなく'input'イベントが発火するため、両方をリッスン
   useEffect(() => {
-    console.log('📱 useEffect running for file input');
     const input = fileInputRef.current;
-    console.log('📱 fileInputRef.current:', input);
-
-    if (!input) {
-      console.error('📱 fileInputRef.current is null!');
-      return;
-    }
+    if (!input) return;
 
     const handler = (e: Event) => {
-      console.log('📱 Native change event fired', e.type);
       handleFileChange(e);
     };
 
-    const clickHandler = () => {
-      console.log('📱 Input element clicked!');
-    };
-
-    const focusHandler = () => {
-      console.log('📱 Input element focused!');
-    };
-
-    // 複数のイベントをリッスン
-    console.log('📱 Adding event listeners...');
     input.addEventListener('change', handler);
     input.addEventListener('input', handler);
-    input.addEventListener('click', clickHandler);
-    input.addEventListener('focus', focusHandler);
-    console.log('📱 Event listeners added');
 
     return () => {
-      console.log('📱 Removing event listeners');
       input.removeEventListener('change', handler);
       input.removeEventListener('input', handler);
-      input.removeEventListener('click', clickHandler);
-      input.removeEventListener('focus', focusHandler);
     };
   }, [handleFileChange]);
 
@@ -179,15 +132,7 @@ export default function FileUploadZone({
 
   // ファイル選択ボタンクリック
   const handleButtonClick = () => {
-    console.log('📱 handleButtonClick called');
-    console.log('📱 fileInputRef.current:', fileInputRef.current);
-    if (fileInputRef.current) {
-      console.log('📱 Calling input.click()');
-      fileInputRef.current.click();
-      console.log('📱 input.click() called');
-    } else {
-      console.error('📱 fileInputRef.current is null in handleButtonClick');
-    }
+    fileInputRef.current?.click();
   };
 
   return (
@@ -208,28 +153,13 @@ export default function FileUploadZone({
           }
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-blue-400'}
         `}
-        onClick={(e) => {
-          console.log('📱 Drop zone clicked', { disabled, selectedFile: !!selectedFile });
-          if (!disabled && !selectedFile) {
-            handleButtonClick();
-          }
-        }}
+        onClick={!disabled && !selectedFile ? handleButtonClick : undefined}
       >
         {/* 非表示のfile input */}
         <input
           ref={fileInputRef}
           type="file"
           accept=".mp3,.wav,.m4a,.flac,.ogg,.aac"
-          onChange={(e) => {
-            console.log('📱 React onChange fired');
-            handleFileChange(e);
-          }}
-          onClick={() => {
-            console.log('📱 Input onClick fired');
-          }}
-          onFocus={() => {
-            console.log('📱 Input onFocus fired');
-          }}
           disabled={disabled}
           className="hidden"
           key={selectedFile?.name || 'file-input'}
@@ -298,7 +228,6 @@ export default function FileUploadZone({
             <button
               type="button"
               onClick={(e) => {
-                console.log('📱 ファイルを選択 button clicked');
                 e.stopPropagation();
                 handleButtonClick();
               }}

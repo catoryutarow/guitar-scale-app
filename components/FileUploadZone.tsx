@@ -28,6 +28,13 @@ export default function FileUploadZone({
 
   // ファイルのバリデーション
   const validateFile = (file: File): { valid: boolean; error?: string } => {
+    console.log('📱 Validating file:', {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      maxSize: MAX_FILE_SIZE,
+    });
+
     // ファイルサイズチェック
     if (file.size > MAX_FILE_SIZE) {
       return {
@@ -36,13 +43,22 @@ export default function FileUploadZone({
       };
     }
 
-    // ファイル形式チェック（MIMEタイプまたは拡張子）
+    // ファイル形式チェック（拡張子を優先、次にMIMEタイプ）
+    // iOSでは正しいMIMEタイプが取得できないことがあるため、拡張子チェックを優先
     const supportedExtensions = ['.mp3', '.wav', '.m4a', '.flac', '.ogg', '.aac'];
     const fileExtension = file.name.toLowerCase().match(/\.[^.]+$/)?.[0];
-    const isMimeTypeSupported = SUPPORTED_AUDIO_FORMATS.includes(file.type as any);
     const isExtensionSupported = fileExtension && supportedExtensions.includes(fileExtension);
+    const isMimeTypeSupported = file.type && SUPPORTED_AUDIO_FORMATS.includes(file.type as any);
 
-    if (!isMimeTypeSupported && !isExtensionSupported) {
+    console.log('📱 File format check:', {
+      extension: fileExtension,
+      isExtensionSupported,
+      mimeType: file.type,
+      isMimeTypeSupported,
+    });
+
+    // 拡張子またはMIMEタイプのどちらかが正しければOK
+    if (!isExtensionSupported && !isMimeTypeSupported) {
       return {
         valid: false,
         error: 'サポートされていないファイル形式です',
@@ -55,13 +71,25 @@ export default function FileUploadZone({
   // ファイル選択処理
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    console.log('📱 File selected:', {
+      name: file?.name,
+      size: file?.size,
+      type: file?.type,
+    });
+
     if (file) {
       const validation = validateFile(file);
+      console.log('📱 Validation result:', validation);
+
       if (validation.valid) {
+        console.log('📱 Calling onFileSelect...');
         onFileSelect(file);
       } else {
+        console.error('📱 Validation failed:', validation.error);
         alert(validation.error);
       }
+    } else {
+      console.log('📱 No file selected');
     }
   };
 

@@ -37,11 +37,19 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
 
   // ファイル選択時の処理
   const handleFileSelect = async (file: File) => {
+    console.log('📱 AudioAnalyzer: File received:', {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    });
+
     setSelectedFile(file);
     setError(null);
 
     // モバイルUX改善: ファイル選択直後に自動的に解析開始
+    console.log('📱 AudioAnalyzer: Setting timeout to start analysis...');
     setTimeout(() => {
+      console.log('📱 AudioAnalyzer: Starting analysis...');
       handleStartAnalysis(file);
     }, 500);
   };
@@ -50,12 +58,20 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
   const handleStartAnalysis = async (fileToAnalyze?: File) => {
     const file = fileToAnalyze || selectedFile;
 
+    console.log('📱 handleStartAnalysis called with:', {
+      fileToAnalyze: fileToAnalyze?.name,
+      selectedFile: selectedFile?.name,
+      finalFile: file?.name,
+    });
+
     if (!file) {
+      console.error('📱 No file available for analysis');
       setError('ファイルを選択してください');
       return;
     }
 
     try {
+      console.log('📱 Starting upload process...');
       setError(null);
       setStatus('uploading');
       setProgress(0);
@@ -94,8 +110,11 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
       await fetchAnalysisResult(jobId, fileUrl);
 
     } catch (err) {
-      console.error('Analysis error:', err);
-      setError(err instanceof Error ? err.message : '解析中にエラーが発生しました');
+      console.error('📱 Analysis error:', err);
+      console.error('📱 Error stack:', err instanceof Error ? err.stack : 'No stack trace');
+      const errorMessage = err instanceof Error ? err.message : '解析中にエラーが発生しました';
+      console.error('📱 Setting error message:', errorMessage);
+      setError(errorMessage);
       setStatus('failed');
     }
   };

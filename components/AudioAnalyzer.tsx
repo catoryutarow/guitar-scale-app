@@ -11,6 +11,7 @@
 'use client';
 
 import { useState } from 'react';
+import { upload } from '@vercel/blob/client';
 import FileUploadZone from './FileUploadZone';
 import AnalysisProgress from './AnalysisProgress';
 import ChordTimeline from './ChordTimeline';
@@ -52,46 +53,38 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
       setStatus('uploading');
       setProgress(0);
 
-      // アップロード処理
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-
+      // クライアントサイドから直接Vercel Blobにアップロード
       setProgress(30);
 
-      const uploadResponse = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
+      const blob = await upload(selectedFile.name, selectedFile, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
       });
 
-      if (!uploadResponse.ok) {
-        throw new Error('アップロードに失敗しました');
-      }
-
-      const uploadData: UploadResponse = await uploadResponse.json();
-
-      if (!uploadData.success) {
-        throw new Error(uploadData.error || 'アップロードに失敗しました');
-      }
-
-      // アップロード結果を保存（Phase 3でPythonバックエンドに渡すため）
-      setJobId(uploadData.jobId);
-      if (uploadData.fileInfo) {
-        setUploadedFileInfo(uploadData.fileInfo);
-      }
+      const jobId = `job_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+      const fileUrl = blob.url;
 
       console.log('Upload completed:', {
-        jobId: uploadData.jobId,
-        filePath: uploadData.filePath,
-        fileUrl: uploadData.fileUrl,
-        storedFilePath: uploadData.fileInfo?.storedFilePath,
+        jobId,
+        fileUrl,
+        fileName: selectedFile.name,
+      });
+
+      setJobId(jobId);
+      setUploadedFileInfo({
+        jobId,
+        originalFileName: selectedFile.name,
+        mimeType: selectedFile.type,
+        size: selectedFile.size,
+        storedFilePath: fileUrl,
+        uploadedAt: new Date().toISOString(),
       });
 
       setProgress(50);
       setStatus('processing');
 
       // 解析結果の取得
-      // uploadData から直接 storedFilePath を取得して渡す（state更新を待たないため）
-      await fetchAnalysisResult(uploadData.jobId, uploadData.fileInfo?.storedFilePath);
+      await fetchAnalysisResult(jobId, fileUrl);
 
     } catch (err) {
       console.error('Analysis error:', err);

@@ -22,6 +22,7 @@ python-multipart==0.0.6
 librosa==0.10.1
 soundfile==0.12.1
 numpy>=1.26,<1.27
+scipy<1.11  # librosa 0.10.1との互換性のため
 
 # stem 分解（音源分離）
 # demucs==4.0.1

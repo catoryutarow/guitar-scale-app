@@ -9,7 +9,7 @@
 
 'use client';
 
-import { useState, useRef, DragEvent, ChangeEvent } from 'react';
+import { useState, useRef, useEffect, useCallback, DragEvent, ChangeEvent } from 'react';
 import type { FileUploadZoneProps } from '@/lib/audio-analysis-types';
 import { SUPPORTED_AUDIO_FORMATS, MAX_FILE_SIZE } from '@/lib/audio-analysis-types';
 
@@ -27,7 +27,7 @@ export default function FileUploadZone({
   };
 
   // ファイルのバリデーション
-  const validateFile = (file: File): { valid: boolean; error?: string } => {
+  const validateFile = useCallback((file: File): { valid: boolean; error?: string } => {
     console.log('📱 Validating file:', {
       name: file.name,
       size: file.size,
@@ -66,11 +66,13 @@ export default function FileUploadZone({
     }
 
     return { valid: true };
-  };
+  }, []);
 
   // ファイル選択処理
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement> | Event) => {
+    console.log('📱 handleFileChange triggered');
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
     console.log('📱 File selected:', {
       name: file?.name,
       size: file?.size,
@@ -91,7 +93,27 @@ export default function FileUploadZone({
     } else {
       console.log('📱 No file selected');
     }
-  };
+  }, [onFileSelect, validateFile]);
+
+  // iOS対策: ネイティブイベントリスナーを直接追加
+  useEffect(() => {
+    const input = fileInputRef.current;
+    if (!input) return;
+
+    const handler = (e: Event) => {
+      console.log('📱 Native change event fired');
+      handleFileChange(e);
+    };
+
+    // changeとinputの両方のイベントをリッスン
+    input.addEventListener('change', handler);
+    input.addEventListener('input', handler);
+
+    return () => {
+      input.removeEventListener('change', handler);
+      input.removeEventListener('input', handler);
+    };
+  }, [handleFileChange]);
 
   // ドラッグ開始
   const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
@@ -163,10 +185,11 @@ export default function FileUploadZone({
         <input
           ref={fileInputRef}
           type="file"
-          accept=".mp3,.wav,.m4a,.flac,.ogg,.aac,audio/*"
+          accept=".mp3,.wav,.m4a,.flac,.ogg,.aac"
           onChange={handleFileChange}
           disabled={disabled}
           className="hidden"
+          key={selectedFile?.name || 'file-input'}
         />
 
         {/* アイコン */}

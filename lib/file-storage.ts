@@ -11,6 +11,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { promisify } from 'util';
+import { put } from '@vercel/blob';
 
 const writeFile = promisify(fs.writeFile);
 const mkdir = promisify(fs.mkdir);
@@ -52,11 +53,7 @@ export async function saveAudioFile(
         return await saveToLocal(file, jobId, ext);
 
       case 'vercel-blob':
-        // TODO: Vercel Blob Storageへの保存処理を実装
-        // import { put } from '@vercel/blob';
-        // const blob = await put(`audio-${jobId}${ext}`, file, { access: 'public' });
-        // return { success: true, fileUrl: blob.url };
-        throw new Error('Vercel Blob Storage はまだ実装されていません');
+        return await saveToVercelBlob(file, jobId, ext);
 
       case 's3':
         // TODO: AWS S3への保存処理を実装
@@ -121,6 +118,43 @@ async function saveToLocal(
     return {
       success: false,
       error: error instanceof Error ? error.message : 'ローカル保存に失敗しました',
+    };
+  }
+}
+
+/**
+ * Vercel Blob Storageに保存
+ *
+ * @param file - アップロードされたファイル
+ * @param jobId - ジョブID
+ * @param ext - ファイル拡張子
+ * @returns 保存結果
+ */
+async function saveToVercelBlob(
+  file: File,
+  jobId: string,
+  ext: string
+): Promise<SaveFileResult> {
+  try {
+    const fileName = `audio-${jobId}${ext}`;
+
+    // Vercel Blobにアップロード
+    const blob = await put(fileName, file, {
+      access: 'public',
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    });
+
+    console.log(`File saved to Vercel Blob: ${blob.url}`);
+
+    return {
+      success: true,
+      fileUrl: blob.url,
+    };
+  } catch (error) {
+    console.error('Vercel Blob save error:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Vercel Blob保存に失敗しました',
     };
   }
 }

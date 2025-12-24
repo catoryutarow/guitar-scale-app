@@ -247,7 +247,7 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
             {selectedFile && (
               <div className="mt-6 flex justify-center">
                 <button
-                  onClick={handleStartAnalysis}
+                  onClick={() => handleStartAnalysis()}
                   className="inline-flex items-center px-8 py-3 bg-purple-500 text-white text-lg font-bold rounded-lg hover:bg-purple-600 transition-colors shadow-lg hover:shadow-xl"
                 >
                   <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -37,6 +37,21 @@ function HomeContent() {
     }
   }, [searchParams]);
 
+  // スケール選択時のハンドラー（スマホのみスクロール）
+  const handleScaleSelect = (scale: string) => {
+    setSelectedScale(scale);
+
+    // スマホ判定（画面幅768px以下）
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setTimeout(() => {
+        const fretboardSection = document.getElementById('fretboard-section');
+        if (fretboardSection) {
+          fretboardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
+
   const scaleNotes = getScaleNotes(selectedNote, selectedScale);
 
   return (
@@ -68,7 +83,7 @@ function HomeContent() {
           </h2>
           <ScaleSelector
             selectedScale={selectedScale}
-            onSelectScale={setSelectedScale}
+            onSelectScale={handleScaleSelect}
           />
         </div>
 

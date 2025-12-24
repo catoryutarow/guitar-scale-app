@@ -16,6 +16,7 @@ import FileUploadZone from './FileUploadZone';
 import AnalysisProgress from './AnalysisProgress';
 import ChordTimeline from './ChordTimeline';
 import ScaleMatchCard from './ScaleMatchCard';
+import { useLanguage } from '@/contexts/LanguageContext';
 import type {
   AudioAnalyzerProps,
   AnalysisResult,
@@ -26,6 +27,7 @@ import type {
 } from '@/lib/audio-analysis-types';
 
 export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
+  const { t } = useLanguage();
   // 状態管理
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [status, setStatus] = useState<AnalysisStatus>('idle');
@@ -188,10 +190,10 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
           <svg className="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
           </svg>
-          <h2 className="text-3xl font-bold">音源解析</h2>
+          <h2 className="text-3xl font-bold">{t.audioAnalysis}</h2>
         </div>
         <p className="text-blue-100">
-          音源ファイルをアップロードして、コード進行とスケールを自動解析します
+          {t.uploadDescription}
         </p>
       </div>
 

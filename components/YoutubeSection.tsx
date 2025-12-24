@@ -26,10 +26,10 @@ export default function YoutubeSection({ rootNote, currentScale }: YoutubeSectio
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="mb-4">
           <h3 className="text-2xl font-bold text-gray-800 mb-2">
-            このスケールの参考曲
+            {t.referenceSongs}
           </h3>
           <p className="text-sm text-gray-600">
-            スケール: <span className="font-semibold text-gray-800">{rootNote} {t.scaleNames[currentScale]}</span>
+            {t.scale}: <span className="font-semibold text-gray-800">{rootNote} {t.scaleNames[currentScale]}</span>
           </p>
         </div>
 

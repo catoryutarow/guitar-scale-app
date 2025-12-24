@@ -32,6 +32,10 @@ export interface Translations {
   audioAnalysis: string;
   audioAnalysisSubtitle: string;
   uploadDescription: string;
+
+  // YouTube参考曲セクション
+  referenceSongs: string;
+  scale: string;
   dragAndDrop: string;
   or: string;
   selectFile: string;
@@ -109,6 +113,9 @@ export const translations: Record<Language, Translations> = {
     audioAnalysis: '音源解析',
     audioAnalysisSubtitle: 'Audio Analysis for Guitar Scales',
     uploadDescription: '音源ファイルをアップロードして、コード進行とスケールを自動解析します',
+
+    referenceSongs: 'このスケールの参考曲',
+    scale: 'スケール',
     dragAndDrop: '音源ファイルをドラッグ&ドロップ',
     or: 'または',
     selectFile: 'ファイルを選択',
@@ -194,6 +201,9 @@ export const translations: Record<Language, Translations> = {
     audioAnalysis: 'Audio Analysis',
     audioAnalysisSubtitle: 'Audio Analysis for Guitar Scales',
     uploadDescription: 'Upload audio files to automatically analyze chord progressions and scales',
+
+    referenceSongs: 'Reference Songs for This Scale',
+    scale: 'Scale',
     dragAndDrop: 'Drag & Drop Audio File',
     or: 'or',
     selectFile: 'Select File',
@@ -279,6 +289,9 @@ export const translations: Record<Language, Translations> = {
     audioAnalysis: '音频分析',
     audioAnalysisSubtitle: 'Audio Analysis for Guitar Scales',
     uploadDescription: '上传音频文件，自动分析和弦进行和音阶',
+
+    referenceSongs: '此音阶的参考歌曲',
+    scale: '音阶',
     dragAndDrop: '拖放音频文件',
     or: '或',
     selectFile: '选择文件',

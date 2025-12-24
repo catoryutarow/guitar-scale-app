@@ -1,0 +1,29 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="64" height="64" fill="white"/>
+
+  <!-- 手書き風の「ギ」 -->
+  <!-- 左側の縦線（太め） -->
+  <path d="M 14 10 Q 15 32 14 54" stroke="black" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- 左上の横線 -->
+  <path d="M 8 18 L 28 16" stroke="black" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- 左下の横線 -->
+  <path d="M 8 36 L 28 34" stroke="black" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- 右側の縦線（少し斜め） -->
+  <path d="M 36 12 Q 38 32 40 54" stroke="black" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- 右上の横線 -->
+  <path d="M 30 18 L 50 16" stroke="black" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- 右下の横線 -->
+  <path d="M 30 36 L 50 34" stroke="black" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- 濁点（上） -->
+  <circle cx="52" cy="14" r="3" fill="black"/>
+
+  <!-- 濁点（下） -->
+  <circle cx="52" cy="24" r="3" fill="black"/>
+</svg>

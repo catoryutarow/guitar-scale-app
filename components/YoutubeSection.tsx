@@ -63,9 +63,6 @@ export default function YoutubeSection({ rootNote, currentScale }: YoutubeSectio
             <p className="text-gray-500">
               このスケールに紐づく動画はまだ登録されていません。
             </p>
-            <p className="text-sm text-gray-400 mt-2">
-              動画を追加するには <code className="bg-gray-100 px-2 py-1 rounded text-xs">lib/youtube-data.ts</code> を編集してください。
-            </p>
           </div>
         )}
       </div>

@@ -61,9 +61,17 @@ export async function POST(
       return NextResponse.json(errorResponse, { status: 400 });
     }
 
+    // ホストのパスをDockerコンテナ内のパスに変換
+    // ホスト: /Users/ryutaro/gt_app/guitar-scale-app/python-backend/uploads/audio-xxx.mp3
+    // コンテナ: /app/uploads/audio-xxx.mp3
+    const containerFilePath = filePath.includes('python-backend/uploads/')
+      ? filePath.replace(/.*python-backend\/uploads\//, '/app/uploads/')
+      : filePath;
+
     console.log('Requesting analysis from Python backend:', {
       jobId,
       filePath,
+      containerFilePath,
       backendUrl: PYTHON_BACKEND_URL,
     });
 
@@ -80,7 +88,7 @@ export async function POST(
         },
         body: JSON.stringify({
           jobId,
-          filePath,
+          filePath: containerFilePath,
           options: options || {
             separateStems: true,
             analysisDepth: 'basic',
@@ -189,6 +197,11 @@ export async function GET(
     // （簡略化のため、内部的にPOSTを呼び出す）
     console.log('GET method called, redirecting to POST logic');
 
+    // ホストのパスをDockerコンテナ内のパスに変換
+    const containerFilePath = filePath.includes('python-backend/uploads/')
+      ? filePath.replace(/.*python-backend\/uploads\//, '/app/uploads/')
+      : filePath;
+
     const analyzeUrl = `${PYTHON_BACKEND_URL}/analyze`;
 
     const pythonResponse = await fetch(analyzeUrl, {
@@ -198,7 +211,7 @@ export async function GET(
       },
       body: JSON.stringify({
         jobId,
-        filePath,
+        filePath: containerFilePath,
         options: {
           separateStems: true,
           analysisDepth: 'basic',

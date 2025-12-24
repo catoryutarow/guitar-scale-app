@@ -21,28 +21,44 @@ export default function AnalysisProgress({
     switch (status) {
       case 'uploading':
         return {
-          icon: '📤',
+          iconComponent: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+          ),
           title: 'アップロード中',
           defaultMessage: '音源ファイルをアップロードしています...',
           color: 'blue',
         };
       case 'analyzing':
         return {
-          icon: '🎵',
+          iconComponent: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+            </svg>
+          ),
           title: '解析中',
           defaultMessage: 'コード進行を解析しています...',
           color: 'purple',
         };
       case 'completed':
         return {
-          icon: '✅',
+          iconComponent: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          ),
           title: '解析完了',
           defaultMessage: '解析が完了しました！',
           color: 'green',
         };
       default:
         return {
-          icon: '⏳',
+          iconComponent: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          ),
           title: '処理中',
           defaultMessage: '処理を実行しています...',
           color: 'gray',
@@ -81,7 +97,7 @@ export default function AnalysisProgress({
     <div className={`w-full rounded-lg p-6 ${bgColor} border border-${statusInfo.color}-200`}>
       {/* ステータス表示 */}
       <div className="flex items-center mb-4">
-        <span className="text-3xl mr-3">{statusInfo.icon}</span>
+        <div className={`mr-3 ${textColor}`}>{statusInfo.iconComponent}</div>
         <div className="flex-1">
           <h3 className={`text-lg font-bold ${textColor}`}>
             {statusInfo.title}

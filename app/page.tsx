@@ -1,32 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import NoteSelector from '@/components/NoteSelector';
 import ScaleSelector from '@/components/ScaleSelector';
 import GuitarFretboard from '@/components/GuitarFretboard';
 import YoutubeSection from '@/components/YoutubeSection';
-import AudioAnalyzer from '@/components/AudioAnalyzer';
 import { getScaleNotes } from '@/lib/scales';
+import Link from 'next/link';
 
-export default function Home() {
+function HomeContent() {
+  const searchParams = useSearchParams();
   const [selectedNote, setSelectedNote] = useState('G');
   const [selectedScale, setSelectedScale] = useState('メジャー');
 
+  // URLパラメータからnoteとscaleを取得
+  useEffect(() => {
+    const noteParam = searchParams.get('note');
+    const scaleParam = searchParams.get('scale');
+
+    if (noteParam) {
+      setSelectedNote(noteParam);
+    }
+    if (scaleParam) {
+      setSelectedScale(scaleParam);
+    }
+
+    // パラメータがあれば指板までスクロール
+    if (noteParam || scaleParam) {
+      setTimeout(() => {
+        const fretboardSection = document.getElementById('fretboard-section');
+        if (fretboardSection) {
+          fretboardSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
+
   const scaleNotes = getScaleNotes(selectedNote, selectedScale);
-
-  // 音源解析結果からのスケール切り替えハンドラー
-  const handleScaleSelectFromAnalysis = (rootNote: string, scaleName: string) => {
-    setSelectedNote(rootNote);
-    setSelectedScale(scaleName);
-
-    // スムーズスクロールで指板まで移動
-    setTimeout(() => {
-      const fretboardSection = document.getElementById('fretboard-section');
-      if (fretboardSection) {
-        fretboardSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, 100);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -61,6 +72,32 @@ export default function Home() {
           />
         </div>
 
+        {/* 音源自動解析へのリンク */}
+        <div className="text-center mb-8">
+          <Link
+            href="/analysis"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200"
+          >
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+              />
+            </svg>
+            音源自動解析はこちら
+          </Link>
+          <p className="text-sm text-gray-500 mt-2">
+            音源ファイルをアップロードして自動でスケールを検出
+          </p>
+        </div>
+
         {/* 選択中のスケール表示 */}
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-800">
@@ -70,9 +107,6 @@ export default function Home() {
             構成音: {scaleNotes.join(' - ')}
           </div>
         </div>
-
-        {/* 音源解析セクション */}
-        <AudioAnalyzer onScaleSelect={handleScaleSelectFromAnalysis} />
 
         {/* YouTube参考動画セクション */}
         <YoutubeSection rootNote={selectedNote} currentScale={selectedScale} />
@@ -101,5 +135,13 @@ export default function Home() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

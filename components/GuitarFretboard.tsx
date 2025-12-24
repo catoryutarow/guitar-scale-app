@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { GUITAR_TUNING, getNoteAtPosition, isNoteInScale, getScaleDegree, getPitchClass } from '@/lib/scales';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface GuitarFretboardProps {
   rootNote: string;
@@ -10,6 +11,7 @@ interface GuitarFretboardProps {
 }
 
 export default function GuitarFretboard({ rootNote, scaleNotes, numFrets = 12 }: GuitarFretboardProps) {
+  const { t } = useLanguage();
   const fretMarkers = [3, 5, 7, 9, 12, 15, 17, 19, 21];
   const doubleFretMarkers = [12];
   const [isRotated, setIsRotated] = useState(false);
@@ -131,7 +133,7 @@ export default function GuitarFretboard({ rootNote, scaleNotes, numFrets = 12 }:
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
-          {isRotated ? '元に戻す' : 'タップで回転'}
+          {isRotated ? t.returnToNormal : t.tapToRotate}
         </button>
       </div>
 
@@ -152,7 +154,7 @@ export default function GuitarFretboard({ rootNote, scaleNotes, numFrets = 12 }:
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
-              元に戻す
+              {t.returnToNormal}
             </button>
           </div>
 

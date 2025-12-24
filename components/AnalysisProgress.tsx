@@ -10,12 +10,14 @@
 'use client';
 
 import type { AnalysisProgressProps } from '@/lib/audio-analysis-types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AnalysisProgress({
   progress,
   status,
   message,
 }: AnalysisProgressProps) {
+  const { t } = useLanguage();
   // 状態に応じたメッセージとアイコンを取得
   const getStatusInfo = () => {
     switch (status) {
@@ -26,8 +28,8 @@ export default function AnalysisProgress({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
           ),
-          title: 'アップロード中',
-          defaultMessage: '音源ファイルをアップロードしています...',
+          title: t.uploading,
+          defaultMessage: t.uploadingMessage,
           color: 'blue',
         };
       case 'analyzing':
@@ -37,9 +39,9 @@ export default function AnalysisProgress({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
             </svg>
           ),
-          title: '解析中',
-          defaultMessage: 'コード進行を解析しています...',
-          color: 'purple',
+          title: t.analyzing,
+          defaultMessage: t.analyzingMessage,
+          color: 'yellow',
         };
       case 'completed':
         return {
@@ -48,9 +50,9 @@ export default function AnalysisProgress({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           ),
-          title: '解析完了',
-          defaultMessage: '解析が完了しました！',
-          color: 'green',
+          title: t.completed,
+          defaultMessage: t.completedMessage,
+          color: 'blue',
         };
       default:
         return {
@@ -59,8 +61,8 @@ export default function AnalysisProgress({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           ),
-          title: '処理中',
-          defaultMessage: '処理を実行しています...',
+          title: t.processing,
+          defaultMessage: t.processingMessage,
           color: 'gray',
         };
     }
@@ -72,24 +74,21 @@ export default function AnalysisProgress({
   // プログレスバーの色
   const progressBarColor = {
     blue: 'bg-blue-500',
-    purple: 'bg-purple-500',
-    green: 'bg-green-500',
+    yellow: 'bg-yellow-500',
     gray: 'bg-gray-500',
   }[statusInfo.color];
 
   // 背景色
   const bgColor = {
     blue: 'bg-blue-50',
-    purple: 'bg-purple-50',
-    green: 'bg-green-50',
+    yellow: 'bg-yellow-50',
     gray: 'bg-gray-50',
   }[statusInfo.color];
 
   // テキスト色
   const textColor = {
     blue: 'text-blue-700',
-    purple: 'text-purple-700',
-    green: 'text-green-700',
+    yellow: 'text-yellow-700',
     gray: 'text-gray-700',
   }[statusInfo.color];
 
@@ -129,7 +128,7 @@ export default function AnalysisProgress({
       {/* 完了時の追加メッセージ */}
       {status === 'completed' && (
         <div className="mt-4 text-center text-sm text-gray-600">
-          下にスクロールして解析結果をご確認ください
+          {t.scrollToResults}
         </div>
       )}
 

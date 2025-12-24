@@ -10,6 +10,7 @@
 'use client';
 
 import type { ScaleMatchCardProps } from '@/lib/audio-analysis-types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ScaleMatchCard({
   matchingScales,
@@ -17,6 +18,7 @@ export default function ScaleMatchCard({
   currentRootNote,
   currentScale,
 }: ScaleMatchCardProps) {
+  const { t } = useLanguage();
   // マッチ率に応じたランク表示
   const getRankBadge = (index: number) => {
     const badges = [
@@ -40,7 +42,7 @@ export default function ScaleMatchCard({
       },
       {
         label: '3位',
-        color: 'bg-orange-300 text-orange-900',
+        color: 'bg-blue-200 text-blue-900',
         icon: (
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -68,8 +70,8 @@ export default function ScaleMatchCard({
 
   // マッチ率に応じた色を取得
   const getMatchRateColor = (matchRate: number): string => {
-    if (matchRate >= 0.9) return 'text-green-600';
-    if (matchRate >= 0.8) return 'text-blue-600';
+    if (matchRate >= 0.9) return 'text-blue-600';
+    if (matchRate >= 0.8) return 'text-blue-500';
     if (matchRate >= 0.7) return 'text-yellow-600';
     return 'text-gray-600';
   };
@@ -90,16 +92,16 @@ export default function ScaleMatchCard({
   return (
     <div className="w-full">
       <h3 className="text-xl font-bold text-gray-800 mb-2">
-        マッチするスケール
+        {t.matchingScales}
       </h3>
       <p className="text-sm text-gray-600 mb-4">
-        検出されたコード進行にマッチする可能性の高いスケールです
+        {t.matchingScalesDesc}
       </p>
 
       {/* スケールが見つからない場合 */}
       {matchingScales.length === 0 ? (
         <div className="text-center py-8 bg-gray-50 rounded-lg">
-          <p className="text-gray-500">マッチするスケールが見つかりませんでした</p>
+          <p className="text-gray-500">{t.noMatchingScales}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -125,7 +127,7 @@ export default function ScaleMatchCard({
 
                   {/* 右側：マッチ率 */}
                   <div className="text-right">
-                    <div className="text-xs text-gray-500">マッチ率</div>
+                    <div className="text-xs text-gray-500">{t.matchRate}</div>
                     <div className={`text-2xl font-bold ${matchRateColor}`}>
                       {Math.round(match.matchRate * 100)}%
                     </div>
@@ -138,7 +140,7 @@ export default function ScaleMatchCard({
                     {match.rootNote} {match.scale}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">
-                    マッチしたコード: {match.matchingChords.join(', ')}
+                    {t.matchedChords}: {match.matchingChords.join(', ')}
                   </div>
                 </div>
 
@@ -153,14 +155,14 @@ export default function ScaleMatchCard({
                           clipRule="evenodd"
                         />
                       </svg>
-                      現在選択中のスケール
+                      {t.currentlySelected}
                     </div>
                   ) : (
                     <button
                       onClick={() => handleSelectScale(match.rootNote, match.scale)}
                       className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm hover:shadow-md"
                     >
-                      このスケールに切り替える
+                      {t.switchToScale}
                     </button>
                   )}
                 </div>
@@ -178,9 +180,7 @@ export default function ScaleMatchCard({
               <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
             </svg>
             <p className="text-sm text-gray-600">
-              <strong>ヒント：</strong>
-              マッチ率が高いスケールほど、検出されたコード進行との相性が良いです。
-              スケールを切り替えると、指板上の表示も自動的に更新されます。
+              {t.scaleHint}
             </p>
           </div>
         </div>

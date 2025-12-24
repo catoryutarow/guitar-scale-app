@@ -183,14 +183,14 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
   return (
     <div className="w-full max-w-6xl mx-auto mb-8">
       {/* セクションヘッダー */}
-      <div className="bg-orange-500 rounded-t-lg p-6 text-white">
+      <div className="bg-blue-500 rounded-t-lg p-6 text-white">
         <div className="flex items-center mb-2">
           <svg className="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
           </svg>
           <h2 className="text-3xl font-bold">音源解析</h2>
         </div>
-        <p className="text-orange-100">
+        <p className="text-blue-100">
           音源ファイルをアップロードして、コード進行とスケールを自動解析します
         </p>
       </div>
@@ -229,7 +229,7 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
               <div className="mt-6 flex justify-center">
                 <button
                   onClick={() => handleStartAnalysis()}
-                  className="inline-flex items-center px-8 py-3 bg-purple-500 text-white text-lg font-bold rounded-lg hover:bg-purple-600 transition-colors shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center px-8 py-3 bg-blue-500 text-white text-lg font-bold rounded-lg hover:bg-blue-600 transition-colors shadow-lg hover:shadow-xl"
                 >
                   <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />

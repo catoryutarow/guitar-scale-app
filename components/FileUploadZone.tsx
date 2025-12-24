@@ -12,12 +12,14 @@
 import { useState, useRef, useEffect, useCallback, DragEvent, ChangeEvent } from 'react';
 import type { FileUploadZoneProps } from '@/lib/audio-analysis-types';
 import { SUPPORTED_AUDIO_FORMATS, MAX_FILE_SIZE } from '@/lib/audio-analysis-types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function FileUploadZone({
   onFileSelect,
   selectedFile,
   disabled = false,
 }: FileUploadZoneProps) {
+  const { t } = useLanguage();
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -32,7 +34,7 @@ export default function FileUploadZone({
     if (file.size > MAX_FILE_SIZE) {
       return {
         valid: false,
-        error: `ファイルサイズが大きすぎます（最大 ${formatFileSize(MAX_FILE_SIZE)}MB）`,
+        error: `${t.fileTooLarge}（${t.maxFileSize}: ${formatFileSize(MAX_FILE_SIZE)}MB）`,
       };
     }
 
@@ -47,12 +49,12 @@ export default function FileUploadZone({
     if (!isExtensionSupported && !isMimeTypeSupported) {
       return {
         valid: false,
-        error: 'サポートされていないファイル形式です',
+        error: t.unsupportedFormat,
       };
     }
 
     return { valid: true };
-  }, []);
+  }, [t]);
 
   // ファイル選択処理
   const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement> | Event) => {
@@ -148,7 +150,7 @@ export default function FileUploadZone({
           ${isDragging
             ? 'border-blue-500 bg-blue-50'
             : selectedFile
-            ? 'border-green-500 bg-green-50'
+            ? 'border-blue-500 bg-blue-50'
             : 'border-gray-300 bg-gray-50'
           }
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-blue-400'}
@@ -169,7 +171,7 @@ export default function FileUploadZone({
         <div className="mb-4">
           {selectedFile ? (
             <svg
-              className="mx-auto h-12 w-12 text-green-500"
+              className="mx-auto h-12 w-12 text-blue-500"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -215,16 +217,16 @@ export default function FileUploadZone({
                 }}
                 className="mt-3 text-sm text-blue-600 hover:text-blue-700 underline"
               >
-                別のファイルを選択
+                {t.selectAnotherFile}
               </button>
             )}
           </div>
         ) : (
           <div>
             <p className="text-lg font-semibold text-gray-700 mb-2">
-              音源ファイルをドラッグ&ドロップ
+              {t.dragAndDrop}
             </p>
-            <p className="text-sm text-gray-500 mb-3">または</p>
+            <p className="text-sm text-gray-500 mb-3">{t.or}</p>
             <button
               type="button"
               onClick={(e) => {
@@ -234,15 +236,15 @@ export default function FileUploadZone({
               disabled={disabled}
               className="px-6 py-2 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors disabled:opacity-50"
             >
-              ファイルを選択
+              {t.selectFile}
             </button>
           </div>
         )}
 
         {/* 対応フォーマット表示 */}
         <div className="mt-4 text-xs text-gray-500">
-          <p>対応形式: MP3, WAV, M4A, FLAC, OGG</p>
-          <p>最大ファイルサイズ: {formatFileSize(MAX_FILE_SIZE)} MB</p>
+          <p>{t.supportedFormats}: MP3, WAV, M4A, FLAC, OGG</p>
+          <p>{t.maxFileSize}: {formatFileSize(MAX_FILE_SIZE)} MB</p>
         </div>
       </div>
     </div>

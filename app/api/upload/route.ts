@@ -34,11 +34,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           pathname,
         });
 
-        // 署名付きURLを発行（認証なし、サイズ制限20MB）
+        // 署名付きURLを発行（認証なし、サイズ制限20MB、上書き許可）
         return {
           allowedContentTypes: ['audio/mpeg', 'audio/wav', 'audio/mp4', 'audio/x-m4a', 'audio/flac', 'audio/ogg'],
           maximumSizeInBytes: 20 * 1024 * 1024, // 20MB
           tokenPayload: JSON.stringify({ jobId }),
+          allowOverwrite: true,
         };
       },
       onUploadCompleted: async ({ blob, tokenPayload }) => {

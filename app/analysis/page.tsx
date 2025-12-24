@@ -22,6 +22,17 @@ export default function AnalysisPage() {
             音源自動解析
           </h1>
           <p className="text-gray-600">Audio Analysis for Guitar Scales</p>
+
+          {/* デバッグ: JavaScriptテスト */}
+          <button
+            onClick={() => {
+              alert('✅ JavaScriptが動作しています！');
+              console.log('✅ Test button clicked');
+            }}
+            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            🧪 JavaScript動作テスト
+          </button>
         </div>
 
         {/* 戻るリンク */}

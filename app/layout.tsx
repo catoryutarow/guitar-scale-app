@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Kiwi_Maru } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const kiwiMaru = Kiwi_Maru({
   weight: ['300', '400', '500'],
@@ -25,7 +26,9 @@ export default function RootLayout({
         className={`${kiwiMaru.variable} font-sans antialiased`}
         style={{ fontFamily: 'var(--font-kiwi-maru)' }}
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

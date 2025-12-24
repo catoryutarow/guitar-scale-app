@@ -2,10 +2,13 @@
 
 import { useRouter } from 'next/navigation';
 import AudioAnalyzer from '@/components/AudioAnalyzer';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
 
 export default function AnalysisPage() {
   const router = useRouter();
+  const { t } = useLanguage();
 
   // 音源解析結果からのスケール切り替えハンドラー
   const handleScaleSelectFromAnalysis = (rootNote: string, scaleName: string) => {
@@ -16,12 +19,17 @@ export default function AnalysisPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <main className="container mx-auto px-4 py-8">
+        {/* 言語切り替え */}
+        <div className="flex justify-end mb-4">
+          <LanguageSwitcher />
+        </div>
+
         {/* ヘッダー */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            音源自動解析
+            {t.audioAnalysis}
           </h1>
-          <p className="text-gray-600">Audio Analysis for Guitar Scales</p>
+          <p className="text-gray-600">{t.audioAnalysisSubtitle}</p>
         </div>
 
         {/* 戻るリンク */}
@@ -43,7 +51,7 @@ export default function AnalysisPage() {
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-            スケール選択画面に戻る
+            {t.backToScale}
           </Link>
         </div>
 
@@ -52,13 +60,13 @@ export default function AnalysisPage() {
 
         {/* 説明 */}
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mt-8">
-          <h3 className="text-lg font-semibold text-gray-800 mb-3">音源解析の使い方</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.audioHowToUse}</h3>
           <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>MP3、WAV、M4Aなどの音源ファイルをアップロード</li>
-            <li>AIが自動的にキー（ルート音）とスケールを検出</li>
-            <li>検出されたコード進行をタイムライン表示</li>
-            <li>マッチするスケールの候補を複数提案</li>
-            <li>「このスケールで練習する」ボタンで指板表示画面に移動</li>
+            <li>{t.audioInstruction1}</li>
+            <li>{t.audioInstruction2}</li>
+            <li>{t.audioInstruction3}</li>
+            <li>{t.audioInstruction4}</li>
+            <li>{t.audioInstruction5}</li>
           </ul>
         </div>
       </main>

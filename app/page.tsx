@@ -6,10 +6,13 @@ import NoteSelector from '@/components/NoteSelector';
 import ScaleSelector from '@/components/ScaleSelector';
 import GuitarFretboard from '@/components/GuitarFretboard';
 import YoutubeSection from '@/components/YoutubeSection';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { getScaleNotes } from '@/lib/scales';
+import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
 
 function HomeContent() {
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const [selectedNote, setSelectedNote] = useState('G');
   const [selectedScale, setSelectedScale] = useState('メジャー');
@@ -57,18 +60,22 @@ function HomeContent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <main className="container mx-auto px-4 py-8">
-        {/* ヘッダー */}
+        {/* ヘッダーと言語切り替え */}
+        <div className="flex justify-end mb-4">
+          <LanguageSwitcher />
+        </div>
+
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            ギタースケールわかる君
+            {t.appTitle}
           </h1>
-          <p className="text-gray-600">Guitar Scale Visualizer</p>
+          <p className="text-gray-600">{t.appSubtitle}</p>
         </div>
 
         {/* 音名選択 */}
         <div className="mb-8">
           <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center">
-            ルート音を選択
+            {t.selectRootNote}
           </h2>
           <NoteSelector
             selectedNote={selectedNote}
@@ -79,7 +86,7 @@ function HomeContent() {
         {/* スケール選択 */}
         <div className="mb-8">
           <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center">
-            スケールを選択
+            {t.selectScale}
           </h2>
           <ScaleSelector
             selectedScale={selectedScale}
@@ -106,20 +113,20 @@ function HomeContent() {
                 d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
               />
             </svg>
-            音源からスケールを自動解析
+            {t.audioAnalysisLink}
           </Link>
           <p className="text-sm text-gray-500 mt-2">
-            音源ファイルをアップロードして自動でスケールを検出
+            {t.audioAnalysisDesc}
           </p>
         </div>
 
         {/* 選択中のスケール表示 */}
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-800">
-            {selectedNote} {selectedScale} スケール
+            {selectedNote} {selectedScale} {t.currentScale}
           </h2>
           <div className="mt-2 text-gray-600">
-            構成音: {scaleNotes.join(' - ')}
+            {t.notes}: {scaleNotes.join(' - ')}
           </div>
         </div>
 
@@ -137,15 +144,15 @@ function HomeContent() {
 
         {/* 説明 */}
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mt-8">
-          <h3 className="text-lg font-semibold text-gray-800 mb-3">使い方</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.howToUse}</h3>
           <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>ルート音（キー）を選択してください</li>
-            <li>切り替えボタンで♯系/♭系を変更できます</li>
-            <li>表示したいスケールを選択してください</li>
-            <li>黄色の丸がスケール上の音を示しています</li>
-            <li>濃い黄色の丸がルート音（1度）を示しています</li>
-            <li>数字はスケール内での度数（1-7）を表します</li>
-            <li>音名は、メジャースケールのディグリーを基準に音楽理論的に正しく表示されます</li>
+            <li>{t.instruction1}</li>
+            <li>{t.instruction2}</li>
+            <li>{t.instruction3}</li>
+            <li>{t.instruction4}</li>
+            <li>{t.instruction5}</li>
+            <li>{t.instruction6}</li>
+            <li>{t.instruction7}</li>
           </ul>
         </div>
       </main>

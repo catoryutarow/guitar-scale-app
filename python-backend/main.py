@@ -120,7 +120,7 @@ class AnalyzeResponse(BaseModel):
 # 環境変数による解析モード切り替え
 # ============================================
 
-USE_REAL_ANALYSIS = os.getenv("USE_REAL_ANALYSIS", "false").lower() == "true"
+USE_REAL_ANALYSIS = os.getenv("USE_REAL_ANALYSIS", "true").lower() == "true"
 
 print("=" * 60)
 print("🎵 Audio Analysis API - Startup")

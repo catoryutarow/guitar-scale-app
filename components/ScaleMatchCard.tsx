@@ -137,7 +137,7 @@ export default function ScaleMatchCard({
                 {/* スケール情報 */}
                 <div className="mb-3">
                   <div className="text-2xl font-bold text-gray-800">
-                    {match.rootNote} {match.scale}
+                    {match.rootNote} {t.scaleNames[match.scale]}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">
                     {t.matchedChords}: {match.matchingChords.join(', ')}

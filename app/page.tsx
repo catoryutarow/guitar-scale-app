@@ -123,7 +123,7 @@ function HomeContent() {
         {/* 選択中のスケール表示 */}
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-800">
-            {selectedNote} {selectedScale} {t.currentScale}
+            {selectedNote} {t.scaleNames[selectedScale]} {t.currentScale}
           </h2>
           <div className="mt-2 text-gray-600">
             {t.notes}: {scaleNotes.join(' - ')}

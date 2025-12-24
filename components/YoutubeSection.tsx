@@ -5,7 +5,10 @@
  * 動画情報は lib/youtube-data.ts で管理されています。
  */
 
+'use client';
+
 import { getVideosForRootAndScale, getYoutubeEmbedUrl } from '@/lib/youtube-data';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface YoutubeSectionProps {
   rootNote: string;     // 現在選択中のルート音（例: "G"）
@@ -13,6 +16,7 @@ interface YoutubeSectionProps {
 }
 
 export default function YoutubeSection({ rootNote, currentScale }: YoutubeSectionProps) {
+  const { t } = useLanguage();
   // 現在のルート音とスケールに紐づく動画リストを取得
   const videos = getVideosForRootAndScale(rootNote, currentScale);
 
@@ -25,7 +29,7 @@ export default function YoutubeSection({ rootNote, currentScale }: YoutubeSectio
             このスケールの参考曲
           </h3>
           <p className="text-sm text-gray-600">
-            スケール: <span className="font-semibold text-gray-800">{rootNote} {currentScale}</span>
+            スケール: <span className="font-semibold text-gray-800">{rootNote} {t.scaleNames[currentScale]}</span>
           </p>
         </div>
 

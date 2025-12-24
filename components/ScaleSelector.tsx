@@ -1,4 +1,7 @@
+'use client';
+
 import { SCALE_NAMES } from '@/lib/scales';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ScaleSelectorProps {
   selectedScale: string;
@@ -6,6 +9,7 @@ interface ScaleSelectorProps {
 }
 
 export default function ScaleSelector({ selectedScale, onSelectScale }: ScaleSelectorProps) {
+  const { t } = useLanguage();
   return (
     <div className="mb-8">
       <div className="flex flex-wrap gap-2 justify-center">
@@ -21,7 +25,7 @@ export default function ScaleSelector({ selectedScale, onSelectScale }: ScaleSel
               }
             `}
           >
-            {scale}
+            {t.scaleNames[scale]}
           </button>
         ))}
       </div>

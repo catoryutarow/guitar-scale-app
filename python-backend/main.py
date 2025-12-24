@@ -19,6 +19,8 @@ from typing import List, Dict, Optional
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import requests
+import tempfile
 
 # 環境変数を読み込み
 load_dotenv()
@@ -39,7 +41,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",  # Next.js 開発サーバー
         "http://127.0.0.1:3000",
-        # 本番環境のドメインもここに追加
+        "https://*.vercel.app",  # Vercel デプロイ（プレビュー）
+        "*",  # 本番環境用（一時的に全許可、後で制限）
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -143,6 +146,54 @@ else:
     print("=" * 60)
 
 # ============================================
+# ユーティリティ関数
+# ============================================
+
+def download_file_if_url(file_path: str) -> str:
+    """
+    URLの場合はダウンロードして一時ファイルに保存、
+    ローカルパスの場合はそのまま返す
+
+    Args:
+        file_path: ファイルパスまたはURL
+
+    Returns:
+        str: ローカルファイルパス
+    """
+    # URLかどうかを判定
+    if file_path.startswith('http://') or file_path.startswith('https://'):
+        print(f"  → Downloading file from URL: {file_path}")
+
+        try:
+            # URLからファイルをダウンロード
+            response = requests.get(file_path, timeout=30)
+            response.raise_for_status()
+
+            # 拡張子を取得（URLから）
+            ext = '.mp3'  # デフォルト
+            if '.' in file_path:
+                ext = '.' + file_path.split('.')[-1].split('?')[0]  # クエリパラメータを除去
+
+            # 一時ファイルに保存
+            with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp_file:
+                tmp_file.write(response.content)
+                local_path = tmp_file.name
+
+            print(f"  → Downloaded to: {local_path} ({len(response.content)} bytes)")
+            return local_path
+
+        except requests.RequestException as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Failed to download file from URL: {str(e)}"
+            )
+    else:
+        # ローカルパスの場合はそのまま返す
+        print(f"  → Using local file: {file_path}")
+        return file_path
+
+
+# ============================================
 # エンドポイント
 # ============================================
 
@@ -176,35 +227,38 @@ async def analyze_audio(request: AnalyzeRequest):
     """
 
     try:
-        # ファイルパスのバリデーション
-        file_path = Path(request.filePath)
-
-        if not file_path.exists():
-            raise HTTPException(
-                status_code=404,
-                detail=f"Audio file not found: {request.filePath}"
-            )
-
         print("\n" + "=" * 60)
         print(f"🎵 Analyzing audio file")
         print("=" * 60)
         print(f"Job ID: {request.jobId}")
-        print(f"File Path: {request.filePath}")
+        print(f"File Path/URL: {request.filePath}")
         print(f"Options: {request.options}")
         print(f"Analysis Mode: {'REAL (librosa)' if USE_REAL_ANALYSIS else 'DUMMY (固定値)'}")
         print("=" * 60)
+
+        # URLの場合はダウンロード、ローカルパスの場合はそのまま使用
+        local_file_path = download_file_if_url(request.filePath)
+
+        # ファイルパスのバリデーション
+        file_path = Path(local_file_path)
+
+        if not file_path.exists():
+            raise HTTPException(
+                status_code=404,
+                detail=f"Audio file not found: {local_file_path}"
+            )
 
         # 環境変数に応じて実解析 or ダミー解析を選択
         if USE_REAL_ANALYSIS:
             print("→ Calling analyze_audio_real()...")
             result = analyze_audio_real(
-                file_path=request.filePath,
+                file_path=local_file_path,
                 options=request.options.dict() if request.options else {}
             )
         else:
             print("→ Calling analyze_audio_dummy()...")
             result = analyze_audio_dummy(
-                file_path=request.filePath,
+                file_path=local_file_path,
                 options=request.options.dict() if request.options else {}
             )
 

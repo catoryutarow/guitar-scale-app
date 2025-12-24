@@ -163,7 +163,7 @@ export default function FileUploadZone({
         <input
           ref={fileInputRef}
           type="file"
-          accept={SUPPORTED_AUDIO_FORMATS.join(',')}
+          accept=".mp3,.wav,.m4a,.flac,.ogg,.aac,audio/*"
           onChange={handleFileChange}
           disabled={disabled}
           className="hidden"

@@ -7,6 +7,7 @@ import ScaleSelector from '@/components/ScaleSelector';
 import GuitarFretboard from '@/components/GuitarFretboard';
 import YoutubeSection from '@/components/YoutubeSection';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import HelpButton from '@/components/HelpButton';
 import { getScaleNotes } from '@/lib/scales';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
@@ -68,20 +69,6 @@ function HomeContent() {
             {t.appTitle}
           </h1>
           <p className="text-gray-600">{t.appSubtitle}</p>
-        </div>
-
-        {/* 使い方 */}
-        <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
-          <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.howToUse}</h3>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>{t.instruction1}</li>
-            <li>{t.instruction2}</li>
-            <li>{t.instruction3}</li>
-            <li>{t.instruction4}</li>
-            <li>{t.instruction5}</li>
-            <li>{t.instruction6}</li>
-            <li>{t.instruction7}</li>
-          </ul>
         </div>
 
         {/* 音名選択 */}
@@ -153,6 +140,9 @@ function HomeContent() {
             numFrets={15}
           />
         </div>
+
+        {/* フローティングヘルプボタン */}
+        <HelpButton />
       </main>
     </div>
   );

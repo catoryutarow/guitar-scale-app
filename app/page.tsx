@@ -70,6 +70,20 @@ function HomeContent() {
           <p className="text-gray-600">{t.appSubtitle}</p>
         </div>
 
+        {/* 使い方 */}
+        <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.howToUse}</h3>
+          <ul className="list-disc list-inside text-gray-700 space-y-2">
+            <li>{t.instruction1}</li>
+            <li>{t.instruction2}</li>
+            <li>{t.instruction3}</li>
+            <li>{t.instruction4}</li>
+            <li>{t.instruction5}</li>
+            <li>{t.instruction6}</li>
+            <li>{t.instruction7}</li>
+          </ul>
+        </div>
+
         {/* 音名選択 */}
         <div className="mb-8">
           <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center">
@@ -138,20 +152,6 @@ function HomeContent() {
             scaleNotes={scaleNotes}
             numFrets={15}
           />
-        </div>
-
-        {/* 説明 */}
-        <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mt-8">
-          <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.howToUse}</h3>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>{t.instruction1}</li>
-            <li>{t.instruction2}</li>
-            <li>{t.instruction3}</li>
-            <li>{t.instruction4}</li>
-            <li>{t.instruction5}</li>
-            <li>{t.instruction6}</li>
-            <li>{t.instruction7}</li>
-          </ul>
         </div>
       </main>
     </div>

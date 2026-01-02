@@ -86,6 +86,14 @@ export interface Translations {
   // 指板関連
   tapToRotate: string;
   returnToNormal: string;
+
+  // チューニング選択
+  tuningSelection: string;
+  tuningStandard: string;
+  tuningDrop: string;
+  tuningOpenAlternate: string;
+  halfStepDown: string;
+  currentTuning: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -175,6 +183,13 @@ export const translations: Record<Language, Translations> = {
 
     tapToRotate: 'タップで回転',
     returnToNormal: '元に戻す',
+
+    tuningSelection: 'チューニング選択',
+    tuningStandard: 'スタンダード',
+    tuningDrop: 'ドロップ',
+    tuningOpenAlternate: 'オープン・オルタネート',
+    halfStepDown: '半音下げ（全弦 -1）',
+    currentTuning: '現在のチューニング',
   },
 
   en: {
@@ -263,6 +278,13 @@ export const translations: Record<Language, Translations> = {
 
     tapToRotate: 'Tap to Rotate',
     returnToNormal: 'Reset',
+
+    tuningSelection: 'Tuning Selection',
+    tuningStandard: 'Standard',
+    tuningDrop: 'Drop',
+    tuningOpenAlternate: 'Open & Alternate',
+    halfStepDown: 'Half-step down (all strings -1)',
+    currentTuning: 'Current Tuning',
   },
 
   zh: {
@@ -351,6 +373,13 @@ export const translations: Record<Language, Translations> = {
 
     tapToRotate: 'Tap to Rotate',
     returnToNormal: 'Reset',
+
+    tuningSelection: 'Tuning Selection',
+    tuningStandard: 'Standard',
+    tuningDrop: 'Drop',
+    tuningOpenAlternate: 'Open & Alternate',
+    halfStepDown: 'Half-step down (all strings -1)',
+    currentTuning: 'Current Tuning',
   },
 
   es: {
@@ -439,6 +468,13 @@ export const translations: Record<Language, Translations> = {
 
     tapToRotate: 'Toca para Rotar',
     returnToNormal: 'Restablecer',
+
+    tuningSelection: 'Tuning Selection',
+    tuningStandard: 'Standard',
+    tuningDrop: 'Drop',
+    tuningOpenAlternate: 'Open & Alternate',
+    halfStepDown: 'Half-step down (all strings -1)',
+    currentTuning: 'Current Tuning',
   },
 };
 

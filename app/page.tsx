@@ -101,19 +101,6 @@ function HomeContent() {
           />
         </div>
 
-        {/* チューニング選択 */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center">
-            Tuning Selection
-          </h2>
-          <TuningSelector
-            selectedTuningId={selectedTuningId}
-            onSelectTuning={setSelectedTuningId}
-            halfStepDown={halfStepDown}
-            onToggleHalfStep={setHalfStepDown}
-          />
-        </div>
-
         {/* 音源自動解析へのリンク */}
         <div className="text-center mb-8">
           <Link
@@ -153,8 +140,18 @@ function HomeContent() {
         {/* YouTube参考動画セクション */}
         <YoutubeSection rootNote={selectedNote} currentScale={selectedScale} />
 
+        {/* チューニング選択（指板の直前） */}
+        <div id="fretboard-section" className="mb-2">
+          <TuningSelector
+            selectedTuningId={selectedTuningId}
+            onSelectTuning={setSelectedTuningId}
+            halfStepDown={halfStepDown}
+            onToggleHalfStep={setHalfStepDown}
+          />
+        </div>
+
         {/* ギター指板 */}
-        <div id="fretboard-section" className="mb-8">
+        <div className="mb-8">
           <GuitarFretboard
             rootNote={selectedNote}
             scaleNotes={scaleNotes}

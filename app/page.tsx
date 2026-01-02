@@ -137,6 +137,7 @@ function HomeContent() {
           <GuitarFretboard
             rootNote={selectedNote}
             scaleNotes={scaleNotes}
+            scaleName={selectedScale}
             numFrets={15}
           />
         </div>

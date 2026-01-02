@@ -1,16 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { GUITAR_TUNING, getNoteAtPosition, isNoteInScale, getScaleDegree, getPitchClass } from '@/lib/scales';
+import { GUITAR_TUNING, getNoteAtPosition, isNoteInScale, getScaleDegreeLabel, getPitchClass } from '@/lib/scales';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface GuitarFretboardProps {
   rootNote: string;
   scaleNotes: string[];
+  scaleName: string;
   numFrets?: number;
 }
 
-export default function GuitarFretboard({ rootNote, scaleNotes, numFrets = 12 }: GuitarFretboardProps) {
+export default function GuitarFretboard({ rootNote, scaleNotes, scaleName, numFrets = 12 }: GuitarFretboardProps) {
   const { t } = useLanguage();
   const fretMarkers = [3, 5, 7, 9, 12, 15, 17, 19, 21];
   const doubleFretMarkers = [12];
@@ -65,7 +66,7 @@ export default function GuitarFretboard({ rootNote, scaleNotes, numFrets = 12 }:
                     {Array.from({ length: numFrets + 1 }, (_, fret) => {
                       const note = getNoteAtPosition(actualStringIndex, fret, rootNote, scaleNotes);
                       const inScale = isNoteInScale(note, scaleNotes);
-                      const degree = getScaleDegree(note, scaleNotes);
+                      const degreeLabel = getScaleDegreeLabel(note, rootNote, scaleName, scaleNotes);
                       const isRoot = getPitchClass(note) === getPitchClass(rootNote);
 
                       return (
@@ -87,7 +88,7 @@ export default function GuitarFretboard({ rootNote, scaleNotes, numFrets = 12 }:
                                 `}
                               >
                                 <span className="text-xs">{note}</span>
-                                <span className="text-[10px] text-gray-700">{degree}</span>
+                                <span className="text-[10px] text-gray-700">{degreeLabel}</span>
                               </div>
                             </div>
                           )}

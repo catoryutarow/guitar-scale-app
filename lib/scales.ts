@@ -348,7 +348,69 @@ export function isNoteInScale(note: string, scaleNotes: string[]): boolean {
   return scaleNotes.some(scaleNote => getPitchClass(scaleNote) === notePitch);
 }
 
-// 音階での度数を取得（1-7）
+// メジャースケールの各度数の基準半音数
+const MAJOR_SEMITONES_BY_DEGREE = [0, 2, 4, 5, 7, 9, 11] as const;
+
+/**
+ * 半音差分から変化記号文字列を生成
+ * @param diff メジャー基準からの半音差分
+ * @returns 変化記号文字列 ('b', '##', '', など)
+ */
+function semitoneDiffToAccidental(diff: number): string {
+  if (diff === 0) return '';
+  if (diff > 0) return '#'.repeat(diff);   // +1 => #, +2 => ##, +3 => ###
+  return 'b'.repeat(-diff);                // -1 => b, -2 => bb, -3 => bbb
+}
+
+/**
+ * interval表記とsemitonesから度数ラベルを生成
+ * @param interval インターバル表記 (例: 'P1', 'M2', 'm3', 'aug4')
+ * @param semitones ルートからの半音数
+ * @returns 度数ラベル (例: '1', 'b3', '#4', '5')
+ */
+export function intervalToDegreeLabel(interval: string, semitones: number): string {
+  // interval例: P1, M2, m3, aug4, dim5, m7 など
+  const match = interval.match(/\d+/);
+  if (!match) return '?';
+
+  const degreeNum = parseInt(match[0], 10);       // 1..7
+  const majorBase = MAJOR_SEMITONES_BY_DEGREE[degreeNum - 1]; // その度数のメジャー基準の半音
+  const diff = semitones - majorBase;             // 例: m3(3)-M3(4)=-1 => b3
+
+  const accidental = semitoneDiffToAccidental(diff);
+  return `${accidental}${degreeNum}`;             // "b3", "#4", "5", "6" ...
+}
+
+/**
+ * 音名から度数ラベルを取得（欠番を保持）
+ * @param note 音名
+ * @param rootNote ルート音
+ * @param scaleName スケール名
+ * @param scaleNotes スケールの音名配列
+ * @returns 度数ラベル (例: '1', 'b3', '5') または null
+ */
+export function getScaleDegreeLabel(
+  note: string,
+  rootNote: string,
+  scaleName: string,
+  scaleNotes: string[]
+): string | null {
+  const patterns = SCALE_PATTERNS[scaleName];
+  if (!patterns) return null;
+
+  const notePitch = getPitchClass(note);
+
+  // scaleNotes 上で該当音を探す（pitchで照合）
+  const idx = scaleNotes.findIndex(n => getPitchClass(n) === notePitch);
+  if (idx === -1) return null;
+
+  // idx は "スケール内での順番" なので、同じ順番の pattern を参照できる
+  const p = patterns[idx];
+  return intervalToDegreeLabel(p.interval, p.semitones);
+}
+
+// 音階での度数を取得（1-7）- 後方互換性のために残す
+// 注意: この関数はペンタトニックで1-5に詰めてしまうため、新規コードではgetScaleDegreeLabelを使用すること
 export function getScaleDegree(note: string, scaleNotes: string[]): number | null {
   const notePitch = getPitchClass(note);
   const index = scaleNotes.findIndex(scaleNote => getPitchClass(scaleNote) === notePitch);

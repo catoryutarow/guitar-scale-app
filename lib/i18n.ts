@@ -94,6 +94,13 @@ export interface Translations {
   tuningOpenAlternate: string;
   halfStepDown: string;
   currentTuning: string;
+
+  // 楽器名
+  instrumentGuitar: string;
+  instrumentGuitar3: string;
+  instrumentUkulele: string;
+  instrumentBass4: string;
+  instrumentBass5: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -190,6 +197,12 @@ export const translations: Record<Language, Translations> = {
     tuningOpenAlternate: 'オープン・オルタネート',
     halfStepDown: '半音下げ（全弦 -1）',
     currentTuning: '現在のチューニング',
+
+    instrumentGuitar: 'ギター (6-9弦)',
+    instrumentGuitar3: '3弦ギター',
+    instrumentUkulele: 'ウクレレ',
+    instrumentBass4: '4弦ベース',
+    instrumentBass5: '5弦ベース',
   },
 
   en: {
@@ -285,6 +298,12 @@ export const translations: Record<Language, Translations> = {
     tuningOpenAlternate: 'Open & Alternate',
     halfStepDown: 'Half-step down (all strings -1)',
     currentTuning: 'Current Tuning',
+
+    instrumentGuitar: 'Guitar (6-9 strings)',
+    instrumentGuitar3: '3-string Guitar',
+    instrumentUkulele: 'Ukulele',
+    instrumentBass4: '4-string Bass',
+    instrumentBass5: '5-string Bass',
   },
 
   zh: {
@@ -380,6 +399,12 @@ export const translations: Record<Language, Translations> = {
     tuningOpenAlternate: 'Open & Alternate',
     halfStepDown: 'Half-step down (all strings -1)',
     currentTuning: 'Current Tuning',
+
+    instrumentGuitar: 'Guitar (6-9 strings)',
+    instrumentGuitar3: '3-string Guitar',
+    instrumentUkulele: 'Ukulele',
+    instrumentBass4: '4-string Bass',
+    instrumentBass5: '5-string Bass',
   },
 
   es: {
@@ -475,6 +500,12 @@ export const translations: Record<Language, Translations> = {
     tuningOpenAlternate: 'Open & Alternate',
     halfStepDown: 'Half-step down (all strings -1)',
     currentTuning: 'Current Tuning',
+
+    instrumentGuitar: 'Guitar (6-9 strings)',
+    instrumentGuitar3: '3-string Guitar',
+    instrumentUkulele: 'Ukulele',
+    instrumentBass4: '4-string Bass',
+    instrumentBass5: '5-string Bass',
   },
 };
 

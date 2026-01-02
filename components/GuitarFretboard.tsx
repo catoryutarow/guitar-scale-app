@@ -1,24 +1,25 @@
 'use client';
 
 import { useState } from 'react';
-import { GUITAR_TUNING, getNoteAtPosition, isNoteInScale, getScaleDegreeLabel, getPitchClass } from '@/lib/scales';
+import { getNoteAtPosition, isNoteInScale, getScaleDegreeLabel, getPitchClass } from '@/lib/scales';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface GuitarFretboardProps {
   rootNote: string;
   scaleNotes: string[];
   scaleName: string;
+  tuningStrings: string[]; // low -> high
   numFrets?: number;
 }
 
-export default function GuitarFretboard({ rootNote, scaleNotes, scaleName, numFrets = 12 }: GuitarFretboardProps) {
+export default function GuitarFretboard({ rootNote, scaleNotes, scaleName, tuningStrings, numFrets = 12 }: GuitarFretboardProps) {
   const { t } = useLanguage();
   const fretMarkers = [3, 5, 7, 9, 12, 15, 17, 19, 21];
   const doubleFretMarkers = [12];
   const [isRotated, setIsRotated] = useState(false);
 
-  // 弦を逆順にして表示（上から1弦、2弦...6弦の順）
-  const reversedTuning = [...GUITAR_TUNING].reverse();
+  // 弦を逆順にして表示（上から1弦、2弦...n弦の順）
+  const reversedTuning = [...tuningStrings].reverse();
 
   // 回転をトグル
   const toggleRotation = () => {
@@ -47,7 +48,7 @@ export default function GuitarFretboard({ rootNote, scaleNotes, scaleName, numFr
 
         {/* 各弦 */}
         {reversedTuning.map((openString, displayIndex) => {
-          const actualStringIndex = GUITAR_TUNING.length - 1 - displayIndex;
+          const actualStringIndex = tuningStrings.length - 1 - displayIndex;
 
           return (
             <div key={displayIndex} className="relative mb-3">
@@ -64,7 +65,7 @@ export default function GuitarFretboard({ rootNote, scaleNotes, scaleName, numFr
 
                   <div className="flex relative">
                     {Array.from({ length: numFrets + 1 }, (_, fret) => {
-                      const note = getNoteAtPosition(actualStringIndex, fret, rootNote, scaleNotes);
+                      const note = getNoteAtPosition(actualStringIndex, fret, rootNote, scaleNotes, tuningStrings);
                       const inScale = isNoteInScale(note, scaleNotes);
                       const degreeLabel = getScaleDegreeLabel(note, rootNote, scaleName, scaleNotes);
                       const isRoot = getPitchClass(note) === getPitchClass(rootNote);

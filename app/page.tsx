@@ -4,11 +4,13 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import NoteSelector from '@/components/NoteSelector';
 import ScaleSelector from '@/components/ScaleSelector';
+import TuningSelector from '@/components/TuningSelector';
 import GuitarFretboard from '@/components/GuitarFretboard';
 import YoutubeSection from '@/components/YoutubeSection';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import HelpButton from '@/components/HelpButton';
 import { getScaleNotes } from '@/lib/scales';
+import { TuningId, TUNINGS, transposeTuning } from '@/lib/tunings';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
 
@@ -17,6 +19,8 @@ function HomeContent() {
   const searchParams = useSearchParams();
   const [selectedNote, setSelectedNote] = useState('G');
   const [selectedScale, setSelectedScale] = useState('メジャー');
+  const [selectedTuningId, setSelectedTuningId] = useState<TuningId>('standard_6');
+  const [halfStepDown, setHalfStepDown] = useState(false);
 
   // URLパラメータからnoteとscaleを取得
   useEffect(() => {
@@ -56,6 +60,10 @@ function HomeContent() {
 
   const scaleNotes = getScaleNotes(selectedNote, selectedScale);
 
+  // チューニングを計算（半音下げを適用）
+  const baseTuning = TUNINGS[selectedTuningId];
+  const tuning = halfStepDown ? transposeTuning(baseTuning, -1) : baseTuning;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <main className="container mx-auto px-4 py-8">
@@ -90,6 +98,19 @@ function HomeContent() {
           <ScaleSelector
             selectedScale={selectedScale}
             onSelectScale={handleScaleSelect}
+          />
+        </div>
+
+        {/* チューニング選択 */}
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center">
+            Tuning Selection
+          </h2>
+          <TuningSelector
+            selectedTuningId={selectedTuningId}
+            onSelectTuning={setSelectedTuningId}
+            halfStepDown={halfStepDown}
+            onToggleHalfStep={setHalfStepDown}
           />
         </div>
 
@@ -138,6 +159,7 @@ function HomeContent() {
             rootNote={selectedNote}
             scaleNotes={scaleNotes}
             scaleName={selectedScale}
+            tuningStrings={tuning.strings}
             numFrets={15}
           />
         </div>

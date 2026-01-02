@@ -320,13 +320,16 @@ export function getChromaticScaleForKey(rootNote: string): string[] {
 }
 
 // 指板上の位置から音名を取得（キーに応じた正しい表記で）
+// 新バージョン: チューニング配列対応
 export function getNoteAtPosition(
   stringIndex: number,
   fret: number,
   rootNote: string,
-  scaleNotes: string[]
+  scaleNotes: string[],
+  tuningStrings?: string[]
 ): string {
-  const openString = GUITAR_TUNING[stringIndex];
+  // 後方互換性: tuningStringsが渡されない場合は旧GUITAR_TUNINGを使用
+  const openString = tuningStrings ? tuningStrings[stringIndex] : GUITAR_TUNING[stringIndex];
   const openPitch = getPitchClass(openString);
   const targetPitch = (openPitch + fret) % 12;
 
@@ -340,6 +343,21 @@ export function getNoteAtPosition(
   // スケール外の音の場合、キーのクロマティックスケール（12音）から取得
   const chromaticScale = getChromaticScaleForKey(rootNote);
   return chromaticScale[targetPitch];
+}
+
+/**
+ * 開放弦の音名とフレット番号から音名を取得（チューニング非依存）
+ * @param openStringNote 開放弦の音名
+ * @param fret フレット番号
+ * @returns 音名
+ */
+export function getNoteFromOpenString(openStringNote: string, fret: number): string {
+  const openPitch = getPitchClass(openStringNote);
+  const targetPitch = (openPitch + fret) % 12;
+
+  // シャープ優先で音名を返す
+  const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  return notes[targetPitch];
 }
 
 // 特定の音がスケールに含まれるかチェック（ピッチで比較）

@@ -2,7 +2,7 @@
  * 多言語対応（i18n）の翻訳データと設定
  */
 
-export type Language = 'ja' | 'en' | 'zh';
+export type Language = 'ja' | 'en' | 'zh' | 'es';
 
 export interface Translations {
   // ヘッダー
@@ -351,6 +351,94 @@ export const translations: Record<Language, Translations> = {
 
     tapToRotate: 'Tap to Rotate',
     returnToNormal: 'Reset',
+  },
+
+  es: {
+    appTitle: 'Maestro de Escalas de Guitarra',
+    appSubtitle: 'Visualizador de Escalas de Guitarra',
+
+    selectRootNote: 'Seleccionar Nota Raíz',
+    selectScale: 'Seleccionar Escala',
+    audioAnalysisLink: 'Analizar Escala Automáticamente desde Audio',
+    audioAnalysisDesc: 'Sube un archivo de audio para detectar escalas automáticamente',
+    currentScale: 'Escala',
+    notes: 'Notas',
+
+    howToUse: 'Cómo Usar',
+    instruction1: 'Selecciona la nota raíz (tonalidad)',
+    instruction2: 'Usa el botón para cambiar entre notación sostenido/bemol',
+    instruction3: 'Selecciona la escala que deseas mostrar',
+    instruction4: 'Los círculos amarillos indican las notas de la escala',
+    instruction5: 'Los círculos amarillos oscuros indican la nota raíz (1er grado)',
+    instruction6: 'Los números representan el grado (1-7) dentro de la escala',
+    instruction7: 'Los nombres de las notas se muestran según la teoría musical basada en los grados de la escala mayor',
+    instruction8: '',
+
+    audioAnalysis: 'Análisis de Audio',
+    audioAnalysisSubtitle: 'Análisis de Audio para Escalas de Guitarra',
+    uploadDescription: 'Sube archivos de audio para analizar automáticamente progresiones de acordes y escalas',
+
+    referenceSongs: 'Canciones de Referencia para Esta Escala',
+    scale: 'Escala',
+    dragAndDrop: 'Arrastra y Suelta el Archivo de Audio',
+    or: 'o',
+    selectFile: 'Seleccionar Archivo',
+    selectAnotherFile: 'Seleccionar Otro Archivo',
+    supportedFormats: 'Formatos Compatibles',
+    maxFileSize: 'Tamaño Máximo de Archivo',
+    fileTooLarge: 'El tamaño del archivo es demasiado grande',
+    unsupportedFormat: 'Formato de archivo no compatible',
+    uploading: 'Subiendo',
+    uploadingMessage: 'Subiendo archivo de audio...',
+    analyzing: 'Analizando',
+    analyzingMessage: 'Analizando progresión de acordes...',
+    completed: 'Análisis Completo',
+    completedMessage: '¡Análisis completado exitosamente!',
+    processing: 'Procesando',
+    processingMessage: 'Procesando...',
+    scrollToResults: 'Desplázate hacia abajo para ver los resultados del análisis',
+    detectedKey: 'Tonalidad Detectada',
+    confidence: 'Confianza',
+    openingChords: 'Acordes de Apertura (Estimados)',
+    aiEstimate: '※ Resultados estimados por IA. Pueden diferir de la progresión de acordes real.',
+    matchingScales: 'Escalas Coincidentes',
+    matchingScalesDesc: 'Escalas que probablemente coincidan con la progresión de acordes detectada',
+    noMatchingScales: 'No se encontraron escalas coincidentes',
+    matchRate: 'Tasa de Coincidencia',
+    matchedChords: 'Acordes Coincidentes',
+    currentlySelected: 'Escala Actualmente Seleccionada',
+    switchToScale: 'Cambiar a Esta Escala',
+    scaleHint: 'Tasas de coincidencia más altas indican mejor compatibilidad con la progresión de acordes detectada. Cambiar escalas actualizará automáticamente la visualización del diapasón.',
+    noChordProgression: 'No se detectó progresión de acordes',
+    practiceWithScale: 'Practicar con Esta Escala',
+    backToScale: 'Volver a Selección de Escalas',
+    analyzeAnother: 'Analizar Otro Audio',
+
+    audioHowToUse: 'Cómo Usar el Análisis de Audio',
+    audioInstruction1: 'Sube archivos de audio (MP3, WAV, M4A, etc.)',
+    audioInstruction2: 'La IA detecta automáticamente la tonalidad (nota raíz) y la escala',
+    audioInstruction3: 'Ver línea de tiempo de la progresión de acordes detectada',
+    audioInstruction4: 'Se sugieren múltiples candidatos de escalas coincidentes',
+    audioInstruction5: 'Haz clic en "Practicar con Esta Escala" para ver el diapasón',
+
+    scaleNames: {
+      'メジャー': 'Mayor',
+      'マイナー': 'Menor',
+      'ドリアン': 'Dórico',
+      'フリジアン': 'Frigio',
+      'リディア': 'Lidio',
+      'ミクソリディアン': 'Mixolidio',
+      'ロクリアン': 'Locrio',
+      'ハーモニックマイナー': 'Menor Armónico',
+      'メロディックマイナー': 'Menor Melódico',
+      'ブルース': 'Blues',
+      'メジャーペンタトニック': 'Pentatónica Mayor',
+      'マイナーペンタトニック': 'Pentatónica Menor',
+      '都節音階': 'Miyako-bushi',
+    },
+
+    tapToRotate: 'Toca para Rotar',
+    returnToNormal: 'Restablecer',
   },
 };
 

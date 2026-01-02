@@ -10,6 +10,7 @@ export default function LanguageSwitcher() {
     { code: 'ja', label: '日本語', flag: '🇯🇵' },
     { code: 'en', label: 'English', flag: '🇺🇸' },
     { code: 'zh', label: '中文', flag: '🇨🇳' },
+    { code: 'es', label: 'Español', flag: '🇪🇸' },
   ];
 
   return (

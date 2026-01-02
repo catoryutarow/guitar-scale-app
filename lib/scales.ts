@@ -1,14 +1,30 @@
-// 音名の定義（クロマティック、半音単位）
+/**
+ * scales.ts - 新しいscaleEngineベースの実装
+ *
+ * 旧実装から新実装への移行:
+ * - 内部では厳密な音名表記（PitchSpelling）を使用
+ * - 既存のAPIとの互換性を保つため、文字列ベースのインターフェースを提供
+ */
+
+import {
+  generateScale,
+  formatScale,
+  SCALE_DEFINITIONS as ENGINE_SCALE_DEFINITIONS,
+  ScaleTone,
+} from './scaleEngine';
+import { parsePitchSpelling, getPitchClass as getPitchClassFromSpelling } from './pitchSpelling';
+
+// 音名の定義（クロマティック、半音単位）- 後方互換性のために残す
 export const CHROMATIC_SCALE = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] as const;
 
-// すべての可能な音名（エンハーモニック含む）
+// すべての可能な音名（エンハーモニック含む）- 後方互換性のために残す
 export const ALL_NOTE_NAMES = [
   'C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'E#', 'Fb',
   'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb',
   'B', 'B#', 'Cb'
 ];
 
-// 音名から半音番号へのマッピング
+// 音名から半音番号へのマッピング - 後方互換性のために残す
 const NOTE_TO_PITCH: { [key: string]: number } = {
   'C': 0, 'B#': 0,
   'C#': 1, 'Db': 1,
@@ -69,20 +85,14 @@ export const ROOT_NOTES = [
   { note: 'B', display: 'B', enharmonic: null },
 ];
 
-// インターバル表記から度数（0-6）を抽出
-function getDegreeFromInterval(interval: string): number {
-  const match = interval.match(/\d+/);
-  if (!match) return 0;
-  const degree = parseInt(match[0]);
-  return degree - 1; // 1度=0, 2度=1, ..., 7度=6
-}
-
-// スケールパターン（半音数とインターバル表記）
+// 旧インターフェースとの互換性のため、ScalePatternを残す
 export interface ScalePattern {
   semitones: number;
   interval: string;
 }
 
+// SCALE_PATTERNSは後方互換性のために残すが、内部では使用しない
+// 新しい実装では SCALE_DEFINITIONS を使用
 export const SCALE_PATTERNS: { [key: string]: ScalePattern[] } = {
   'メジャー': [
     { semitones: 0, interval: 'P1' },   // Perfect 1st
@@ -197,88 +207,82 @@ export const SCALE_PATTERNS: { [key: string]: ScalePattern[] } = {
 };
 
 // スケール名の配列（表示順）
-export const SCALE_NAMES = Object.keys(SCALE_PATTERNS);
+export const SCALE_NAMES = Object.keys(ENGINE_SCALE_DEFINITIONS);
 
 // ギターのチューニング（標準チューニング、6弦から1弦）
 export const GUITAR_TUNING = ['E', 'A', 'D', 'G', 'B', 'E'];
 
-// 音名から半音番号を取得
+// 音名から半音番号を取得（後方互換性のために残す）
 export function getPitchClass(note: string): number {
   const pitch = NOTE_TO_PITCH[note];
   if (pitch === undefined) {
-    throw new Error(`Invalid note: ${note}`);
+    // 新しいエンジンで解析を試みる
+    try {
+      const spelling = parsePitchSpelling(note);
+      return getPitchClassFromSpelling(spelling);
+    } catch {
+      throw new Error(`Invalid note: ${note}`);
+    }
   }
   return pitch;
 }
 
-// メジャースケールのディグリー（度数）を基準に音名を決定
-export function getScaleNoteNames(rootNote: string, patterns: ScalePattern[]): string[] {
-  const rootPitch = getPitchClass(rootNote);
+// 内部キャッシュ（パフォーマンス最適化）
+const scaleCache = new Map<string, ScaleTone[]>();
 
-  // ルート音のメジャースケールを取得（これが基準となる）
-  const majorScale = MAJOR_SCALES[rootNote];
+/**
+ * スケールの音を計算（新エンジンを使用）
+ * 音楽理論的に正しい音名で返す
+ */
+export function getScaleNotes(rootNote: string, scaleName: string): string[] {
+  const cacheKey = `${rootNote}-${scaleName}`;
 
-  if (!majorScale) {
-    // メジャースケールが定義されていない場合は、エンハーモニックを試す
-    const enharmonic = ENHARMONIC_PAIRS[rootNote];
-    if (enharmonic && MAJOR_SCALES[enharmonic]) {
-      return getScaleNoteNames(enharmonic, patterns);
+  // キャッシュチェック
+  let scaleTones = scaleCache.get(cacheKey);
+
+  if (!scaleTones) {
+    // 新エンジンでスケールを生成
+    const scaleDefinition = ENGINE_SCALE_DEFINITIONS[scaleName];
+    if (!scaleDefinition) {
+      console.warn(`Scale definition not found: ${scaleName}`);
+      return [];
     }
-    // それでもない場合は、単純な変換
-    return patterns.map(pattern => {
-      const pitch = (rootPitch + pattern.semitones) % 12;
-      return CHROMATIC_SCALE[pitch];
-    });
+
+    try {
+      scaleTones = generateScale(rootNote, scaleDefinition);
+      scaleCache.set(cacheKey, scaleTones);
+    } catch (error) {
+      console.error(`Error generating scale ${rootNote} ${scaleName}:`, error);
+      return [];
+    }
   }
 
-  // 自然音名（ナチュラルな7音）
-  const naturalNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-
-  // ルート音の自然音名を取得
-  const rootNatural = rootNote.replace(/[#b]/g, '');
-  const rootNaturalIndex = naturalNotes.indexOf(rootNatural);
-
-  return patterns.map((pattern) => {
-    const targetPitch = (rootPitch + pattern.semitones) % 12;
-
-    // インターバル表記から度数を取得（例：'P1'→0, 'M2'→1, 'm3'→2）
-    const degree = getDegreeFromInterval(pattern.interval);
-
-    // このディグリーで使うべき自然音名を決定
-    const degreeIndex = (rootNaturalIndex + degree) % 7;
-    const expectedNatural = naturalNotes[degreeIndex];
-
-    // その自然音名を持つ音名を探す
-    // 例：expectedNatural = 'A' なら、'A', 'A#', 'Ab' のいずれか
-    const candidates = ALL_NOTE_NAMES.filter(n => n.startsWith(expectedNatural));
-
-    for (const candidate of candidates) {
-      if (getPitchClass(candidate) === targetPitch) {
-        return candidate;
-      }
-    }
-
-    // 見つからない場合は、メジャースケールから推測
-    // これは理論上起こらないはずだが、フォールバック
-    return CHROMATIC_SCALE[targetPitch];
-  });
+  // 親切モード（friendly）で文字列に変換
+  return formatScale(scaleTones, 'friendly');
 }
 
-// スケールの音を計算（音楽理論的に正しい音名で）
-export function getScaleNotes(rootNote: string, scaleName: string): string[] {
-  const pattern = SCALE_PATTERNS[scaleName];
-  if (!pattern) return [];
+// 後方互換性のための旧関数（内部では新エンジンを使用）
+export function getScaleNoteNames(rootNote: string, patterns: ScalePattern[]): string[] {
+  // この関数は使われなくなる予定だが、後方互換性のために残す
+  // パターンから一致するスケール名を探す
+  for (const [scaleName, scalePatterns] of Object.entries(SCALE_PATTERNS)) {
+    if (JSON.stringify(scalePatterns) === JSON.stringify(patterns)) {
+      return getScaleNotes(rootNote, scaleName);
+    }
+  }
 
-  return getScaleNoteNames(rootNote, pattern);
+  // 見つからない場合は空配列
+  console.warn('Unknown scale pattern, returning empty array');
+  return [];
 }
 
 // キーに基づいて12音すべての正しい音名表記を取得
 export function getChromaticScaleForKey(rootNote: string): string[] {
-  // メジャースケールを基準とする
-  const majorScale = MAJOR_SCALES[rootNote] || MAJOR_SCALES[ENHARMONIC_PAIRS[rootNote] || rootNote];
+  // 新エンジンでメジャースケールを生成
+  const majorScale = getScaleNotes(rootNote, 'メジャー');
 
-  if (!majorScale) {
-    // デフォルトは♯系
+  if (majorScale.length === 0) {
+    // フォールバック: デフォルトは♯系
     return ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
   }
 
@@ -290,8 +294,7 @@ export function getChromaticScaleForKey(rootNote: string): string[] {
 
   // 12音すべてを埋める
   const chromaticScale: string[] = [];
-  const naturalNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-  const isFlat = rootNote.includes('b');
+  const isFlat = rootNote.includes('b') || rootNote.includes('♭');
 
   for (let pitch = 0; pitch < 12; pitch++) {
     if (scaleNoteMap.has(pitch)) {

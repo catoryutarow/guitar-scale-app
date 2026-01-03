@@ -66,12 +66,15 @@ export default function TuningSelector({
               const tunings = groupedTunings[instrumentId];
               if (!tunings || tunings.length === 0) return null;
 
+              // ギターセクションだけ2カラムグリッドにする
+              const isGuitar = instrumentId === 'guitar';
+
               return (
                 <div key={instrumentId}>
                   <h3 className="text-sm font-semibold text-gray-600 mb-2">
                     {instrumentLabels[instrumentId]}
                   </h3>
-                  <div className="space-y-2">
+                  <div className={isGuitar ? "grid grid-cols-2 gap-2" : "space-y-2"}>
                     {tunings.map(tuning => (
                       <button
                         key={tuning.id}

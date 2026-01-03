@@ -61,7 +61,7 @@ function playTone(
  * スケールを上昇→下降で再生
  * 例: Gメジャーなら G4-A4-B4-C5-D5-E5-F#5-G5-F#5-E5-D5-C5-B4-A4-G4
  *
- * @param scaleNotes スケールの構成音配列 (例: ["C", "D", "E", "F", "G", "A", "B"])
+ * @param scaleNotes スケールの構成音配列 (例: ["G", "A", "B", "C", "D", "E", "F#"] for G Major)
  * @param onComplete 再生完了時のコールバック
  * @param onStop 停止用コールバックを受け取る関数
  */
@@ -77,22 +77,52 @@ export function playScale(
   const noteDuration = 60 / tempo; // 1音あたりの秒数 (0.5秒)
   const baseOctave = 4; // 開始オクターブ
 
-  // 上昇: octave 4 の全音 + octave 5 のルート音
-  // 下降: octave 5 のルートから octave 4 のルートまで（両端のルートは重複させない）
-  const noteSequence: Array<{ note: string; octave: number }> = [];
-
-  // 上昇部分: 同じオクターブ内の音 + 1オクターブ上のルート
-  scaleNotes.forEach((note) => {
-    noteSequence.push({ note, octave: baseOctave });
-  });
-  // 1オクターブ上のルート
-  noteSequence.push({ note: scaleNotes[0], octave: baseOctave + 1 });
-
-  // 下降部分: 1オクターブ上のルートの次の音から、元のオクターブのルートまで
-  // （両端は既に追加済みなので除外）
-  for (let i = scaleNotes.length - 1; i >= 1; i--) {
-    noteSequence.push({ note: scaleNotes[i], octave: baseOctave });
+  if (scaleNotes.length === 0) {
+    return;
   }
+
+  // ルート音のピッチクラス
+  const rootPitchClass = getPitchClass(scaleNotes[0]);
+
+  // 上昇部分: ルートから1オクターブ上のルートまで（ピッチクラスベース）
+  const ascendingSequence: Array<{ note: string; octave: number }> = [];
+
+  scaleNotes.forEach((note, index) => {
+    const pitchClass = getPitchClass(note);
+    let octave = baseOctave;
+
+    // ピッチクラスがルートより小さい場合は次のオクターブ
+    if (pitchClass < rootPitchClass) {
+      octave = baseOctave + 1;
+    }
+
+    ascendingSequence.push({ note, octave });
+  });
+
+  // 最後に1オクターブ上のルートを追加
+  ascendingSequence.push({ note: scaleNotes[0], octave: baseOctave + 1 });
+
+  // 下降部分: 1オクターブ上のルートから元のルートまで（逆順、上端のG5は除く、下端のG4は含む）
+  const descendingSequence: Array<{ note: string; octave: number }> = [];
+
+  for (let i = scaleNotes.length - 1; i >= 1; i--) {
+    const note = scaleNotes[i];
+    const pitchClass = getPitchClass(note);
+    let octave = baseOctave;
+
+    // ピッチクラスがルートより小さい場合は次のオクターブ
+    if (pitchClass < rootPitchClass) {
+      octave = baseOctave + 1;
+    }
+
+    descendingSequence.push({ note, octave });
+  }
+
+  // 最後に元のオクターブのルートを追加
+  descendingSequence.push({ note: scaleNotes[0], octave: baseOctave });
+
+  // 全体のシーケンス
+  const noteSequence = [...ascendingSequence, ...descendingSequence];
 
   // 各音を順番にスケジュール
   let currentTime = audioContext.currentTime;

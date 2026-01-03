@@ -10,6 +10,7 @@ import GuitarFretboard from '@/components/GuitarFretboard';
 import YoutubeSection from '@/components/YoutubeSection';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import HelpButton from '@/components/HelpButton';
+import BackgroundLogo from '@/components/BackgroundLogo';
 import { getScaleNotes } from '@/lib/scales';
 import { TuningId, TUNINGS, transposeTuning } from '@/lib/tunings';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -67,7 +68,10 @@ function HomeContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <main className="container mx-auto px-4 py-8">
+      {/* 背景ロゴ */}
+      <BackgroundLogo />
+
+      <main className="container mx-auto px-4 py-8 relative z-10">
         {/* ヘッダーと言語切り替え */}
         <div className="flex justify-end mb-4">
           <LanguageSwitcher />

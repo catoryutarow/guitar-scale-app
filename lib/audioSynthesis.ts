@@ -59,6 +59,7 @@ function playTone(
 
 /**
  * スケールを上昇→下降で再生
+ * 例: Gメジャーなら G4-A4-B4-C5-D5-E5-F#5-G5-F#5-E5-D5-C5-B4-A4-G4
  *
  * @param scaleNotes スケールの構成音配列 (例: ["C", "D", "E", "F", "G", "A", "B"])
  * @param onComplete 再生完了時のコールバック
@@ -74,17 +75,29 @@ export function playScale(
 
   const tempo = 120; // BPM
   const noteDuration = 60 / tempo; // 1音あたりの秒数 (0.5秒)
-  const octave = 4; // 中央のオクターブ
+  const baseOctave = 4; // 開始オクターブ
 
-  // 上昇 + 下降のノート配列を作成
-  const ascendingNotes = [...scaleNotes];
-  const descendingNotes = [...scaleNotes].reverse().slice(1); // 最高音は重複させない
-  const allNotes = [...ascendingNotes, ...descendingNotes];
+  // 上昇: octave 4 の全音 + octave 5 のルート音
+  // 下降: octave 5 のルートから octave 4 のルートまで（両端のルートは重複させない）
+  const noteSequence: Array<{ note: string; octave: number }> = [];
+
+  // 上昇部分: 同じオクターブ内の音 + 1オクターブ上のルート
+  scaleNotes.forEach((note) => {
+    noteSequence.push({ note, octave: baseOctave });
+  });
+  // 1オクターブ上のルート
+  noteSequence.push({ note: scaleNotes[0], octave: baseOctave + 1 });
+
+  // 下降部分: 1オクターブ上のルートの次の音から、元のオクターブのルートまで
+  // （両端は既に追加済みなので除外）
+  for (let i = scaleNotes.length - 1; i >= 1; i--) {
+    noteSequence.push({ note: scaleNotes[i], octave: baseOctave });
+  }
 
   // 各音を順番にスケジュール
   let currentTime = audioContext.currentTime;
 
-  allNotes.forEach((note, index) => {
+  noteSequence.forEach(({ note, octave }) => {
     const frequency = noteToFrequency(note, octave);
     playTone(frequency, noteDuration * 0.9, audioContext, currentTime); // 0.9倍で音を少し短くして区切りを明確に
     currentTime += noteDuration;
@@ -101,7 +114,7 @@ export function playScale(
   }
 
   // 再生完了時にAudioContextをクローズ
-  const totalDuration = allNotes.length * noteDuration * 1000; // ミリ秒
+  const totalDuration = noteSequence.length * noteDuration * 1000; // ミリ秒
   setTimeout(() => {
     audioContext.close();
     if (onComplete) {

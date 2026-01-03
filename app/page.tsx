@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import NoteSelector from '@/components/NoteSelector';
 import ScaleSelector from '@/components/ScaleSelector';
 import TuningSelector from '@/components/TuningSelector';
+import ScalePlayer from '@/components/ScalePlayer';
 import GuitarFretboard from '@/components/GuitarFretboard';
 import YoutubeSection from '@/components/YoutubeSection';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -147,6 +148,15 @@ function HomeContent() {
             onSelectTuning={setSelectedTuningId}
             halfStepDown={halfStepDown}
             onToggleHalfStep={setHalfStepDown}
+          />
+        </div>
+
+        {/* スケール再生 */}
+        <div className="mb-4">
+          <ScalePlayer
+            rootNote={selectedNote}
+            scaleNotes={scaleNotes}
+            scaleName={selectedScale}
           />
         </div>
 

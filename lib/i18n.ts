@@ -101,6 +101,11 @@ export interface Translations {
   instrumentUkulele: string;
   instrumentBass4: string;
   instrumentBass5: string;
+
+  // スケール再生
+  playScale: string;
+  playing: string;
+  stopPlayback: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -203,6 +208,10 @@ export const translations: Record<Language, Translations> = {
     instrumentUkulele: 'ウクレレ',
     instrumentBass4: '4弦ベース',
     instrumentBass5: '5弦ベース',
+
+    playScale: 'スケールを再生',
+    playing: '再生中',
+    stopPlayback: '停止',
   },
 
   en: {
@@ -304,6 +313,10 @@ export const translations: Record<Language, Translations> = {
     instrumentUkulele: 'Ukulele',
     instrumentBass4: '4-string Bass',
     instrumentBass5: '5-string Bass',
+
+    playScale: 'Play Scale',
+    playing: 'Playing',
+    stopPlayback: 'Stop',
   },
 
   zh: {
@@ -405,6 +418,10 @@ export const translations: Record<Language, Translations> = {
     instrumentUkulele: 'Ukulele',
     instrumentBass4: '4-string Bass',
     instrumentBass5: '5-string Bass',
+
+    playScale: 'Play Scale',
+    playing: 'Playing',
+    stopPlayback: 'Stop',
   },
 
   es: {
@@ -506,6 +523,10 @@ export const translations: Record<Language, Translations> = {
     instrumentUkulele: 'Ukulele',
     instrumentBass4: '4-string Bass',
     instrumentBass5: '5-string Bass',
+
+    playScale: 'Play Scale',
+    playing: 'Playing',
+    stopPlayback: 'Stop',
   },
 };
 

@@ -134,7 +134,7 @@ export const translations: Record<Language, Translations> = {
     audioAnalysisSubtitle: 'Audio Analysis for Guitar Scales',
     uploadDescription: '音源ファイルをアップロードして、コード進行とスケールを自動解析します',
 
-    referenceSongs: 'このスケールの参考曲',
+    referenceSongs: 'この曲に合わせてみよう',
     scale: 'スケール',
     dragAndDrop: '音源ファイルをドラッグ&ドロップ',
     or: 'または',

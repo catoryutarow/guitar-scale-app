@@ -121,30 +121,197 @@ function generateAllCombinations(): ScaleYoutubeMap {
  */
 export const SCALE_YOUTUBE_MAP: ScaleYoutubeMap = generateAllCombinations();
 
-// 以下、実際に動画を追加する際のサンプル（コメントアウト）
-// 動画を追加する場合は、以下のようにエントリを上書きしてください：
-
-SCALE_YOUTUBE_MAP['G-メジャー'] = [
+// メジャースケールの参考動画
+SCALE_YOUTUBE_MAP['C-メジャー'] = [
   {
-    id: 'pAgnJDJN4VA',
-    title: 'AC/DC - Back In Black',
-    url: 'https://www.youtube.com/watch?v=pAgnJDJN4VA'
+    id: 'BNVbWDIT4eo',
+    title: 'C Major Scale',
+    url: 'https://www.youtube.com/watch?v=BNVbWDIT4eo'
+  }
+];
+
+SCALE_YOUTUBE_MAP['C#-メジャー'] = [
+  {
+    id: '6Dn6DTE-xlM',
+    title: 'C# Major Scale',
+    url: 'https://www.youtube.com/watch?v=6Dn6DTE-xlM'
   }
 ];
 
 SCALE_YOUTUBE_MAP['D-メジャー'] = [
   {
-    id: 'sEhQTjgoTdU',
-    title: 'Spain - Chick Corea',
-    url: 'https://youtu.be/sEhQTjgoTdU?si=ToESocE0HniCYHvl'
+    id: 'HoR-wGfJU08',
+    title: 'D Major Scale',
+    url: 'https://www.youtube.com/watch?v=HoR-wGfJU08'
   }
 ];
 
-SCALE_YOUTUBE_MAP['E-マイナーペンタトニック'] = [
+SCALE_YOUTUBE_MAP['D#-メジャー'] = [
   {
-    id: 'pAgnJDJN4VA',
-    title: 'AC/DC - Back In Black',
-    url: 'https://www.youtube.com/watch?v=pAgnJDJN4VA'
+    id: 'tHpg-veuvpA',
+    title: 'D# Major Scale',
+    url: 'https://www.youtube.com/watch?v=tHpg-veuvpA'
+  }
+];
+
+SCALE_YOUTUBE_MAP['E-メジャー'] = [
+  {
+    id: 'a-u6Q4Vzhjg',
+    title: 'E Major Scale',
+    url: 'https://www.youtube.com/watch?v=a-u6Q4Vzhjg'
+  }
+];
+
+SCALE_YOUTUBE_MAP['F-メジャー'] = [
+  {
+    id: 'wKbg6iDSXJQ',
+    title: 'F Major Scale',
+    url: 'https://www.youtube.com/watch?v=wKbg6iDSXJQ'
+  }
+];
+
+SCALE_YOUTUBE_MAP['F#-メジャー'] = [
+  {
+    id: 'BRarPwy0O-U',
+    title: 'F# Major Scale',
+    url: 'https://www.youtube.com/watch?v=BRarPwy0O-U'
+  }
+];
+
+SCALE_YOUTUBE_MAP['G-メジャー'] = [
+  {
+    id: 'xVLjezAhDS8',
+    title: 'G Major Scale',
+    url: 'https://www.youtube.com/watch?v=xVLjezAhDS8'
+  }
+];
+
+SCALE_YOUTUBE_MAP['G#-メジャー'] = [
+  {
+    id: 'u0hFi65uYg8',
+    title: 'G# Major Scale',
+    url: 'https://www.youtube.com/watch?v=u0hFi65uYg8'
+  }
+];
+
+SCALE_YOUTUBE_MAP['A-メジャー'] = [
+  {
+    id: '78-nA8U6Rj8',
+    title: 'A Major Scale',
+    url: 'https://www.youtube.com/watch?v=78-nA8U6Rj8'
+  }
+];
+
+SCALE_YOUTUBE_MAP['A#-メジャー'] = [
+  {
+    id: 'i4vK-x69AJ8',
+    title: 'A# Major Scale',
+    url: 'https://www.youtube.com/watch?v=i4vK-x69AJ8'
+  }
+];
+
+SCALE_YOUTUBE_MAP['B-メジャー'] = [
+  {
+    id: 'LDyNr3jP3ZE',
+    title: 'B Major Scale',
+    url: 'https://www.youtube.com/watch?v=LDyNr3jP3ZE'
+  }
+];
+
+// マイナースケールの参考動画
+SCALE_YOUTUBE_MAP['C-マイナー'] = [
+  {
+    id: '9oMJHUkWOLE',
+    title: 'C Minor Scale',
+    url: 'https://www.youtube.com/watch?v=9oMJHUkWOLE'
+  }
+];
+
+SCALE_YOUTUBE_MAP['C#-マイナー'] = [
+  {
+    id: 'Ieu0elFHuv4',
+    title: 'C# Minor Scale',
+    url: 'https://www.youtube.com/watch?v=Ieu0elFHuv4'
+  }
+];
+
+SCALE_YOUTUBE_MAP['D-マイナー'] = [
+  {
+    id: 'RRuL6f75Hsw',
+    title: 'D Minor Scale',
+    url: 'https://www.youtube.com/watch?v=RRuL6f75Hsw'
+  }
+];
+
+SCALE_YOUTUBE_MAP['D#-マイナー'] = [
+  {
+    id: 'Tw2HGQdyvfY',
+    title: 'D# Minor Scale',
+    url: 'https://www.youtube.com/watch?v=Tw2HGQdyvfY'
+  }
+];
+
+SCALE_YOUTUBE_MAP['E-マイナー'] = [
+  {
+    id: 'bhqp2LpnyOc',
+    title: 'E Minor Scale',
+    url: 'https://www.youtube.com/watch?v=bhqp2LpnyOc'
+  }
+];
+
+SCALE_YOUTUBE_MAP['F-マイナー'] = [
+  {
+    id: 'yEFIftyE-og',
+    title: 'F Minor Scale',
+    url: 'https://www.youtube.com/watch?v=yEFIftyE-og'
+  }
+];
+
+SCALE_YOUTUBE_MAP['F#-マイナー'] = [
+  {
+    id: 'TsSxSZ8h4ak',
+    title: 'F# Minor Scale',
+    url: 'https://www.youtube.com/watch?v=TsSxSZ8h4ak'
+  }
+];
+
+SCALE_YOUTUBE_MAP['G-マイナー'] = [
+  {
+    id: '2gjI2brnvtQ',
+    title: 'G Minor Scale',
+    url: 'https://www.youtube.com/watch?v=2gjI2brnvtQ'
+  }
+];
+
+SCALE_YOUTUBE_MAP['G#-マイナー'] = [
+  {
+    id: 'y_NMsAJ17RU',
+    title: 'G# Minor Scale',
+    url: 'https://www.youtube.com/watch?v=y_NMsAJ17RU'
+  }
+];
+
+SCALE_YOUTUBE_MAP['A-マイナー'] = [
+  {
+    id: '1O-8KHd7i2o',
+    title: 'A Minor Scale',
+    url: 'https://www.youtube.com/watch?v=1O-8KHd7i2o'
+  }
+];
+
+SCALE_YOUTUBE_MAP['A#-マイナー'] = [
+  {
+    id: 'rYQgVYRK9LM',
+    title: 'A# Minor Scale',
+    url: 'https://www.youtube.com/watch?v=rYQgVYRK9LM'
+  }
+];
+
+SCALE_YOUTUBE_MAP['B-マイナー'] = [
+  {
+    id: 'm6fpnACLZ6s',
+    title: 'B Minor Scale',
+    url: 'https://www.youtube.com/watch?v=m6fpnACLZ6s'
   }
 ];
 

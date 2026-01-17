@@ -15,6 +15,7 @@ import { getScaleNotes } from '@/lib/scales';
 import { TuningId, TUNINGS, transposeTuning } from '@/lib/tunings';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 function HomeContent() {
   const { t } = useLanguage();
@@ -178,6 +179,8 @@ function HomeContent() {
         {/* フローティングヘルプボタン */}
         <HelpButton />
       </main>
+
+      <Footer />
     </div>
   );
 }

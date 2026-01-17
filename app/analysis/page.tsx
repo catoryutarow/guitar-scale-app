@@ -5,6 +5,7 @@ import AudioAnalyzer from '@/components/AudioAnalyzer';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 export default function AnalysisPage() {
   const router = useRouter();
@@ -70,6 +71,8 @@ export default function AnalysisPage() {
           </ul>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

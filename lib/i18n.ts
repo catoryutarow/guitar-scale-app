@@ -106,6 +106,247 @@ export interface Translations {
   playScale: string;
   playing: string;
   stopPlayback: string;
+
+  // フッター
+  footerDescription: string;
+  footerContents: string;
+  footerSupport: string;
+  home: string;
+  aboutSite: string;
+  articles: string;
+  contact: string;
+  privacyPolicy: string;
+  companyInfo: string;
+  copyright: string;
+
+  // ナビゲーション
+  backToHome: string;
+
+  // Aboutページ
+  aboutTitle: string;
+  aboutServiceOverview: string;
+  aboutServiceDesc1: string;
+  aboutServiceDesc2: string;
+  aboutMainFeatures: string;
+  aboutFeatureVisualize: string;
+  aboutFeatureVisualizeDesc: string;
+  aboutFeatureAnalysis: string;
+  aboutFeatureAnalysisDesc: string;
+  aboutFeaturePlay: string;
+  aboutFeaturePlayDesc: string;
+  aboutFeatureVideo: string;
+  aboutFeatureVideoDesc: string;
+  aboutFeatureTuning: string;
+  aboutFeatureTuningDesc: string;
+  aboutFeatureResponsive: string;
+  aboutFeatureResponsiveDesc: string;
+  aboutSupportedScales: string;
+  aboutBasicScales: string;
+  aboutModeScales: string;
+  aboutPentaOther: string;
+  scaleMajor: string;
+  scaleNaturalMinor: string;
+  scaleHarmonicMinor: string;
+  scaleMelodicMinor: string;
+  scaleDorian: string;
+  scalePhrygian: string;
+  scaleLydian: string;
+  scaleMixolydian: string;
+  scaleLocrian: string;
+  scaleMajorPentatonic: string;
+  scaleMinorPentatonic: string;
+  scaleBlues: string;
+  scaleInSen: string;
+  aboutHowToUse: string;
+  aboutStep1: string;
+  aboutStep1Desc: string;
+  aboutStep2: string;
+  aboutStep2Desc: string;
+  aboutStep3: string;
+  aboutStep3Desc: string;
+  aboutStep4: string;
+  aboutStep4Desc: string;
+  aboutRecommendedFor: string;
+  aboutRecommend1: string;
+  aboutRecommend2: string;
+  aboutRecommend3: string;
+  aboutRecommend4: string;
+  aboutRecommend5: string;
+  aboutRecommend6: string;
+  aboutCta: string;
+
+  // コラム記事ページ
+  articlesTitle: string;
+  articlesSubtitle: string;
+  articleCategory: {
+    beginner: string;
+    intermediate: string;
+    practice: string;
+  };
+  articleReadMore: string;
+  articleTryScale: string;
+  articleTryScaleDesc: string;
+  articleUseVisualizer: string;
+  articleRelated: string;
+
+  // ペンタトニック記事
+  pentatonicTitle: string;
+  pentatonicDesc: string;
+  pentatonicWhat: string;
+  pentatonicWhatDesc1: string;
+  pentatonicWhatDesc2: string;
+  pentatonicTypes: string;
+  pentatonicMajor: string;
+  pentatonicMajorDesc: string;
+  pentatonicMinor: string;
+  pentatonicMinorDesc: string;
+  pentatonicWhy: string;
+  pentatonicWhy1: string;
+  pentatonicWhy1Desc: string;
+  pentatonicWhy2: string;
+  pentatonicWhy2Desc: string;
+  pentatonicWhy3: string;
+  pentatonicWhy3Desc: string;
+  pentatonicPractice: string;
+  pentatonicPracticeList: string[];
+  pentatonicSummary: string;
+  pentatonicSummaryDesc: string;
+  pentatonicCta: string;
+  pentatonicViewMajor: string;
+  pentatonicViewMinor: string;
+
+  // モードスケール記事
+  modeTitle: string;
+  modeDesc: string;
+  modeWhat: string;
+  modeWhatDesc1: string;
+  modeWhatDesc2: string;
+  mode7Modes: string;
+  modeIonian: string;
+  modeIonianDesc: string;
+  modeDorian: string;
+  modeDorianDesc: string;
+  modeDorianExample: string;
+  modePhrygian: string;
+  modePhrygianDesc: string;
+  modePhrygianExample: string;
+  modeLydian: string;
+  modeLydianDesc: string;
+  modeLydianExample: string;
+  modeMixolydian: string;
+  modeMixolydianDesc: string;
+  modeMixolydianExample: string;
+  modeAeolian: string;
+  modeAeolianDesc: string;
+  modeLocrian: string;
+  modeLocrianDesc: string;
+  modeHowToRemember: string;
+  modeHowToRememberDesc: string;
+  modePracticalTips: string;
+  modePracticalTipsList: string[];
+  modeSummary: string;
+  modeSummaryDesc: string;
+  modeCta: string;
+
+  // ブルーススケール記事
+  bluesTitle: string;
+  bluesDesc: string;
+  bluesWhat: string;
+  bluesWhatDesc1: string;
+  bluesWhatDesc2: string;
+  bluesStructure: string;
+  bluesExample: string;
+  bluesDegrees: string;
+  bluesStructureDesc: string;
+  bluesNote: string;
+  bluesNoteMagic: string;
+  bluesBending: string;
+  bluesBendingDesc: string;
+  bluesHammerPull: string;
+  bluesHammerPullDesc: string;
+  bluesSlide: string;
+  bluesSlideDesc: string;
+  bluesPatterns: string;
+  bluesPattern1: string;
+  bluesPattern1Desc: string;
+  bluesPattern2: string;
+  bluesPattern2Desc: string;
+  bluesPattern3: string;
+  bluesPattern3Desc: string;
+  bluesMajorApplication: string;
+  bluesMajorApplicationDesc1: string;
+  bluesMajorApplicationDesc2: string;
+  bluesPractice: string;
+  bluesPracticeList: string[];
+  bluesGuitarists: string;
+  bluesGuitarist1: string;
+  bluesGuitarist2: string;
+  bluesGuitarist3: string;
+  bluesGuitarist4: string;
+  bluesSummary: string;
+  bluesSummaryDesc: string;
+  bluesCta: string;
+  bluesViewA: string;
+  bluesViewE: string;
+
+  // プライバシーポリシーページ
+  privacyTitle: string;
+  privacyIntro: string;
+  privacySection1: string;
+  privacySection1List: string[];
+  privacySection2: string;
+  privacySection2List: string[];
+  privacySection3: string;
+  privacySection3Desc: string;
+  privacySection3List: string[];
+  privacySection4: string;
+  privacySection4Desc: string;
+  privacySection5: string;
+  privacySection5Desc: string;
+  privacySection6: string;
+  privacySection6Desc1: string;
+  privacySection6Desc2: string;
+  privacySection6Desc3: string;
+  privacySection7: string;
+  privacySection7Desc: string;
+  privacySection8: string;
+  privacySection8Desc: string;
+  privacySection9: string;
+  privacySection9Desc1: string;
+  privacySection9Desc2: string;
+  privacySection10: string;
+  privacySection10Desc: string;
+  privacySection11: string;
+  privacySection11Desc: string;
+  privacySection12: string;
+  privacySection12Desc: string;
+  privacyEnacted: string;
+  privacyUpdated: string;
+
+  // 運営者情報ページ
+  companyTitle: string;
+  companySection1: string;
+  companyName: string;
+  companyNameEn: string;
+  companyOfficialSite: string;
+  companySection2: string;
+  companyBusinessDesc: string;
+  companyBusinessList: string[];
+  companySection3: string;
+  companyServiceDesc1: string;
+  companyServiceDesc2: string;
+  companySection4: string;
+  companyContactDesc: string;
+  companyContactForm: string;
+  companyOfficialSiteBtn: string;
+
+  // お問い合わせページ
+  contactTitle: string;
+  contactDesc: string;
+  contactNotes: string;
+  contactNote1: string;
+  contactNote2: string;
+  contactNote3: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -212,6 +453,287 @@ export const translations: Record<Language, Translations> = {
     playScale: 'スケールを再生',
     playing: '再生中',
     stopPlayback: '停止',
+
+    // フッター
+    footerDescription: 'ギタースケールを視覚的に学べる無料Webアプリです。13種類以上のスケールをギター指板上に表示し、音源から自動でキーを検出する機能も搭載。初心者からプロまで、あなたの音楽制作・練習をサポートします。',
+    footerContents: 'コンテンツ',
+    footerSupport: 'サポート',
+    home: 'ホーム',
+    aboutSite: 'このサイトについて',
+    articles: 'コラム記事',
+    contact: 'お問い合わせ',
+    privacyPolicy: 'プライバシーポリシー',
+    companyInfo: '運営者情報',
+    copyright: '© {year} ギタースケールわかる君. All rights reserved.',
+
+    // ナビゲーション
+    backToHome: '← ホームに戻る',
+
+    // Aboutページ
+    aboutTitle: 'ギタースケールわかる君について',
+    aboutServiceOverview: 'サービス概要',
+    aboutServiceDesc1: '「ギタースケールわかる君」は、ギタリストの練習や作曲をサポートするために開発された無料のWebアプリケーションです。ギターの指板上にスケールを視覚的に表示することで、スケールの構造や運指パターンを直感的に理解できます。',
+    aboutServiceDesc2: '初心者の方がスケールを覚える際の学習ツールとして、また経験者の方が新しいスケールを探求したり、作曲時にアイデアを得るためのリファレンスとしてご活用いただけます。',
+    aboutMainFeatures: '主な機能',
+    aboutFeatureVisualize: 'スケール可視化',
+    aboutFeatureVisualizeDesc: '13種類以上のスケール（メジャー、マイナー、ペンタトニック、モード系、都節など）をギター指板上にわかりやすく表示します。ルート音は赤、その他のスケール構成音は緑で色分けされます。',
+    aboutFeatureAnalysis: '音源自動解析',
+    aboutFeatureAnalysisDesc: 'MP3、WAV、M4Aファイルをアップロードすると、AIが自動的に楽曲のキーとスケールを検出します。コピーしたい曲のスケールがわからない時に便利です。',
+    aboutFeaturePlay: 'スケール再生',
+    aboutFeaturePlayDesc: '選択したスケールの音を実際に聴くことができます。耳でスケールの響きを確認しながら、指板上の位置と音を結びつけて覚えられます。',
+    aboutFeatureVideo: '参考動画',
+    aboutFeatureVideoDesc: '各スケールとルート音に対応したYouTube動画を表示。実際の演奏例や詳しい解説動画で、より深くスケールを理解できます。',
+    aboutFeatureTuning: 'チューニング対応',
+    aboutFeatureTuningDesc: 'スタンダードチューニングだけでなく、ドロップD、7弦ギター、半音下げなど様々なチューニングに対応。あなたのギター設定に合わせて表示を切り替えられます。',
+    aboutFeatureResponsive: 'レスポンシブ対応',
+    aboutFeatureResponsiveDesc: 'PC、タブレット、スマートフォンのどれでも快適に使えます。モバイルでは指板を90度回転表示することも可能です。',
+    aboutSupportedScales: '対応スケール一覧',
+    aboutBasicScales: '基本スケール',
+    aboutModeScales: 'モードスケール',
+    aboutPentaOther: 'ペンタ・その他',
+    scaleMajor: 'メジャー',
+    scaleNaturalMinor: 'ナチュラルマイナー',
+    scaleHarmonicMinor: 'ハーモニックマイナー',
+    scaleMelodicMinor: 'メロディックマイナー',
+    scaleDorian: 'ドリアン',
+    scalePhrygian: 'フリジアン',
+    scaleLydian: 'リディアン',
+    scaleMixolydian: 'ミクソリディアン',
+    scaleLocrian: 'ロクリアン',
+    scaleMajorPentatonic: 'メジャーペンタトニック',
+    scaleMinorPentatonic: 'マイナーペンタトニック',
+    scaleBlues: 'ブルース',
+    scaleInSen: '都節',
+    aboutHowToUse: '使い方',
+    aboutStep1: 'ルート音を選ぶ',
+    aboutStep1Desc: 'C、D、E...などの12音から、スケールの基準となる音を選択します。',
+    aboutStep2: 'スケールを選ぶ',
+    aboutStep2Desc: 'メジャー、マイナー、ペンタトニックなど、覚えたいスケールを選択します。',
+    aboutStep3: '指板で確認',
+    aboutStep3Desc: '指板上に表示されたポジションを見ながら、実際にギターで弾いてみましょう。',
+    aboutStep4: '音を聴いて覚える',
+    aboutStep4Desc: '再生ボタンでスケールの音を聴き、耳でも覚えることで定着率がアップします。',
+    aboutRecommendedFor: 'こんな方におすすめ',
+    aboutRecommend1: 'ギター初心者で、スケールの基礎を覚えたい方',
+    aboutRecommend2: 'アドリブ演奏に挑戦したいが、何を弾けばいいかわからない方',
+    aboutRecommend3: 'コピーしたい曲のキーやスケールを知りたい方',
+    aboutRecommend4: '作曲時にスケールのリファレンスが欲しい方',
+    aboutRecommend5: 'ペンタトニック以外のスケールも習得したい中級者の方',
+    aboutRecommend6: '日本音階（都節）やモードスケールなど、多様なスケールを探求したい方',
+    aboutCta: 'さっそく使ってみる →',
+
+    // コラム記事
+    articlesTitle: 'コラム記事',
+    articlesSubtitle: 'ギタースケールの基礎から応用まで、ギタリストに役立つ情報をお届けします',
+    articleCategory: {
+      beginner: '初心者向け',
+      intermediate: '中級者向け',
+      practice: '実践テクニック',
+    },
+    articleReadMore: '続きを読む →',
+    articleTryScale: 'スケールを実際に試してみよう',
+    articleTryScaleDesc: '記事で学んだスケールを、ギター指板上で視覚的に確認できます。',
+    articleUseVisualizer: 'スケール可視化ツールを使う →',
+    articleRelated: '関連記事',
+
+    // ペンタトニック記事
+    pentatonicTitle: 'ペンタトニックスケール入門 - ギター初心者が最初に覚えるべきスケール',
+    pentatonicDesc: 'ペンタトニックスケールはギタリストにとって最も重要なスケールの一つ。なぜ最初に覚えるべきなのか、その理由と練習方法を解説します。',
+    pentatonicWhat: 'ペンタトニックスケールとは？',
+    pentatonicWhatDesc1: 'ペンタトニックスケール（Pentatonic Scale）は、名前の通り5つの音で構成されるスケールです。「ペンタ」はギリシャ語で「5」を意味し、通常の7音スケールから2音を省略したシンプルな構造が特徴です。',
+    pentatonicWhatDesc2: 'このシンプルさこそが、ペンタトニックスケールが初心者におすすめされる理由です。音の数が少ないため覚えやすく、しかも「外れにくい」という大きなメリットがあります。',
+    pentatonicTypes: '2種類のペンタトニックスケール',
+    pentatonicMajor: 'メジャーペンタトニック',
+    pentatonicMajorDesc: 'メジャーペンタトニックは、メジャースケールから4度と7度を省略したスケールです。明るく開放的なサウンドが特徴で、カントリーやポップスでよく使われます。',
+    pentatonicMinor: 'マイナーペンタトニック',
+    pentatonicMinorDesc: 'マイナーペンタトニックは、ナチュラルマイナースケールから2度と6度を省略したスケールです。ロック、ブルース、メタルなど幅広いジャンルで使用される、最も汎用性の高いスケールと言えます。',
+    pentatonicWhy: 'なぜペンタトニックが初心者におすすめなのか',
+    pentatonicWhy1: '1. 覚えやすい',
+    pentatonicWhy1Desc: '5音しかないため、指板上のポジションパターンがシンプルです。多くのギタリストは「ボックスポジション」と呼ばれる5つの基本パターンを覚えることで、指板全体でペンタトニックを弾けるようになります。',
+    pentatonicWhy2: '2. 外れにくい',
+    pentatonicWhy2Desc: 'ペンタトニックで省略されている4度と7度は、コードトーンとぶつかりやすい「アボイドノート」になりがちな音です。これらを省略することで、どの音を弾いても比較的安全にサウンドし、初心者でもアドリブに挑戦しやすくなります。',
+    pentatonicWhy3: '3. 汎用性が高い',
+    pentatonicWhy3Desc: 'ロック、ブルース、ポップス、ファンク、メタルなど、ほぼすべてのポピュラー音楽で活用できます。一度マスターすれば、様々なジャンルの楽曲で応用が利きます。',
+    pentatonicPractice: '練習のポイント',
+    pentatonicPracticeList: [
+      'まずは1つのポジション（第1ポジションがおすすめ）を完璧に覚える',
+      'メトロノームを使って、ゆっくり正確に弾く練習をする',
+      'バッキングトラックに合わせてアドリブを試す',
+      '好きなギタリストのフレーズをコピーして、使い方を学ぶ',
+      '慣れてきたら、5つのポジションすべてを繋げる練習をする',
+    ],
+    pentatonicSummary: 'まとめ',
+    pentatonicSummaryDesc: 'ペンタトニックスケールは、シンプルながら非常にパワフルなツールです。多くのプロギタリストも、ペンタトニックを基盤としてフレーズを構築しています。まずはこのスケールをしっかりマスターし、そこから徐々に他のスケールへと知識を広げていきましょう。',
+    pentatonicCta: 'ペンタトニックスケールを指板で確認してみよう',
+    pentatonicViewMajor: 'Aメジャーペンタを見る',
+    pentatonicViewMinor: 'Aマイナーペンタを見る',
+
+    // モードスケール記事
+    modeTitle: 'モードスケール完全ガイド - ドリアン、フリジアン、リディアンの使い分け',
+    modeDesc: '7つのモードスケールの特徴と、実際の楽曲での使い方を詳しく解説。中級者から上級者へのステップアップに。',
+    modeWhat: 'モードスケールとは？',
+    modeWhatDesc1: 'モードスケール（チャーチモード）は、メジャースケールの各音を起点として生成される7つのスケールの総称です。古代ギリシャの音楽理論に起源を持ち、現代のジャズやロック、フュージョンで広く使用されています。',
+    modeWhatDesc2: '各モードは固有の「カラー」や「ムード」を持っており、これを使い分けることで、より豊かな音楽表現が可能になります。',
+    mode7Modes: '7つのモードスケール',
+    modeIonian: '1. イオニアン（Ionian）',
+    modeIonianDesc: 'これは私たちがよく知る「メジャースケール」そのものです。明るく安定したサウンドが特徴。',
+    modeDorian: '2. ドリアン（Dorian）',
+    modeDorianDesc: 'マイナースケールに近いですが、6度がナチュラル（長6度）なのが特徴。マイナーでありながらも、どこか明るさを感じさせるサウンドです。ジャズ、ファンク、ソウルでよく使用されます。',
+    modeDorianExample: '使用例: Santana「Oye Como Va」、Miles Davis「So What」',
+    modePhrygian: '3. フリジアン（Phrygian）',
+    modePhrygianDesc: '♭2度が最大の特徴で、スペイン風・アラビア風のエキゾチックなサウンドを生み出します。メタル、フラメンコ、プログレッシブロックで効果的に使用されます。',
+    modePhrygianExample: '使用例: Metallica「Wherever I May Roam」',
+    modeLydian: '4. リディアン（Lydian）',
+    modeLydianDesc: 'メジャースケールの4度が半音上がった（#4）スケール。浮遊感のある、夢見るようなサウンドが特徴です。映画音楽やプログレッシブロック、フュージョンで多用されます。',
+    modeLydianExample: '使用例: Steve Vai「For The Love of God」、Joe Satriani作品',
+    modeMixolydian: '5. ミクソリディアン（Mixolydian）',
+    modeMixolydianDesc: 'メジャースケールの7度が半音下がった（♭7）スケール。ブルージーでロックなサウンドが特徴で、ドミナント7thコード上で使用されます。ロック、ブルース、カントリーの定番スケールです。',
+    modeMixolydianExample: '使用例: The Beatles「Norwegian Wood」、Guns N\' Roses「Sweet Child O\' Mine」',
+    modeAeolian: '6. エオリアン（Aeolian）',
+    modeAeolianDesc: '「ナチュラルマイナースケール」として知られるスケールです。悲しげで暗いサウンドが特徴で、あらゆるジャンルのマイナーキーの楽曲で使用されます。',
+    modeLocrian: '7. ロクリアン（Locrian）',
+    modeLocrianDesc: '最も不安定なモードで、♭5度（減5度）が特徴。緊張感のある、不協和なサウンドを生み出します。プログレッシブメタルやジャズの特定の場面で使用されます。',
+    modeHowToRemember: 'モードスケールの覚え方',
+    modeHowToRememberDesc: 'モードを理解する最も簡単な方法は、「メジャースケールの各音から始める」と考えることです。',
+    modePracticalTips: '実践的な使い方のコツ',
+    modePracticalTipsList: [
+      '各モードの「特性音」（他のモードと区別する音）を意識して弾く',
+      'コード進行に合わせて適切なモードを選ぶ',
+      '1つのモードを徹底的にマスターしてから次へ進む',
+      'バッキングトラックを使って、各モードの響きを耳で覚える',
+      '好きなギタリストの演奏を分析し、モードの使い方を学ぶ',
+    ],
+    modeSummary: 'まとめ',
+    modeSummaryDesc: 'モードスケールをマスターすることで、あなたの音楽表現は格段に広がります。最初は難しく感じるかもしれませんが、一つずつ着実に覚えていくことで、様々な音楽シーンに対応できるギタリストになれるでしょう。',
+    modeCta: 'モードスケールを指板で確認してみよう',
+
+    // ブルーススケール記事
+    bluesTitle: 'ブルーススケールでソウルフルなフレーズを弾こう',
+    bluesDesc: 'ブルーススケールの構造と、ブルーノートの使い方をマスター。エモーショナルなギターソロを弾くためのテクニック。',
+    bluesWhat: 'ブルーススケールとは？',
+    bluesWhatDesc1: 'ブルーススケールは、マイナーペンタトニックスケールに「ブルーノート」と呼ばれる♭5度の音を加えた6音スケールです。この1音が加わることで、独特の「泣き」や「うねり」のあるサウンドが生まれます。',
+    bluesWhatDesc2: 'ブルースはもちろん、ロック、ジャズ、ファンクなど幅広いジャンルで使用される、非常に表現力豊かなスケールです。',
+    bluesStructure: 'ブルーススケールの構造',
+    bluesExample: 'Aブルーススケール',
+    bluesDegrees: '音程',
+    bluesStructureDesc: 'マイナーペンタトニック（1-♭3-4-5-♭7）に♭5度を追加することで、ブルーススケールが完成します。この♭5度が「ブルーノート」であり、独特の緊張感と哀愁を生み出す重要な音です。',
+    bluesNote: 'ブルーノートの魔力',
+    bluesNoteMagic: 'ブルーノート（♭5度）は、単に弾くだけでなく、様々なテクニックと組み合わせることで真価を発揮します：',
+    bluesBending: '1. チョーキング（ベンド）',
+    bluesBendingDesc: '♭5度から5度へのクォーターベンド（1/4音上げ）や、4度から♭5度へのベンドは、ブルースギターの定番テクニックです。この「中途半端な」音程が、人間の声のような表現を生み出します。',
+    bluesHammerPull: '2. ハンマリング・プリング',
+    bluesHammerPullDesc: '4度 → ♭5度 → 5度の流れをハンマリングオン・プリングオフで繋げると、滑らかで表情豊かなフレーズになります。BBキングやエリック・クラプトンの定番フレーズです。',
+    bluesSlide: '3. スライド',
+    bluesSlideDesc: 'ブルーノートへスライドで入ったり、ブルーノートからスライドで抜けることで、より「歌っている」ようなニュアンスを出せます。',
+    bluesPatterns: '定番フレーズパターン',
+    bluesPattern1: 'パターン1: クラシックターンアラウンド',
+    bluesPattern1Desc: 'ブルース進行の最後2小節でよく使われるフレーズ。',
+    bluesPattern2: 'パターン2: BBキング風ボックス',
+    bluesPattern2Desc: '1〜2弦のハイポジションで弾く、歌うようなフレーズ。',
+    bluesPattern3: 'パターン3: ロック定番リック',
+    bluesPattern3Desc: 'ロックギターでよく使われる力強いフレーズ。',
+    bluesMajorApplication: 'メジャーブルースへの応用',
+    bluesMajorApplicationDesc1: 'ブルーススケールはマイナー系ですが、メジャーキーのブルース進行でも使えます。これは「メジャーコード上でマイナースケールを弾く」という、ブルース特有の響きを生み出します。',
+    bluesMajorApplicationDesc2: 'さらに上級者は、マイナーペンタとメジャーペンタ、そしてブルーススケールを自在に行き来することで、より複雑で表現力豊かなソロを構築します。',
+    bluesPractice: '練習のポイント',
+    bluesPracticeList: [
+      'まずはマイナーペンタトニックを完璧に覚える',
+      'ブルーノートの位置を各ポジションで把握する',
+      'ブルーノートは「経過音」として使うのが基本（長く伸ばさない）',
+      '有名なブルースギタリストのフレーズをコピーして、使い方を学ぶ',
+      '12小節ブルースのバッキングトラックに合わせて練習する',
+      'チョーキング、ビブラートの表現力を磨く',
+    ],
+    bluesGuitarists: 'おすすめの参考ギタリスト',
+    bluesGuitarist1: 'ブルースギターの王様。ビブラートとチョーキングの教科書的存在。',
+    bluesGuitarist2: 'テキサスブルースの雄。力強いトーンと情熱的なプレイ。',
+    bluesGuitarist3: 'ブルースロックの巨匠。クリアで歌うようなフレージング。',
+    bluesGuitarist4: 'アイリッシュブルースの魂。感情を揺さぶる泣きのギター。',
+    bluesSummary: 'まとめ',
+    bluesSummaryDesc: 'ブルーススケールは、たった1音の追加で驚くほど表現の幅が広がるスケールです。ペンタトニックをマスターしたら、ぜひブルーススケールに挑戦してください。このスケールを使いこなせるようになれば、あなたのギターソロは確実にワンランク上のものになるでしょう。',
+    bluesCta: 'ブルーススケールを指板で確認してみよう',
+    bluesViewA: 'Aブルーススケールを見る',
+    bluesViewE: 'Eブルーススケールを見る',
+
+    // プライバシーポリシー
+    privacyTitle: 'プライバシーポリシー',
+    privacyIntro: 'ギタースケールわかる君（以下、「当サイト」といいます）は、ユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます）を定めます。',
+    privacySection1: '1. 収集する情報',
+    privacySection1List: [
+      'お問い合わせフォームにご入力いただいた情報（お名前、メールアドレス、お問い合わせ内容）',
+      '音源解析機能でアップロードされた音声ファイル（解析後に自動削除されます）',
+      'アクセスログ情報（IPアドレス、ブラウザの種類、アクセス日時など）',
+      'Cookie情報',
+    ],
+    privacySection2: '2. 情報の利用目的',
+    privacySection2List: [
+      'お問い合わせへの回答',
+      'サービスの提供・運営',
+      'サービスの改善・新機能の開発',
+      '利用状況の分析',
+      '不正利用の防止',
+    ],
+    privacySection3: '3. 個人情報の第三者提供',
+    privacySection3Desc: '当サイトは、以下の場合を除き、ユーザーの個人情報を第三者に提供することはありません：',
+    privacySection3List: [
+      'ユーザーの同意がある場合',
+      '法令に基づく場合',
+      '人の生命、身体または財産の保護のために必要がある場合',
+    ],
+    privacySection4: '4. Cookieの使用について',
+    privacySection4Desc: '当サイトでは、ユーザー体験の向上やアクセス解析のためにCookieを使用しています。ブラウザの設定により、Cookieの受け入れを拒否することができますが、その場合、一部の機能が利用できなくなる可能性があります。',
+    privacySection5: '5. アクセス解析ツール',
+    privacySection5Desc: '当サイトでは、アクセス解析のためにGoogle Analyticsを使用する場合があります。Google Analyticsは、Cookieを使用してユーザーの当サイトの利用状況を収集します。この情報は匿名で収集されており、個人を特定するものではありません。',
+    privacySection6: '6. 広告について',
+    privacySection6Desc1: '当サイトでは、第三者配信の広告サービス（Google AdSense）を利用しています。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookieを使用することがあります。',
+    privacySection6Desc2: 'Google AdSenseの詳細については、Google広告に関するポリシーをご確認ください。',
+    privacySection6Desc3: 'ユーザーは、Googleの広告設定ページで、パーソナライズ広告を無効にすることができます。',
+    privacySection7: '7. アップロードファイルについて',
+    privacySection7Desc: '音源解析機能でアップロードされた音声ファイルは、解析処理のためにサーバーに一時的に保存されますが、解析完了後に自動的に削除されます。アップロードされたファイルを第三者と共有したり、解析以外の目的で使用することはありません。',
+    privacySection8: '8. セキュリティ',
+    privacySection8Desc: '当サイトは、個人情報の漏洩、滅失、毀損の防止その他の個人情報の安全管理のために、必要かつ適切なセキュリティ対策を講じます。',
+    privacySection9: '9. 免責事項',
+    privacySection9Desc1: '当サイトに掲載されている情報の正確性には万全を期していますが、利用者が当サイトの情報を用いて行う一切の行為について、当サイトは一切の責任を負いません。',
+    privacySection9Desc2: '当サイトからリンクやバナーなどによって他のサイトに移動された場合、移動先サイトで提供される情報、サービス等について一切の責任を負いません。',
+    privacySection10: '10. 著作権について',
+    privacySection10Desc: '当サイトに掲載されているコンテンツ（文章、画像、プログラム等）の著作権は、当サイトまたは正当な権利を有する第三者に帰属しています。無断での複製、転載、改変等は禁止されています。',
+    privacySection11: '11. プライバシーポリシーの変更',
+    privacySection11Desc: '当サイトは、必要に応じて本ポリシーを変更することがあります。変更後のプライバシーポリシーは、当サイトに掲載したときから効力を生じるものとします。',
+    privacySection12: '12. お問い合わせ',
+    privacySection12Desc: '本ポリシーに関するお問い合わせは、お問い合わせフォームよりご連絡ください。',
+    privacyEnacted: '制定日: 2025年1月1日',
+    privacyUpdated: '最終更新日: 2025年1月15日',
+
+    // 運営者情報
+    companyTitle: '運営者情報',
+    companySection1: '運営会社',
+    companyName: '会社名',
+    companyNameEn: '英文社名',
+    companyOfficialSite: '公式サイト',
+    companySection2: '事業内容',
+    companyBusinessDesc: '株式会社モテコロは「全ての人のQOML（クオリティ・オブ・ミュージック・ライフ）の向上」をミッションに掲げ、音楽を通じた様々なサービスを提供しています。',
+    companyBusinessList: [
+      '地域・学校・企業向け講演・ワークショップ',
+      '音楽活動コンシェルジュサービス',
+      'エンターテインメントコンテンツの企画・運営',
+      'JAMセッション・音楽コラボレーションイベント',
+      '音楽関連Webサービスの開発・運営',
+    ],
+    companySection3: '本サービスについて',
+    companyServiceDesc1: '「ギタースケールわかる君」は、ギタリストの練習や作曲をサポートするために株式会社モテコロが開発・運営する無料Webアプリケーションです。',
+    companyServiceDesc2: 'ギターの指板上にスケールを視覚的に表示する機能に加え、音源から自動的にキーとスケールを検出するAI解析機能を搭載しています。初心者からプロまで、すべてのギタリストの音楽ライフをサポートします。',
+    companySection4: 'お問い合わせ',
+    companyContactDesc: '本サービスに関するお問い合わせは、以下よりお願いいたします。',
+    companyContactForm: 'お問い合わせフォーム',
+    companyOfficialSiteBtn: '会社公式サイト',
+
+    // お問い合わせ
+    contactTitle: 'お問い合わせ',
+    contactDesc: 'ギタースケールわかる君に関するご質問、ご要望、不具合報告などがございましたら、以下のフォームよりお気軽にお問い合わせください。',
+    contactNotes: 'お問い合わせにあたって',
+    contactNote1: '通常、3営業日以内にご返信いたします。',
+    contactNote2: 'お問い合わせ内容によっては、回答にお時間をいただく場合があります。',
+    contactNote3: '営業目的のお問い合わせには回答いたしかねます。',
   },
 
   en: {
@@ -317,6 +839,287 @@ export const translations: Record<Language, Translations> = {
     playScale: 'Play Scale',
     playing: 'Playing',
     stopPlayback: 'Stop',
+
+    // Footer
+    footerDescription: 'A free web app to visually learn guitar scales. Display 13+ scales on the guitar fretboard, with AI-powered key detection from audio files. Supporting your music creation and practice, from beginners to pros.',
+    footerContents: 'Contents',
+    footerSupport: 'Support',
+    home: 'Home',
+    aboutSite: 'About This Site',
+    articles: 'Articles',
+    contact: 'Contact',
+    privacyPolicy: 'Privacy Policy',
+    companyInfo: 'Company Info',
+    copyright: '© {year} Guitar Scale Master. All rights reserved.',
+
+    // Navigation
+    backToHome: '← Back to Home',
+
+    // About Page
+    aboutTitle: 'About Guitar Scale Master',
+    aboutServiceOverview: 'Service Overview',
+    aboutServiceDesc1: 'Guitar Scale Master is a free web application designed to support guitarists in their practice and songwriting. By visually displaying scales on the guitar fretboard, you can intuitively understand scale structures and fingering patterns.',
+    aboutServiceDesc2: 'It serves as a learning tool for beginners memorizing scales, and as a reference for experienced players exploring new scales or seeking ideas during composition.',
+    aboutMainFeatures: 'Main Features',
+    aboutFeatureVisualize: 'Scale Visualization',
+    aboutFeatureVisualizeDesc: 'Display 13+ scales (Major, Minor, Pentatonic, Modes, Miyako-bushi, etc.) clearly on the guitar fretboard. Root notes are shown in red, other scale notes in green.',
+    aboutFeatureAnalysis: 'Audio Auto-Analysis',
+    aboutFeatureAnalysisDesc: 'Upload MP3, WAV, or M4A files and AI will automatically detect the key and scale. Perfect when you want to learn a song but don\'t know the scale.',
+    aboutFeaturePlay: 'Scale Playback',
+    aboutFeaturePlayDesc: 'Listen to the selected scale\'s notes. Connect the sounds with fretboard positions while training your ear.',
+    aboutFeatureVideo: 'Reference Videos',
+    aboutFeatureVideoDesc: 'YouTube videos for each scale and root note. Deepen your understanding with performance examples and tutorials.',
+    aboutFeatureTuning: 'Tuning Support',
+    aboutFeatureTuningDesc: 'Supports various tunings including standard, Drop D, 7-string guitar, half-step down. Switch displays to match your guitar setup.',
+    aboutFeatureResponsive: 'Responsive Design',
+    aboutFeatureResponsiveDesc: 'Works comfortably on PC, tablet, and smartphone. On mobile, the fretboard can be rotated 90 degrees.',
+    aboutSupportedScales: 'Supported Scales',
+    aboutBasicScales: 'Basic Scales',
+    aboutModeScales: 'Mode Scales',
+    aboutPentaOther: 'Pentatonic & Others',
+    scaleMajor: 'Major',
+    scaleNaturalMinor: 'Natural Minor',
+    scaleHarmonicMinor: 'Harmonic Minor',
+    scaleMelodicMinor: 'Melodic Minor',
+    scaleDorian: 'Dorian',
+    scalePhrygian: 'Phrygian',
+    scaleLydian: 'Lydian',
+    scaleMixolydian: 'Mixolydian',
+    scaleLocrian: 'Locrian',
+    scaleMajorPentatonic: 'Major Pentatonic',
+    scaleMinorPentatonic: 'Minor Pentatonic',
+    scaleBlues: 'Blues',
+    scaleInSen: 'In Sen',
+    aboutHowToUse: 'How to Use',
+    aboutStep1: 'Choose Root Note',
+    aboutStep1Desc: 'Select the base note from 12 notes: C, D, E, etc.',
+    aboutStep2: 'Choose Scale',
+    aboutStep2Desc: 'Select the scale you want to learn: Major, Minor, Pentatonic, etc.',
+    aboutStep3: 'Check the Fretboard',
+    aboutStep3Desc: 'Look at the positions on the fretboard and try playing them on your guitar.',
+    aboutStep4: 'Listen and Learn',
+    aboutStep4Desc: 'Press the play button to hear the scale and improve retention through ear training.',
+    aboutRecommendedFor: 'Recommended For',
+    aboutRecommend1: 'Guitar beginners wanting to learn scale basics',
+    aboutRecommend2: 'Those wanting to try improvisation but unsure what to play',
+    aboutRecommend3: 'Those wanting to know the key and scale of songs to cover',
+    aboutRecommend4: 'Those needing scale reference during composition',
+    aboutRecommend5: 'Intermediate players wanting to learn scales beyond pentatonic',
+    aboutRecommend6: 'Those wanting to explore diverse scales like Japanese scales or modes',
+    aboutCta: 'Try It Now →',
+
+    // Articles
+    articlesTitle: 'Articles',
+    articlesSubtitle: 'Useful information for guitarists, from basics to advanced techniques',
+    articleCategory: {
+      beginner: 'Beginner',
+      intermediate: 'Intermediate',
+      practice: 'Practical Technique',
+    },
+    articleReadMore: 'Read More →',
+    articleTryScale: 'Try the Scale',
+    articleTryScaleDesc: 'Visually confirm the scales you learned in the article on the guitar fretboard.',
+    articleUseVisualizer: 'Use Scale Visualizer →',
+    articleRelated: 'Related Articles',
+
+    // Pentatonic Article
+    pentatonicTitle: 'Pentatonic Scale Guide - The First Scale Every Guitarist Should Learn',
+    pentatonicDesc: 'The pentatonic scale is one of the most important scales for guitarists. Learn why it should be your first scale and how to practice it.',
+    pentatonicWhat: 'What is the Pentatonic Scale?',
+    pentatonicWhatDesc1: 'The Pentatonic Scale consists of 5 notes, as its name suggests. "Penta" means "five" in Greek. It\'s a simplified scale with 2 notes removed from the standard 7-note scale.',
+    pentatonicWhatDesc2: 'This simplicity is exactly why the pentatonic scale is recommended for beginners. With fewer notes, it\'s easier to memorize, and it\'s hard to hit wrong notes.',
+    pentatonicTypes: 'Two Types of Pentatonic Scales',
+    pentatonicMajor: 'Major Pentatonic',
+    pentatonicMajorDesc: 'The major pentatonic omits the 4th and 7th degrees from the major scale. It has a bright, open sound commonly used in country and pop music.',
+    pentatonicMinor: 'Minor Pentatonic',
+    pentatonicMinorDesc: 'The minor pentatonic omits the 2nd and 6th degrees from the natural minor scale. It\'s the most versatile scale, used across rock, blues, metal, and many other genres.',
+    pentatonicWhy: 'Why Pentatonic is Perfect for Beginners',
+    pentatonicWhy1: '1. Easy to Learn',
+    pentatonicWhy1Desc: 'With only 5 notes, the fretboard patterns are simple. Most guitarists learn 5 "box positions" to play pentatonic across the entire fretboard.',
+    pentatonicWhy2: '2. Hard to Sound Bad',
+    pentatonicWhy2Desc: 'The 4th and 7th degrees omitted from pentatonic often clash with chord tones. By removing them, almost any note you play will sound good, making improvisation easier for beginners.',
+    pentatonicWhy3: '3. Highly Versatile',
+    pentatonicWhy3Desc: 'Works in rock, blues, pop, funk, metal, and nearly all popular music. Once mastered, it applies to songs across many genres.',
+    pentatonicPractice: 'Practice Tips',
+    pentatonicPracticeList: [
+      'Start by perfecting one position (position 1 recommended)',
+      'Practice slowly and accurately with a metronome',
+      'Try improvising over backing tracks',
+      'Copy phrases from your favorite guitarists to learn application',
+      'Once comfortable, practice connecting all 5 positions',
+    ],
+    pentatonicSummary: 'Summary',
+    pentatonicSummaryDesc: 'The pentatonic scale is a simple yet powerful tool. Many professional guitarists build their phrases on pentatonic foundations. Master this scale first, then gradually expand your knowledge to other scales.',
+    pentatonicCta: 'Check Pentatonic Scale on Fretboard',
+    pentatonicViewMajor: 'View A Major Pentatonic',
+    pentatonicViewMinor: 'View A Minor Pentatonic',
+
+    // Mode Scales Article
+    modeTitle: 'Complete Mode Scale Guide - How to Use Dorian, Phrygian, and Lydian',
+    modeDesc: 'Detailed explanation of the 7 mode scales and their use in actual songs. Level up from intermediate to advanced.',
+    modeWhat: 'What are Mode Scales?',
+    modeWhatDesc1: 'Mode scales (Church Modes) are 7 scales derived from starting on each note of the major scale. They originate from ancient Greek music theory and are widely used in modern jazz, rock, and fusion.',
+    modeWhatDesc2: 'Each mode has its own unique "color" or "mood." Using them appropriately enables richer musical expression.',
+    mode7Modes: 'The 7 Mode Scales',
+    modeIonian: '1. Ionian',
+    modeIonianDesc: 'This is the major scale we all know well. Characterized by a bright, stable sound.',
+    modeDorian: '2. Dorian',
+    modeDorianDesc: 'Similar to minor scale, but with a natural 6th (major 6th). Despite being minor, it has a somewhat bright quality. Commonly used in jazz, funk, and soul.',
+    modeDorianExample: 'Examples: Santana "Oye Como Va", Miles Davis "So What"',
+    modePhrygian: '3. Phrygian',
+    modePhrygianDesc: 'The ♭2nd is its defining feature, creating an exotic Spanish or Arabic sound. Effectively used in metal, flamenco, and progressive rock.',
+    modePhrygianExample: 'Example: Metallica "Wherever I May Roam"',
+    modeLydian: '4. Lydian',
+    modeLydianDesc: 'Major scale with raised 4th (#4). Has a floating, dreamy sound. Frequently used in film music, progressive rock, and fusion.',
+    modeLydianExample: 'Examples: Steve Vai "For The Love of God", Joe Satriani works',
+    modeMixolydian: '5. Mixolydian',
+    modeMixolydianDesc: 'Major scale with lowered 7th (♭7). Has a bluesy, rock sound used over dominant 7th chords. A staple in rock, blues, and country.',
+    modeMixolydianExample: 'Examples: The Beatles "Norwegian Wood", Guns N\' Roses "Sweet Child O\' Mine"',
+    modeAeolian: '6. Aeolian',
+    modeAeolianDesc: 'Known as the natural minor scale. Has a sad, dark sound used in minor key songs across all genres.',
+    modeLocrian: '7. Locrian',
+    modeLocrianDesc: 'The most unstable mode with a ♭5th (diminished 5th). Creates a tense, dissonant sound. Used in specific contexts in progressive metal and jazz.',
+    modeHowToRemember: 'How to Remember Modes',
+    modeHowToRememberDesc: 'The easiest way to understand modes is to think "start from each note of the major scale."',
+    modePracticalTips: 'Practical Usage Tips',
+    modePracticalTipsList: [
+      'Focus on the "characteristic note" that distinguishes each mode',
+      'Choose appropriate modes for chord progressions',
+      'Master one mode thoroughly before moving to the next',
+      'Use backing tracks to train your ear to recognize each mode\'s sound',
+      'Analyze your favorite guitarists\' playing to learn mode applications',
+    ],
+    modeSummary: 'Summary',
+    modeSummaryDesc: 'Mastering mode scales will greatly expand your musical expression. It may feel difficult at first, but by learning them one by one, you\'ll become a guitarist who can handle various musical situations.',
+    modeCta: 'Check Mode Scales on Fretboard',
+
+    // Blues Scale Article
+    bluesTitle: 'Play Soulful Phrases with the Blues Scale',
+    bluesDesc: 'Master the blues scale structure and blue note usage. Techniques for playing emotional guitar solos.',
+    bluesWhat: 'What is the Blues Scale?',
+    bluesWhatDesc1: 'The blues scale adds the "blue note" (♭5th) to the minor pentatonic, creating a 6-note scale. This single added note creates the distinctive "crying" or "wailing" sound.',
+    bluesWhatDesc2: 'It\'s an extremely expressive scale used in blues, rock, jazz, funk, and many other genres.',
+    bluesStructure: 'Blues Scale Structure',
+    bluesExample: 'A Blues Scale',
+    bluesDegrees: 'Degrees',
+    bluesStructureDesc: 'By adding the ♭5th to the minor pentatonic (1-♭3-4-5-♭7), you create the blues scale. This ♭5th is the "blue note" - a crucial tone that creates unique tension and melancholy.',
+    bluesNote: 'The Magic of the Blue Note',
+    bluesNoteMagic: 'The blue note (♭5th) shows its true value when combined with various techniques:',
+    bluesBending: '1. Bending',
+    bluesBendingDesc: 'Quarter-bend from ♭5th to 5th, or bending from 4th to ♭5th, are classic blues guitar techniques. This "in-between" pitch creates vocal-like expression.',
+    bluesHammerPull: '2. Hammer-on/Pull-off',
+    bluesHammerPullDesc: 'Connecting 4th → ♭5th → 5th with hammer-ons and pull-offs creates smooth, expressive phrases. A signature move of B.B. King and Eric Clapton.',
+    bluesSlide: '3. Slide',
+    bluesSlideDesc: 'Sliding into or out of the blue note adds a "singing" quality to your playing.',
+    bluesPatterns: 'Classic Phrase Patterns',
+    bluesPattern1: 'Pattern 1: Classic Turnaround',
+    bluesPattern1Desc: 'A phrase commonly used in the last 2 bars of a blues progression.',
+    bluesPattern2: 'Pattern 2: B.B. King Box',
+    bluesPattern2Desc: 'Singing phrases played in high positions on the 1st and 2nd strings.',
+    bluesPattern3: 'Pattern 3: Classic Rock Lick',
+    bluesPattern3Desc: 'A powerful phrase commonly used in rock guitar.',
+    bluesMajorApplication: 'Application to Major Blues',
+    bluesMajorApplicationDesc1: 'Though the blues scale is minor-based, it works over major key blues progressions. This "playing minor scale over major chords" creates the distinctive blues sound.',
+    bluesMajorApplicationDesc2: 'Advanced players freely move between minor pentatonic, major pentatonic, and blues scale to construct more complex and expressive solos.',
+    bluesPractice: 'Practice Tips',
+    bluesPracticeList: [
+      'First, master the minor pentatonic perfectly',
+      'Learn the blue note location in each position',
+      'Use the blue note as a "passing tone" (don\'t hold it long)',
+      'Copy famous blues guitarists\' phrases to learn application',
+      'Practice with 12-bar blues backing tracks',
+      'Develop expressive bending and vibrato',
+    ],
+    bluesGuitarists: 'Recommended Guitarists to Study',
+    bluesGuitarist1: 'The King of Blues guitar. A textbook for vibrato and bending.',
+    bluesGuitarist2: 'The powerhouse of Texas blues. Powerful tone and passionate playing.',
+    bluesGuitarist3: 'Blues rock master. Clear, singing phrasing.',
+    bluesGuitarist4: 'The soul of Irish blues. Heart-stirring, crying guitar.',
+    bluesSummary: 'Summary',
+    bluesSummaryDesc: 'The blues scale dramatically expands your expression with just one added note. After mastering pentatonic, definitely try the blues scale. Once you can use this scale well, your guitar solos will definitely reach the next level.',
+    bluesCta: 'Check Blues Scale on Fretboard',
+    bluesViewA: 'View A Blues Scale',
+    bluesViewE: 'View E Blues Scale',
+
+    // Privacy Policy
+    privacyTitle: 'Privacy Policy',
+    privacyIntro: 'Guitar Scale Master ("this site") establishes this Privacy Policy regarding the handling of users\' personal information.',
+    privacySection1: '1. Information We Collect',
+    privacySection1List: [
+      'Information entered in the contact form (name, email address, inquiry content)',
+      'Audio files uploaded for analysis (automatically deleted after analysis)',
+      'Access log information (IP address, browser type, access date/time, etc.)',
+      'Cookie information',
+    ],
+    privacySection2: '2. Purpose of Use',
+    privacySection2List: [
+      'Responding to inquiries',
+      'Providing and operating the service',
+      'Improving service and developing new features',
+      'Usage analysis',
+      'Preventing unauthorized use',
+    ],
+    privacySection3: '3. Third-Party Disclosure',
+    privacySection3Desc: 'This site will not provide users\' personal information to third parties except in the following cases:',
+    privacySection3List: [
+      'With user consent',
+      'When required by law',
+      'When necessary to protect life, body, or property',
+    ],
+    privacySection4: '4. Use of Cookies',
+    privacySection4Desc: 'This site uses cookies to improve user experience and for access analysis. You can refuse cookies through browser settings, but some features may become unavailable.',
+    privacySection5: '5. Analytics Tools',
+    privacySection5Desc: 'This site may use Google Analytics for access analysis. Google Analytics uses cookies to collect site usage data. This information is collected anonymously and does not identify individuals.',
+    privacySection6: '6. Advertising',
+    privacySection6Desc1: 'This site uses third-party advertising services (Google AdSense). Advertisers may use cookies to display ads based on user interests.',
+    privacySection6Desc2: 'For details about Google AdSense, please refer to Google\'s advertising policies.',
+    privacySection6Desc3: 'Users can disable personalized ads in Google\'s ad settings.',
+    privacySection7: '7. Uploaded Files',
+    privacySection7Desc: 'Audio files uploaded for analysis are temporarily stored on the server for processing but are automatically deleted after analysis. Uploaded files are not shared with third parties or used for purposes other than analysis.',
+    privacySection8: '8. Security',
+    privacySection8Desc: 'This site implements necessary and appropriate security measures to prevent leakage, loss, and damage of personal information.',
+    privacySection9: '9. Disclaimer',
+    privacySection9Desc1: 'While we strive for accuracy, this site assumes no responsibility for any actions taken based on the information provided.',
+    privacySection9Desc2: 'This site assumes no responsibility for information or services provided by external sites accessed through links or banners.',
+    privacySection10: '10. Copyright',
+    privacySection10Desc: 'Copyright of content on this site (text, images, programs, etc.) belongs to this site or legitimate third-party rights holders. Unauthorized reproduction, reprinting, or modification is prohibited.',
+    privacySection11: '11. Policy Changes',
+    privacySection11Desc: 'This site may change this policy as necessary. Updated privacy policy takes effect when posted on this site.',
+    privacySection12: '12. Contact',
+    privacySection12Desc: 'For inquiries about this policy, please use the contact form.',
+    privacyEnacted: 'Enacted: January 1, 2025',
+    privacyUpdated: 'Last Updated: January 15, 2025',
+
+    // Company Info
+    companyTitle: 'Company Information',
+    companySection1: 'Operating Company',
+    companyName: 'Company Name',
+    companyNameEn: 'English Name',
+    companyOfficialSite: 'Official Site',
+    companySection2: 'Business Description',
+    companyBusinessDesc: 'Motechoro Co., Ltd. operates with the mission of "improving QOML (Quality of Music Life) for everyone," providing various services through music.',
+    companyBusinessList: [
+      'Lectures and workshops for communities, schools, and companies',
+      'Music activity concierge services',
+      'Entertainment content planning and management',
+      'JAM sessions and music collaboration events',
+      'Music-related web service development and operation',
+    ],
+    companySection3: 'About This Service',
+    companyServiceDesc1: 'Guitar Scale Master is a free web application developed and operated by Motechoro Co., Ltd. to support guitarists in their practice and composition.',
+    companyServiceDesc2: 'In addition to visually displaying scales on the guitar fretboard, it features AI analysis that automatically detects key and scale from audio. Supporting all guitarists\' music life, from beginners to professionals.',
+    companySection4: 'Contact',
+    companyContactDesc: 'For inquiries about this service, please use the following:',
+    companyContactForm: 'Contact Form',
+    companyOfficialSiteBtn: 'Company Official Site',
+
+    // Contact
+    contactTitle: 'Contact',
+    contactDesc: 'For questions, requests, or bug reports about Guitar Scale Master, please feel free to contact us using the form below.',
+    contactNotes: 'About Inquiries',
+    contactNote1: 'We typically respond within 3 business days.',
+    contactNote2: 'Depending on the content, responses may take additional time.',
+    contactNote3: 'We cannot respond to business solicitations.',
   },
 
   zh: {
@@ -422,6 +1225,287 @@ export const translations: Record<Language, Translations> = {
     playScale: 'Play Scale',
     playing: 'Playing',
     stopPlayback: 'Stop',
+
+    // 页脚
+    footerDescription: '免费的吉他音阶可视化网络应用。在吉他指板上显示13种以上音阶，具备从音频自动检测调性的AI功能。支持从初学者到专业人士的音乐创作和练习。',
+    footerContents: '内容',
+    footerSupport: '支持',
+    home: '首页',
+    aboutSite: '关于本站',
+    articles: '专栏文章',
+    contact: '联系我们',
+    privacyPolicy: '隐私政策',
+    companyInfo: '运营者信息',
+    copyright: '© {year} 吉他音阶大师. 保留所有权利。',
+
+    // 导航
+    backToHome: '← 返回首页',
+
+    // 关于页面
+    aboutTitle: '关于吉他音阶大师',
+    aboutServiceOverview: '服务概述',
+    aboutServiceDesc1: '吉他音阶大师是一款免费的网络应用，旨在支持吉他手的练习和作曲。通过在吉他指板上可视化显示音阶，您可以直观地理解音阶结构和指法模式。',
+    aboutServiceDesc2: '它可以作为初学者记忆音阶的学习工具，也可以作为有经验的演奏者探索新音阶或在作曲时获取灵感的参考。',
+    aboutMainFeatures: '主要功能',
+    aboutFeatureVisualize: '音阶可视化',
+    aboutFeatureVisualizeDesc: '在吉他指板上清晰显示13种以上音阶（大调、小调、五声、调式、都节等）。根音显示为红色，其他音阶音显示为绿色。',
+    aboutFeatureAnalysis: '音频自动分析',
+    aboutFeatureAnalysisDesc: '上传MP3、WAV或M4A文件，AI将自动检测调性和音阶。当您想学习一首歌但不知道音阶时非常有用。',
+    aboutFeaturePlay: '音阶播放',
+    aboutFeaturePlayDesc: '聆听所选音阶的音符。在训练耳朵的同时，将声音与指板位置联系起来。',
+    aboutFeatureVideo: '参考视频',
+    aboutFeatureVideoDesc: '每个音阶和根音都有YouTube视频。通过演奏示例和教程加深理解。',
+    aboutFeatureTuning: '调音支持',
+    aboutFeatureTuningDesc: '支持标准、Drop D、7弦吉他、半音下调等各种调音。切换显示以匹配您的吉他设置。',
+    aboutFeatureResponsive: '响应式设计',
+    aboutFeatureResponsiveDesc: '在PC、平板和智能手机上都能舒适使用。在移动设备上，指板可以旋转90度。',
+    aboutSupportedScales: '支持的音阶',
+    aboutBasicScales: '基本音阶',
+    aboutModeScales: '调式音阶',
+    aboutPentaOther: '五声音阶等',
+    scaleMajor: '大调',
+    scaleNaturalMinor: '自然小调',
+    scaleHarmonicMinor: '和声小调',
+    scaleMelodicMinor: '旋律小调',
+    scaleDorian: '多利亚',
+    scalePhrygian: '弗里吉亚',
+    scaleLydian: '利迪亚',
+    scaleMixolydian: '混合利迪亚',
+    scaleLocrian: '洛克里亚',
+    scaleMajorPentatonic: '大调五声',
+    scaleMinorPentatonic: '小调五声',
+    scaleBlues: '布鲁斯',
+    scaleInSen: '都节',
+    aboutHowToUse: '使用方法',
+    aboutStep1: '选择根音',
+    aboutStep1Desc: '从12个音符中选择基准音：C、D、E等。',
+    aboutStep2: '选择音阶',
+    aboutStep2Desc: '选择您想学习的音阶：大调、小调、五声等。',
+    aboutStep3: '查看指板',
+    aboutStep3Desc: '查看指板上的位置，然后在吉他上尝试弹奏。',
+    aboutStep4: '听音学习',
+    aboutStep4Desc: '按播放按钮听音阶，通过听觉训练提高记忆。',
+    aboutRecommendedFor: '推荐人群',
+    aboutRecommend1: '想学习音阶基础的吉他初学者',
+    aboutRecommend2: '想尝试即兴演奏但不知道弹什么的人',
+    aboutRecommend3: '想知道要翻弹歌曲的调性和音阶的人',
+    aboutRecommend4: '作曲时需要音阶参考的人',
+    aboutRecommend5: '想学习五声音阶以外音阶的中级演奏者',
+    aboutRecommend6: '想探索日本音阶或调式等多样音阶的人',
+    aboutCta: '立即试用 →',
+
+    // 文章
+    articlesTitle: '专栏文章',
+    articlesSubtitle: '为吉他手提供从基础到高级技巧的有用信息',
+    articleCategory: {
+      beginner: '初学者',
+      intermediate: '中级',
+      practice: '实践技巧',
+    },
+    articleReadMore: '阅读更多 →',
+    articleTryScale: '试试这个音阶',
+    articleTryScaleDesc: '在吉他指板上可视化确认文章中学到的音阶。',
+    articleUseVisualizer: '使用音阶可视化工具 →',
+    articleRelated: '相关文章',
+
+    // 五声音阶文章
+    pentatonicTitle: '五声音阶入门 - 每位吉他手应该首先学习的音阶',
+    pentatonicDesc: '五声音阶是吉他手最重要的音阶之一。了解为什么它应该是您的第一个音阶以及如何练习。',
+    pentatonicWhat: '什么是五声音阶？',
+    pentatonicWhatDesc1: '五声音阶由5个音符组成，正如其名所示。"Penta"在希腊语中意为"五"。它是从标准7音音阶中去掉2个音的简化音阶。',
+    pentatonicWhatDesc2: '这种简单性正是五声音阶被推荐给初学者的原因。音符少更容易记忆，而且很难弹错音。',
+    pentatonicTypes: '两种五声音阶',
+    pentatonicMajor: '大调五声音阶',
+    pentatonicMajorDesc: '大调五声音阶省略了大调音阶的第4度和第7度。具有明亮、开放的音色，常用于乡村和流行音乐。',
+    pentatonicMinor: '小调五声音阶',
+    pentatonicMinorDesc: '小调五声音阶省略了自然小调音阶的第2度和第6度。它是最通用的音阶，广泛用于摇滚、布鲁斯、金属等多种流派。',
+    pentatonicWhy: '为什么五声音阶适合初学者',
+    pentatonicWhy1: '1. 容易学习',
+    pentatonicWhy1Desc: '只有5个音符，指板图案简单。大多数吉他手学习5个"盒子位置"就能在整个指板上弹奏五声音阶。',
+    pentatonicWhy2: '2. 难以弹错',
+    pentatonicWhy2Desc: '五声音阶省略的第4度和第7度经常与和弦音冲突。去掉它们后，几乎弹任何音都会好听，使初学者更容易尝试即兴演奏。',
+    pentatonicWhy3: '3. 高度通用',
+    pentatonicWhy3Desc: '适用于摇滚、布鲁斯、流行、放克、金属等几乎所有流行音乐。一旦掌握，可以应用于多种流派的歌曲。',
+    pentatonicPractice: '练习技巧',
+    pentatonicPracticeList: [
+      '首先完善一个位置（推荐位置1）',
+      '使用节拍器慢速准确练习',
+      '尝试在伴奏音轨上即兴演奏',
+      '复制您喜欢的吉他手的乐句来学习应用',
+      '熟练后，练习连接所有5个位置',
+    ],
+    pentatonicSummary: '总结',
+    pentatonicSummaryDesc: '五声音阶是一个简单而强大的工具。许多专业吉他手都以五声音阶为基础构建乐句。首先掌握这个音阶，然后逐渐扩展到其他音阶。',
+    pentatonicCta: '在指板上查看五声音阶',
+    pentatonicViewMajor: '查看A大调五声音阶',
+    pentatonicViewMinor: '查看A小调五声音阶',
+
+    // 调式音阶文章
+    modeTitle: '调式音阶完整指南 - 如何使用多利亚、弗里吉亚和利底亚',
+    modeDesc: '详细解释7种调式音阶及其在实际歌曲中的应用。从中级到高级的进阶。',
+    modeWhat: '什么是调式音阶？',
+    modeWhatDesc1: '调式音阶（教会调式）是从大调音阶的每个音开始衍生出的7种音阶。它起源于古希腊音乐理论，广泛用于现代爵士、摇滚和融合音乐。',
+    modeWhatDesc2: '每种调式都有其独特的"色彩"或"情绪"。适当使用它们可以实现更丰富的音乐表现。',
+    mode7Modes: '7种调式音阶',
+    modeIonian: '1. 伊奥尼亚（Ionian）',
+    modeIonianDesc: '这就是我们熟知的大调音阶。特点是明亮、稳定的音色。',
+    modeDorian: '2. 多利亚（Dorian）',
+    modeDorianDesc: '类似于小调音阶，但第6度是自然音（大6度）。虽然是小调，但有一种明亮的感觉。常用于爵士、放克和灵魂乐。',
+    modeDorianExample: '示例：Santana "Oye Como Va"、Miles Davis "So What"',
+    modePhrygian: '3. 弗里吉亚（Phrygian）',
+    modePhrygianDesc: '♭2度是其显著特征，创造出异国情调的西班牙或阿拉伯风格音色。在金属、弗拉门戈和前卫摇滚中有效使用。',
+    modePhrygianExample: '示例：Metallica "Wherever I May Roam"',
+    modeLydian: '4. 利底亚（Lydian）',
+    modeLydianDesc: '大调音阶的第4度升高（#4）。具有飘浮、梦幻的音色。常用于电影配乐、前卫摇滚和融合音乐。',
+    modeLydianExample: '示例：Steve Vai "For The Love of God"、Joe Satriani的作品',
+    modeMixolydian: '5. 混合利底亚（Mixolydian）',
+    modeMixolydianDesc: '大调音阶的第7度降低（♭7）。具有布鲁斯风格的摇滚音色，用于属七和弦上。是摇滚、布鲁斯和乡村音乐的常用音阶。',
+    modeMixolydianExample: '示例：The Beatles "Norwegian Wood"、Guns N\' Roses "Sweet Child O\' Mine"',
+    modeAeolian: '6. 艾奥利亚（Aeolian）',
+    modeAeolianDesc: '被称为自然小调音阶。具有悲伤、黑暗的音色，用于各种流派的小调歌曲。',
+    modeLocrian: '7. 洛克里亚（Locrian）',
+    modeLocrianDesc: '最不稳定的调式，具有♭5度（减5度）。创造紧张、不协和的音色。用于前卫金属和爵士的特定场景。',
+    modeHowToRemember: '如何记忆调式',
+    modeHowToRememberDesc: '理解调式最简单的方法是想"从大调音阶的每个音开始"。',
+    modePracticalTips: '实用技巧',
+    modePracticalTipsList: [
+      '关注区分每种调式的"特征音"',
+      '根据和弦进行选择适当的调式',
+      '在移动到下一个之前彻底掌握一个调式',
+      '使用伴奏音轨训练耳朵识别每种调式的音色',
+      '分析您喜欢的吉他手的演奏来学习调式应用',
+    ],
+    modeSummary: '总结',
+    modeSummaryDesc: '掌握调式音阶将大大扩展您的音乐表现力。起初可能感觉困难，但通过逐一学习，您将成为能够应对各种音乐场景的吉他手。',
+    modeCta: '在指板上查看调式音阶',
+
+    // 布鲁斯音阶文章
+    bluesTitle: '用布鲁斯音阶演奏富有灵魂的乐句',
+    bluesDesc: '掌握布鲁斯音阶结构和蓝调音的使用。演奏情感吉他独奏的技巧。',
+    bluesWhat: '什么是布鲁斯音阶？',
+    bluesWhatDesc1: '布鲁斯音阶在小调五声音阶的基础上添加了"蓝调音"（♭5度），形成6音音阶。这一个音的添加创造了独特的"哭泣"或"呻吟"声音。',
+    bluesWhatDesc2: '这是一个极具表现力的音阶，用于布鲁斯、摇滚、爵士、放克等多种流派。',
+    bluesStructure: '布鲁斯音阶结构',
+    bluesExample: 'A布鲁斯音阶',
+    bluesDegrees: '音程',
+    bluesStructureDesc: '通过在小调五声音阶（1-♭3-4-5-♭7）上添加♭5度，就形成了布鲁斯音阶。这个♭5度就是"蓝调音"——一个能创造独特张力和忧郁感的关键音。',
+    bluesNote: '蓝调音的魔力',
+    bluesNoteMagic: '蓝调音（♭5度）与各种技巧结合时才能展现其真正价值：',
+    bluesBending: '1. 推弦',
+    bluesBendingDesc: '从♭5度到5度的四分之一推弦，或从4度到♭5度的推弦，是经典的布鲁斯吉他技巧。这种"介于之间"的音高创造出类似人声的表现。',
+    bluesHammerPull: '2. 击弦/勾弦',
+    bluesHammerPullDesc: '用击弦和勾弦连接4度 → ♭5度 → 5度，创造流畅、富有表现力的乐句。这是B.B. King和Eric Clapton的标志性技巧。',
+    bluesSlide: '3. 滑音',
+    bluesSlideDesc: '滑入或滑出蓝调音可以为您的演奏增添"歌唱"般的质感。',
+    bluesPatterns: '经典乐句模式',
+    bluesPattern1: '模式1：经典转折',
+    bluesPattern1Desc: '常用于布鲁斯进行最后2小节的乐句。',
+    bluesPattern2: '模式2：B.B. King盒子',
+    bluesPattern2Desc: '在1、2弦高把位演奏的歌唱般乐句。',
+    bluesPattern3: '模式3：经典摇滚乐句',
+    bluesPattern3Desc: '摇滚吉他常用的有力乐句。',
+    bluesMajorApplication: '大调布鲁斯应用',
+    bluesMajorApplicationDesc1: '虽然布鲁斯音阶是小调系的，但它可以用于大调布鲁斯进行。这种"在大调和弦上弹小调音阶"创造了独特的布鲁斯音色。',
+    bluesMajorApplicationDesc2: '高级演奏者在小调五声、大调五声和布鲁斯音阶之间自由切换，构建更复杂和富有表现力的独奏。',
+    bluesPractice: '练习技巧',
+    bluesPracticeList: [
+      '首先完美掌握小调五声音阶',
+      '了解每个位置的蓝调音位置',
+      '蓝调音基本用作"经过音"（不要长时间保持）',
+      '复制著名布鲁斯吉他手的乐句来学习应用',
+      '配合12小节布鲁斯伴奏音轨练习',
+      '发展有表现力的推弦和揉弦',
+    ],
+    bluesGuitarists: '推荐学习的吉他手',
+    bluesGuitarist1: '布鲁斯吉他之王。颤音和推弦的教科书。',
+    bluesGuitarist2: '德克萨斯布鲁斯的强者。有力的音色和充满激情的演奏。',
+    bluesGuitarist3: '布鲁斯摇滚大师。清晰、歌唱般的乐句。',
+    bluesGuitarist4: '爱尔兰布鲁斯之魂。触动心灵的哭泣吉他。',
+    bluesSummary: '总结',
+    bluesSummaryDesc: '布鲁斯音阶仅添加一个音就能大大扩展您的表现力。掌握五声音阶后，一定要尝试布鲁斯音阶。一旦您能够运用这个音阶，您的吉他独奏一定会上升到新的水平。',
+    bluesCta: '在指板上查看布鲁斯音阶',
+    bluesViewA: '查看A布鲁斯音阶',
+    bluesViewE: '查看E布鲁斯音阶',
+
+    // 隐私政策
+    privacyTitle: '隐私政策',
+    privacyIntro: '吉他音阶大师（"本站"）就用户个人信息的处理制定本隐私政策。',
+    privacySection1: '1. 收集的信息',
+    privacySection1List: [
+      '联系表单中输入的信息（姓名、电子邮件地址、咨询内容）',
+      '上传用于分析的音频文件（分析后自动删除）',
+      '访问日志信息（IP地址、浏览器类型、访问日期/时间等）',
+      'Cookie信息',
+    ],
+    privacySection2: '2. 使用目的',
+    privacySection2List: [
+      '回复咨询',
+      '提供和运营服务',
+      '改进服务和开发新功能',
+      '使用分析',
+      '防止未经授权的使用',
+    ],
+    privacySection3: '3. 第三方披露',
+    privacySection3Desc: '除以下情况外，本站不会向第三方提供用户个人信息：',
+    privacySection3List: [
+      '经用户同意',
+      '法律要求时',
+      '为保护生命、身体或财产所必需时',
+    ],
+    privacySection4: '4. Cookie的使用',
+    privacySection4Desc: '本站使用Cookie来改善用户体验和进行访问分析。您可以通过浏览器设置拒绝Cookie，但某些功能可能变得不可用。',
+    privacySection5: '5. 分析工具',
+    privacySection5Desc: '本站可能使用Google Analytics进行访问分析。Google Analytics使用Cookie收集网站使用数据。此信息是匿名收集的，不会识别个人。',
+    privacySection6: '6. 广告',
+    privacySection6Desc1: '本站使用第三方广告服务（Google AdSense）。广告商可能使用Cookie根据用户兴趣显示广告。',
+    privacySection6Desc2: '有关Google AdSense的详细信息，请参阅Google的广告政策。',
+    privacySection6Desc3: '用户可以在Google的广告设置中禁用个性化广告。',
+    privacySection7: '7. 上传的文件',
+    privacySection7Desc: '上传用于分析的音频文件暂时存储在服务器上进行处理，但分析后会自动删除。上传的文件不会与第三方共享或用于分析以外的目的。',
+    privacySection8: '8. 安全',
+    privacySection8Desc: '本站采取必要和适当的安全措施，以防止个人信息的泄露、丢失和损坏。',
+    privacySection9: '9. 免责声明',
+    privacySection9Desc1: '虽然我们力求准确，但本站对基于所提供信息采取的任何行动不承担责任。',
+    privacySection9Desc2: '本站对通过链接或横幅访问的外部网站提供的信息或服务不承担责任。',
+    privacySection10: '10. 版权',
+    privacySection10Desc: '本站内容（文字、图片、程序等）的版权属于本站或合法的第三方权利人。禁止未经授权的复制、转载或修改。',
+    privacySection11: '11. 政策变更',
+    privacySection11Desc: '本站可能根据需要更改本政策。更新的隐私政策在本站发布时生效。',
+    privacySection12: '12. 联系方式',
+    privacySection12Desc: '有关本政策的咨询，请使用联系表单。',
+    privacyEnacted: '制定日期：2025年1月1日',
+    privacyUpdated: '最后更新：2025年1月15日',
+
+    // 运营者信息
+    companyTitle: '运营者信息',
+    companySection1: '运营公司',
+    companyName: '公司名称',
+    companyNameEn: '英文名称',
+    companyOfficialSite: '官方网站',
+    companySection2: '业务描述',
+    companyBusinessDesc: '株式会社Motechoro以"提高每个人的QOML（音乐生活质量）"为使命，通过音乐提供各种服务。',
+    companyBusinessList: [
+      '面向社区、学校和企业的讲座和工作坊',
+      '音乐活动礼宾服务',
+      '娱乐内容策划和管理',
+      'JAM会议和音乐协作活动',
+      '音乐相关网络服务的开发和运营',
+    ],
+    companySection3: '关于本服务',
+    companyServiceDesc1: '吉他音阶大师是由株式会社Motechoro开发和运营的免费网络应用，旨在支持吉他手的练习和作曲。',
+    companyServiceDesc2: '除了在吉他指板上可视化显示音阶外，还具有从音频自动检测调性和音阶的AI分析功能。支持从初学者到专业人士的所有吉他手的音乐生活。',
+    companySection4: '联系方式',
+    companyContactDesc: '有关本服务的咨询，请使用以下方式：',
+    companyContactForm: '联系表单',
+    companyOfficialSiteBtn: '公司官方网站',
+
+    // 联系我们
+    contactTitle: '联系我们',
+    contactDesc: '如果您对吉他音阶大师有任何问题、请求或错误报告，请随时使用下面的表单与我们联系。',
+    contactNotes: '关于咨询',
+    contactNote1: '我们通常在3个工作日内回复。',
+    contactNote2: '根据内容，回复可能需要额外时间。',
+    contactNote3: '我们无法回应商业推销。',
   },
 
   es: {
@@ -527,6 +1611,287 @@ export const translations: Record<Language, Translations> = {
     playScale: 'Play Scale',
     playing: 'Playing',
     stopPlayback: 'Stop',
+
+    // Pie de página
+    footerDescription: 'Aplicación web gratuita para aprender escalas de guitarra visualmente. Muestra más de 13 escalas en el diapasón, con detección automática de tonalidad desde audio. Apoyando tu creación musical y práctica, desde principiantes hasta profesionales.',
+    footerContents: 'Contenidos',
+    footerSupport: 'Soporte',
+    home: 'Inicio',
+    aboutSite: 'Sobre Este Sitio',
+    articles: 'Artículos',
+    contact: 'Contacto',
+    privacyPolicy: 'Política de Privacidad',
+    companyInfo: 'Información de la Empresa',
+    copyright: '© {year} Maestro de Escalas de Guitarra. Todos los derechos reservados.',
+
+    // Navegación
+    backToHome: '← Volver al Inicio',
+
+    // Página Acerca de
+    aboutTitle: 'Sobre Maestro de Escalas de Guitarra',
+    aboutServiceOverview: 'Descripción del Servicio',
+    aboutServiceDesc1: 'Maestro de Escalas de Guitarra es una aplicación web gratuita diseñada para apoyar a los guitarristas en su práctica y composición. Al mostrar escalas visualmente en el diapasón, puedes entender intuitivamente las estructuras de escalas y patrones de digitación.',
+    aboutServiceDesc2: 'Sirve como herramienta de aprendizaje para principiantes memorizando escalas, y como referencia para músicos experimentados explorando nuevas escalas o buscando ideas durante la composición.',
+    aboutMainFeatures: 'Características Principales',
+    aboutFeatureVisualize: 'Visualización de Escalas',
+    aboutFeatureVisualizeDesc: 'Muestra más de 13 escalas (Mayor, Menor, Pentatónica, Modos, Miyako-bushi, etc.) claramente en el diapasón. Las notas raíz se muestran en rojo, otras notas de la escala en verde.',
+    aboutFeatureAnalysis: 'Análisis Automático de Audio',
+    aboutFeatureAnalysisDesc: 'Sube archivos MP3, WAV o M4A y la IA detectará automáticamente la tonalidad y escala. Perfecto cuando quieres aprender una canción pero no conoces la escala.',
+    aboutFeaturePlay: 'Reproducción de Escalas',
+    aboutFeaturePlayDesc: 'Escucha las notas de la escala seleccionada. Conecta los sonidos con las posiciones del diapasón mientras entrenas tu oído.',
+    aboutFeatureVideo: 'Videos de Referencia',
+    aboutFeatureVideoDesc: 'Videos de YouTube para cada escala y nota raíz. Profundiza tu comprensión con ejemplos de interpretación y tutoriales.',
+    aboutFeatureTuning: 'Soporte de Afinación',
+    aboutFeatureTuningDesc: 'Soporta varias afinaciones incluyendo estándar, Drop D, guitarra de 7 cuerdas, medio tono abajo. Cambia las visualizaciones para coincidir con tu configuración.',
+    aboutFeatureResponsive: 'Diseño Responsivo',
+    aboutFeatureResponsiveDesc: 'Funciona cómodamente en PC, tablet y smartphone. En móvil, el diapasón puede rotarse 90 grados.',
+    aboutSupportedScales: 'Escalas Soportadas',
+    aboutBasicScales: 'Escalas Básicas',
+    aboutModeScales: 'Escalas Modales',
+    aboutPentaOther: 'Pentatónica y Otras',
+    scaleMajor: 'Mayor',
+    scaleNaturalMinor: 'Menor Natural',
+    scaleHarmonicMinor: 'Menor Armónica',
+    scaleMelodicMinor: 'Menor Melódica',
+    scaleDorian: 'Dórica',
+    scalePhrygian: 'Frigia',
+    scaleLydian: 'Lidia',
+    scaleMixolydian: 'Mixolidia',
+    scaleLocrian: 'Locria',
+    scaleMajorPentatonic: 'Pentatónica Mayor',
+    scaleMinorPentatonic: 'Pentatónica Menor',
+    scaleBlues: 'Blues',
+    scaleInSen: 'In Sen',
+    aboutHowToUse: 'Cómo Usar',
+    aboutStep1: 'Elegir Nota Raíz',
+    aboutStep1Desc: 'Selecciona la nota base de 12 notas: C, D, E, etc.',
+    aboutStep2: 'Elegir Escala',
+    aboutStep2Desc: 'Selecciona la escala que quieres aprender: Mayor, Menor, Pentatónica, etc.',
+    aboutStep3: 'Ver el Diapasón',
+    aboutStep3Desc: 'Mira las posiciones en el diapasón e intenta tocarlas en tu guitarra.',
+    aboutStep4: 'Escuchar y Aprender',
+    aboutStep4Desc: 'Presiona el botón de reproducción para escuchar la escala y mejorar la retención mediante entrenamiento auditivo.',
+    aboutRecommendedFor: 'Recomendado Para',
+    aboutRecommend1: 'Principiantes de guitarra que quieren aprender los fundamentos de las escalas',
+    aboutRecommend2: 'Quienes quieren intentar improvisar pero no saben qué tocar',
+    aboutRecommend3: 'Quienes quieren conocer la tonalidad y escala de canciones para versionar',
+    aboutRecommend4: 'Quienes necesitan referencia de escalas durante la composición',
+    aboutRecommend5: 'Músicos intermedios que quieren aprender escalas más allá de la pentatónica',
+    aboutRecommend6: 'Quienes quieren explorar escalas diversas como escalas japonesas o modos',
+    aboutCta: 'Pruébalo Ahora →',
+
+    // Artículos
+    articlesTitle: 'Artículos',
+    articlesSubtitle: 'Información útil para guitarristas, desde fundamentos hasta técnicas avanzadas',
+    articleCategory: {
+      beginner: 'Principiante',
+      intermediate: 'Intermedio',
+      practice: 'Técnica Práctica',
+    },
+    articleReadMore: 'Leer Más →',
+    articleTryScale: 'Prueba la Escala',
+    articleTryScaleDesc: 'Confirma visualmente las escalas que aprendiste en el artículo en el diapasón.',
+    articleUseVisualizer: 'Usar Visualizador de Escalas →',
+    articleRelated: 'Artículos Relacionados',
+
+    // Artículo Pentatónica
+    pentatonicTitle: 'Guía de Escala Pentatónica - La Primera Escala que Todo Guitarrista Debe Aprender',
+    pentatonicDesc: 'La escala pentatónica es una de las escalas más importantes para guitarristas. Aprende por qué debería ser tu primera escala y cómo practicarla.',
+    pentatonicWhat: '¿Qué es la Escala Pentatónica?',
+    pentatonicWhatDesc1: 'La Escala Pentatónica consiste en 5 notas, como su nombre sugiere. "Penta" significa "cinco" en griego. Es una escala simplificada con 2 notas eliminadas de la escala estándar de 7 notas.',
+    pentatonicWhatDesc2: 'Esta simplicidad es exactamente por qué la escala pentatónica se recomienda para principiantes. Con menos notas, es más fácil de memorizar, y es difícil tocar notas incorrectas.',
+    pentatonicTypes: 'Dos Tipos de Escalas Pentatónicas',
+    pentatonicMajor: 'Pentatónica Mayor',
+    pentatonicMajorDesc: 'La pentatónica mayor omite los grados 4º y 7º de la escala mayor. Tiene un sonido brillante y abierto comúnmente usado en country y pop.',
+    pentatonicMinor: 'Pentatónica Menor',
+    pentatonicMinorDesc: 'La pentatónica menor omite los grados 2º y 6º de la escala menor natural. Es la escala más versátil, usada en rock, blues, metal y muchos otros géneros.',
+    pentatonicWhy: 'Por Qué la Pentatónica es Perfecta para Principiantes',
+    pentatonicWhy1: '1. Fácil de Aprender',
+    pentatonicWhy1Desc: 'Con solo 5 notas, los patrones del diapasón son simples. La mayoría de guitarristas aprenden 5 "posiciones de caja" para tocar pentatónica en todo el diapasón.',
+    pentatonicWhy2: '2. Difícil Sonar Mal',
+    pentatonicWhy2Desc: 'Los grados 4º y 7º omitidos de la pentatónica a menudo chocan con los tonos de acordes. Al eliminarlos, casi cualquier nota que toques sonará bien, facilitando la improvisación para principiantes.',
+    pentatonicWhy3: '3. Altamente Versátil',
+    pentatonicWhy3Desc: 'Funciona en rock, blues, pop, funk, metal y casi toda la música popular. Una vez dominada, se aplica a canciones de muchos géneros.',
+    pentatonicPractice: 'Consejos de Práctica',
+    pentatonicPracticeList: [
+      'Comienza perfeccionando una posición (posición 1 recomendada)',
+      'Practica lenta y precisamente con un metrónomo',
+      'Intenta improvisar sobre pistas de acompañamiento',
+      'Copia frases de tus guitarristas favoritos para aprender aplicación',
+      'Una vez cómodo, practica conectar las 5 posiciones',
+    ],
+    pentatonicSummary: 'Resumen',
+    pentatonicSummaryDesc: 'La escala pentatónica es una herramienta simple pero poderosa. Muchos guitarristas profesionales construyen sus frases sobre fundamentos pentatónicos. Domina esta escala primero, luego expande gradualmente tu conocimiento a otras escalas.',
+    pentatonicCta: 'Ver Escala Pentatónica en el Diapasón',
+    pentatonicViewMajor: 'Ver A Pentatónica Mayor',
+    pentatonicViewMinor: 'Ver A Pentatónica Menor',
+
+    // Artículo Escalas Modales
+    modeTitle: 'Guía Completa de Escalas Modales - Cómo Usar Dórico, Frigio y Lidio',
+    modeDesc: 'Explicación detallada de las 7 escalas modales y su uso en canciones reales. Sube de nivel de intermedio a avanzado.',
+    modeWhat: '¿Qué son las Escalas Modales?',
+    modeWhatDesc1: 'Las escalas modales (Modos Eclesiásticos) son 7 escalas derivadas de comenzar en cada nota de la escala mayor. Se originan en la teoría musical griega antigua y se usan ampliamente en jazz, rock y fusión modernos.',
+    modeWhatDesc2: 'Cada modo tiene su propio "color" o "estado de ánimo" único. Usarlos apropiadamente permite una expresión musical más rica.',
+    mode7Modes: 'Las 7 Escalas Modales',
+    modeIonian: '1. Jónico',
+    modeIonianDesc: 'Esta es la escala mayor que todos conocemos bien. Caracterizada por un sonido brillante y estable.',
+    modeDorian: '2. Dórico',
+    modeDorianDesc: 'Similar a la escala menor, pero con una 6ª natural (6ª mayor). A pesar de ser menor, tiene una cualidad algo brillante. Comúnmente usado en jazz, funk y soul.',
+    modeDorianExample: 'Ejemplos: Santana "Oye Como Va", Miles Davis "So What"',
+    modePhrygian: '3. Frigio',
+    modePhrygianDesc: 'La ♭2ª es su característica definitoria, creando un sonido exótico español o árabe. Usado efectivamente en metal, flamenco y rock progresivo.',
+    modePhrygianExample: 'Ejemplo: Metallica "Wherever I May Roam"',
+    modeLydian: '4. Lidio',
+    modeLydianDesc: 'Escala mayor con 4ª elevada (#4). Tiene un sonido flotante y soñador. Frecuentemente usado en música de cine, rock progresivo y fusión.',
+    modeLydianExample: 'Ejemplos: Steve Vai "For The Love of God", obras de Joe Satriani',
+    modeMixolydian: '5. Mixolidio',
+    modeMixolydianDesc: 'Escala mayor con 7ª bajada (♭7). Tiene un sonido blusero y rockero usado sobre acordes de 7ª dominante. Un básico en rock, blues y country.',
+    modeMixolydianExample: 'Ejemplos: The Beatles "Norwegian Wood", Guns N\' Roses "Sweet Child O\' Mine"',
+    modeAeolian: '6. Eólico',
+    modeAeolianDesc: 'Conocida como la escala menor natural. Tiene un sonido triste y oscuro usado en canciones en tonalidad menor de todos los géneros.',
+    modeLocrian: '7. Locrio',
+    modeLocrianDesc: 'El modo más inestable con una ♭5ª (5ª disminuida). Crea un sonido tenso y disonante. Usado en contextos específicos en metal progresivo y jazz.',
+    modeHowToRemember: 'Cómo Recordar los Modos',
+    modeHowToRememberDesc: 'La forma más fácil de entender los modos es pensar "comenzar desde cada nota de la escala mayor".',
+    modePracticalTips: 'Consejos Prácticos de Uso',
+    modePracticalTipsList: [
+      'Enfócate en la "nota característica" que distingue cada modo',
+      'Elige modos apropiados para progresiones de acordes',
+      'Domina un modo completamente antes de pasar al siguiente',
+      'Usa pistas de acompañamiento para entrenar tu oído a reconocer el sonido de cada modo',
+      'Analiza la interpretación de tus guitarristas favoritos para aprender aplicaciones de modos',
+    ],
+    modeSummary: 'Resumen',
+    modeSummaryDesc: 'Dominar las escalas modales expandirá enormemente tu expresión musical. Puede sentirse difícil al principio, pero aprendiéndolas una por una, te convertirás en un guitarrista que puede manejar varias situaciones musicales.',
+    modeCta: 'Ver Escalas Modales en el Diapasón',
+
+    // Artículo Escala de Blues
+    bluesTitle: 'Toca Frases con Alma con la Escala de Blues',
+    bluesDesc: 'Domina la estructura de la escala de blues y el uso de la nota blue. Técnicas para tocar solos de guitarra emocionales.',
+    bluesWhat: '¿Qué es la Escala de Blues?',
+    bluesWhatDesc1: 'La escala de blues añade la "nota blue" (♭5ª) a la pentatónica menor, creando una escala de 6 notas. Esta única nota añadida crea el distintivo sonido de "llanto" o "lamento".',
+    bluesWhatDesc2: 'Es una escala extremadamente expresiva usada en blues, rock, jazz, funk y muchos otros géneros.',
+    bluesStructure: 'Estructura de la Escala de Blues',
+    bluesExample: 'Escala de Blues en A',
+    bluesDegrees: 'Grados',
+    bluesStructureDesc: 'Al añadir la ♭5ª a la pentatónica menor (1-♭3-4-5-♭7), creas la escala de blues. Esta ♭5ª es la "nota blue" - un tono crucial que crea tensión y melancolía únicas.',
+    bluesNote: 'La Magia de la Nota Blue',
+    bluesNoteMagic: 'La nota blue (♭5ª) muestra su verdadero valor cuando se combina con varias técnicas:',
+    bluesBending: '1. Bending',
+    bluesBendingDesc: 'Bend de cuarto de tono desde ♭5ª a 5ª, o bend desde 4ª a ♭5ª, son técnicas clásicas de guitarra blues. Este tono "intermedio" crea expresión similar a la voz.',
+    bluesHammerPull: '2. Hammer-on/Pull-off',
+    bluesHammerPullDesc: 'Conectar 4ª → ♭5ª → 5ª con hammer-ons y pull-offs crea frases suaves y expresivas. Un movimiento característico de B.B. King y Eric Clapton.',
+    bluesSlide: '3. Slide',
+    bluesSlideDesc: 'Deslizar hacia o desde la nota blue añade una cualidad "cantante" a tu interpretación.',
+    bluesPatterns: 'Patrones de Frases Clásicos',
+    bluesPattern1: 'Patrón 1: Turnaround Clásico',
+    bluesPattern1Desc: 'Una frase comúnmente usada en los últimos 2 compases de una progresión de blues.',
+    bluesPattern2: 'Patrón 2: Caja B.B. King',
+    bluesPattern2Desc: 'Frases cantantes tocadas en posiciones altas en las cuerdas 1ª y 2ª.',
+    bluesPattern3: 'Patrón 3: Lick de Rock Clásico',
+    bluesPattern3Desc: 'Una frase poderosa comúnmente usada en guitarra de rock.',
+    bluesMajorApplication: 'Aplicación al Blues Mayor',
+    bluesMajorApplicationDesc1: 'Aunque la escala de blues es de base menor, funciona sobre progresiones de blues en tonalidad mayor. Este "tocar escala menor sobre acordes mayores" crea el distintivo sonido blues.',
+    bluesMajorApplicationDesc2: 'Los músicos avanzados se mueven libremente entre pentatónica menor, pentatónica mayor y escala de blues para construir solos más complejos y expresivos.',
+    bluesPractice: 'Consejos de Práctica',
+    bluesPracticeList: [
+      'Primero, domina perfectamente la pentatónica menor',
+      'Aprende la ubicación de la nota blue en cada posición',
+      'Usa la nota blue como "nota de paso" (no la mantengas mucho)',
+      'Copia frases de guitarristas de blues famosos para aprender aplicación',
+      'Practica con pistas de acompañamiento de blues de 12 compases',
+      'Desarrolla bending y vibrato expresivos',
+    ],
+    bluesGuitarists: 'Guitarristas Recomendados para Estudiar',
+    bluesGuitarist1: 'El Rey de la guitarra blues. Un libro de texto para vibrato y bending.',
+    bluesGuitarist2: 'La potencia del blues de Texas. Tono poderoso y interpretación apasionada.',
+    bluesGuitarist3: 'Maestro del blues rock. Fraseo claro y cantante.',
+    bluesGuitarist4: 'El alma del blues irlandés. Guitarra llorosa que conmueve el corazón.',
+    bluesSummary: 'Resumen',
+    bluesSummaryDesc: 'La escala de blues expande dramáticamente tu expresión con solo una nota añadida. Después de dominar la pentatónica, definitivamente prueba la escala de blues. Una vez que puedas usar esta escala bien, tus solos de guitarra definitivamente alcanzarán el siguiente nivel.',
+    bluesCta: 'Ver Escala de Blues en el Diapasón',
+    bluesViewA: 'Ver Escala de Blues en A',
+    bluesViewE: 'Ver Escala de Blues en E',
+
+    // Política de Privacidad
+    privacyTitle: 'Política de Privacidad',
+    privacyIntro: 'Maestro de Escalas de Guitarra ("este sitio") establece esta Política de Privacidad respecto al manejo de información personal de los usuarios.',
+    privacySection1: '1. Información que Recopilamos',
+    privacySection1List: [
+      'Información ingresada en el formulario de contacto (nombre, correo electrónico, contenido de consulta)',
+      'Archivos de audio subidos para análisis (eliminados automáticamente después del análisis)',
+      'Información de registro de acceso (dirección IP, tipo de navegador, fecha/hora de acceso, etc.)',
+      'Información de cookies',
+    ],
+    privacySection2: '2. Propósito de Uso',
+    privacySection2List: [
+      'Responder a consultas',
+      'Proveer y operar el servicio',
+      'Mejorar el servicio y desarrollar nuevas funciones',
+      'Análisis de uso',
+      'Prevenir uso no autorizado',
+    ],
+    privacySection3: '3. Divulgación a Terceros',
+    privacySection3Desc: 'Este sitio no proporcionará información personal de usuarios a terceros excepto en los siguientes casos:',
+    privacySection3List: [
+      'Con consentimiento del usuario',
+      'Cuando lo requiera la ley',
+      'Cuando sea necesario para proteger vida, cuerpo o propiedad',
+    ],
+    privacySection4: '4. Uso de Cookies',
+    privacySection4Desc: 'Este sitio usa cookies para mejorar la experiencia del usuario y para análisis de acceso. Puedes rechazar cookies a través de la configuración del navegador, pero algunas funciones pueden no estar disponibles.',
+    privacySection5: '5. Herramientas de Análisis',
+    privacySection5Desc: 'Este sitio puede usar Google Analytics para análisis de acceso. Google Analytics usa cookies para recopilar datos de uso del sitio. Esta información se recopila anónimamente y no identifica individuos.',
+    privacySection6: '6. Publicidad',
+    privacySection6Desc1: 'Este sitio usa servicios de publicidad de terceros (Google AdSense). Los anunciantes pueden usar cookies para mostrar anuncios basados en intereses del usuario.',
+    privacySection6Desc2: 'Para detalles sobre Google AdSense, por favor consulta las políticas de publicidad de Google.',
+    privacySection6Desc3: 'Los usuarios pueden deshabilitar anuncios personalizados en la configuración de anuncios de Google.',
+    privacySection7: '7. Archivos Subidos',
+    privacySection7Desc: 'Los archivos de audio subidos para análisis se almacenan temporalmente en el servidor para procesamiento pero se eliminan automáticamente después del análisis. Los archivos subidos no se comparten con terceros ni se usan para propósitos distintos al análisis.',
+    privacySection8: '8. Seguridad',
+    privacySection8Desc: 'Este sitio implementa medidas de seguridad necesarias y apropiadas para prevenir fuga, pérdida y daño de información personal.',
+    privacySection9: '9. Descargo de Responsabilidad',
+    privacySection9Desc1: 'Aunque nos esforzamos por la precisión, este sitio no asume responsabilidad por acciones tomadas basadas en la información proporcionada.',
+    privacySection9Desc2: 'Este sitio no asume responsabilidad por información o servicios proporcionados por sitios externos accedidos a través de enlaces o banners.',
+    privacySection10: '10. Derechos de Autor',
+    privacySection10Desc: 'Los derechos de autor del contenido de este sitio (texto, imágenes, programas, etc.) pertenecen a este sitio o a titulares de derechos de terceros legítimos. La reproducción, reimpresión o modificación no autorizada está prohibida.',
+    privacySection11: '11. Cambios de Política',
+    privacySection11Desc: 'Este sitio puede cambiar esta política según sea necesario. La política de privacidad actualizada entra en vigor cuando se publica en este sitio.',
+    privacySection12: '12. Contacto',
+    privacySection12Desc: 'Para consultas sobre esta política, por favor usa el formulario de contacto.',
+    privacyEnacted: 'Establecido: 1 de enero de 2025',
+    privacyUpdated: 'Última Actualización: 15 de enero de 2025',
+
+    // Información de la Empresa
+    companyTitle: 'Información de la Empresa',
+    companySection1: 'Empresa Operadora',
+    companyName: 'Nombre de la Empresa',
+    companyNameEn: 'Nombre en Inglés',
+    companyOfficialSite: 'Sitio Oficial',
+    companySection2: 'Descripción del Negocio',
+    companyBusinessDesc: 'Motechoro Co., Ltd. opera con la misión de "mejorar el QOML (Calidad de Vida Musical) para todos", proporcionando varios servicios a través de la música.',
+    companyBusinessList: [
+      'Conferencias y talleres para comunidades, escuelas y empresas',
+      'Servicios de conserjería de actividades musicales',
+      'Planificación y gestión de contenido de entretenimiento',
+      'Sesiones JAM y eventos de colaboración musical',
+      'Desarrollo y operación de servicios web relacionados con música',
+    ],
+    companySection3: 'Sobre Este Servicio',
+    companyServiceDesc1: 'Maestro de Escalas de Guitarra es una aplicación web gratuita desarrollada y operada por Motechoro Co., Ltd. para apoyar a guitarristas en su práctica y composición.',
+    companyServiceDesc2: 'Además de mostrar escalas visualmente en el diapasón, cuenta con análisis de IA que detecta automáticamente tonalidad y escala desde audio. Apoyando la vida musical de todos los guitarristas, desde principiantes hasta profesionales.',
+    companySection4: 'Contacto',
+    companyContactDesc: 'Para consultas sobre este servicio, por favor usa lo siguiente:',
+    companyContactForm: 'Formulario de Contacto',
+    companyOfficialSiteBtn: 'Sitio Oficial de la Empresa',
+
+    // Contacto
+    contactTitle: 'Contacto',
+    contactDesc: 'Para preguntas, solicitudes o reportes de errores sobre Maestro de Escalas de Guitarra, por favor contáctanos usando el formulario a continuación.',
+    contactNotes: 'Sobre Consultas',
+    contactNote1: 'Típicamente respondemos dentro de 3 días hábiles.',
+    contactNote2: 'Dependiendo del contenido, las respuestas pueden tomar tiempo adicional.',
+    contactNote3: 'No podemos responder a solicitudes comerciales.',
   },
 };
 

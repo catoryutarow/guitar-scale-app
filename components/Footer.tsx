@@ -60,6 +60,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/terms" className="hover:text-white transition-colors">
+                  {t.termsOfService}
+                </Link>
+              </li>
+              <li>
                 <Link href="/company" className="hover:text-white transition-colors">
                   {t.companyInfo}
                 </Link>

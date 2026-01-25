@@ -289,6 +289,56 @@ export interface Translations {
   bluesViewA: string;
   bluesViewE: string;
 
+  // ハーモニックマイナー記事
+  harmonicTitle: string;
+  harmonicDesc: string;
+  harmonicWhat: string;
+  harmonicWhatDesc1: string;
+  harmonicWhatDesc2: string;
+  harmonicStructure: string;
+  harmonicStructureDesc: string;
+  harmonicCharacteristic: string;
+  harmonicCharacteristicDesc: string;
+  harmonicUsage: string;
+  harmonicUsage1: string;
+  harmonicUsage1Desc: string;
+  harmonicUsage2: string;
+  harmonicUsage2Desc: string;
+  harmonicUsage3: string;
+  harmonicUsage3Desc: string;
+  harmonicComparison: string;
+  harmonicComparisonDesc: string;
+  harmonicPractice: string;
+  harmonicPracticeList: string[];
+  harmonicSummary: string;
+  harmonicSummaryDesc: string;
+  harmonicCta: string;
+  harmonicViewA: string;
+  harmonicViewE: string;
+
+  // スケール練習法記事
+  practiceTitle: string;
+  practiceDesc: string;
+  practiceIntro: string;
+  practiceIntroDesc: string;
+  practiceStep1: string;
+  practiceStep1Desc: string;
+  practiceStep1List: string[];
+  practiceStep2: string;
+  practiceStep2Desc: string;
+  practiceStep2List: string[];
+  practiceStep3: string;
+  practiceStep3Desc: string;
+  practiceStep3List: string[];
+  practiceStep4: string;
+  practiceStep4Desc: string;
+  practiceStep4List: string[];
+  practiceTips: string;
+  practiceTipsList: string[];
+  practiceSummary: string;
+  practiceSummaryDesc: string;
+  practiceCta: string;
+
   // プライバシーポリシーページ
   privacyTitle: string;
   privacyIntro: string;
@@ -347,6 +397,41 @@ export interface Translations {
   contactNote1: string;
   contactNote2: string;
   contactNote3: string;
+
+  // 利用規約ページ
+  termsTitle: string;
+  termsIntro: string;
+  termsSection1: string;
+  termsSection1Desc: string;
+  termsSection2: string;
+  termsSection2List: string[];
+  termsSection3: string;
+  termsSection3List: string[];
+  termsSection4: string;
+  termsSection4Desc: string;
+  termsSection5: string;
+  termsSection5Desc: string;
+  termsSection6: string;
+  termsSection6Desc: string;
+  termsSection7: string;
+  termsSection7Desc: string;
+  termsSection8: string;
+  termsSection8Desc: string;
+  termsEnacted: string;
+  termsUpdated: string;
+  termsOfService: string;
+
+  // メインページ説明セクション
+  homeAboutTitle: string;
+  homeAboutDesc: string;
+  homeFeature1: string;
+  homeFeature1Desc: string;
+  homeFeature2: string;
+  homeFeature2Desc: string;
+  homeFeature3: string;
+  homeFeature3Desc: string;
+  homeTargetUsers: string;
+  homeTargetList: string[];
 }
 
 export const translations: Record<Language, Translations> = {
@@ -655,6 +740,87 @@ export const translations: Record<Language, Translations> = {
     bluesViewA: 'Aブルーススケールを見る',
     bluesViewE: 'Eブルーススケールを見る',
 
+    // ハーモニックマイナー記事
+    harmonicTitle: 'ハーモニックマイナースケールの魅力と使い方',
+    harmonicDesc: 'クラシックからメタルまで幅広く使われるハーモニックマイナースケール。独特の響きと実践的な使い方を解説します。',
+    harmonicWhat: 'ハーモニックマイナースケールとは？',
+    harmonicWhatDesc1: 'ハーモニックマイナースケールは、ナチュラルマイナースケールの第7音を半音上げたスケールです。これにより、マイナーキーでも強い解決感を持つドミナントコード（V7）を形成できるようになります。',
+    harmonicWhatDesc2: 'このスケールの最大の特徴は、第6音と第7音の間に増2度（1音半）の音程差があることです。この独特の音程がエキゾチックな響きを生み出し、中東音楽やクラシック音楽、さらにはネオクラシカルメタルなど、様々なジャンルで愛用されています。',
+    harmonicStructure: 'スケールの構成',
+    harmonicStructureDesc: '全音・半音・全音・全音・半音・増2度・半音という音程パターンで構成されます。',
+    harmonicCharacteristic: '特徴的な響き',
+    harmonicCharacteristicDesc: '第6音と第7音の間の増2度音程が、このスケール独特のエキゾチックでドラマチックな響きを生み出します。この響きはクラシック音楽の短調の楽曲で頻繁に聴くことができます。',
+    harmonicUsage: '実践的な使い方',
+    harmonicUsage1: 'V7コード上での使用',
+    harmonicUsage1Desc: 'マイナーキーのドミナントセブンスコード（例：AmキーのE7）上で使用することで、スムーズにトニックへ解決できます。',
+    harmonicUsage2: 'ネオクラシカルフレーズ',
+    harmonicUsage2Desc: 'イングヴェイ・マルムスティーンに代表されるネオクラシカルメタルでは、このスケールを使った高速アルペジオやシーケンスフレーズが定番です。',
+    harmonicUsage3: 'エキゾチックなメロディ',
+    harmonicUsage3Desc: '中東風やスパニッシュ風のメロディを作る際にも効果的です。フラメンコギターでもよく使用されます。',
+    harmonicComparison: 'ナチュラルマイナーとの比較',
+    harmonicComparisonDesc: 'ナチュラルマイナーは落ち着いた悲しみを表現するのに対し、ハーモニックマイナーはよりドラマチックで緊張感のある響きを持ちます。両方を使い分けることで、表現の幅が大きく広がります。',
+    harmonicPractice: '効果的な練習方法',
+    harmonicPracticeList: [
+      '3ノートパーストリング（1弦あたり3音）のパターンで指板全体をカバー',
+      'ドミナントセブンスコード（V7）上で意識的に弾く練習',
+      '増2度の音程を含むフレーズを繰り返し練習',
+      'クラシック音楽やネオクラシカルメタルのフレーズをコピー',
+    ],
+    harmonicSummary: 'まとめ',
+    harmonicSummaryDesc: 'ハーモニックマイナースケールは、マイナーキーの楽曲に強い解決感とドラマチックな響きをもたらします。クラシック、フラメンコ、メタルなど様々なジャンルで活用できる、非常に汎用性の高いスケールです。',
+    harmonicCta: 'ハーモニックマイナーを指板で確認',
+    harmonicViewA: 'Aハーモニックマイナーを見る',
+    harmonicViewE: 'Eハーモニックマイナーを見る',
+
+    // スケール練習法記事
+    practiceTitle: 'ギター初心者のためのスケール練習法【効率的な覚え方】',
+    practiceDesc: 'スケールを効率的に覚えるための練習方法を初心者向けに解説。挫折しないコツと段階的な練習ステップを紹介します。',
+    practiceIntro: 'なぜスケール練習が重要なのか',
+    practiceIntroDesc: 'スケールはギター演奏の基礎であり、アドリブ、作曲、耳コピなど、あらゆる音楽活動の土台となります。しかし、やみくもに練習しても効率は上がりません。正しい方法で段階的に取り組むことが上達の近道です。',
+    practiceStep1: 'ステップ1：まずはペンタトニックから',
+    practiceStep1Desc: 'いきなり7音スケールを覚えようとせず、まずは5音で構成されるペンタトニックスケールから始めましょう。覚えやすく、実際の楽曲でもよく使われます。',
+    practiceStep1List: [
+      'Aマイナーペンタトニックの第1ポジションを覚える',
+      'メトロノームに合わせて上昇・下降を繰り返す',
+      '最初はBPM60から始め、徐々にテンポを上げる',
+      '指が滑らかに動くまで、毎日15分は練習する',
+    ],
+    practiceStep2: 'ステップ2：ポジションを増やす',
+    practiceStep2Desc: '1つのポジションが弾けるようになったら、次のポジションに挑戦します。最終的には指板全体でスケールを弾けることを目指します。',
+    practiceStep2List: [
+      '5つのペンタトニックポジションを順番に覚える',
+      'ポジション間をスムーズに移動する練習',
+      '同じフレーズを異なるポジションで弾いてみる',
+      '視覚的に指板上のスケールパターンを把握する',
+    ],
+    practiceStep3: 'ステップ3：7音スケールへ拡張',
+    practiceStep3Desc: 'ペンタトニックに慣れたら、メジャースケールやナチュラルマイナースケールなどの7音スケールに挑戦します。',
+    practiceStep3List: [
+      'まずはCメジャースケールから始める',
+      'ペンタトニックとの違いを意識しながら練習',
+      '3ノートパーストリングのパターンを使う',
+      'スケールの度数（1,2,3,4,5,6,7）を歌いながら弾く',
+    ],
+    practiceStep4: 'ステップ4：実際の曲で使う',
+    practiceStep4Desc: 'スケールを覚えるだけでなく、実際の楽曲やバッキングトラックに合わせて使う練習が重要です。',
+    practiceStep4List: [
+      'YouTubeのバッキングトラックに合わせてアドリブ',
+      'お気に入りの曲のソロをコピー',
+      'スケールの音を使って簡単なメロディを作る',
+      '異なるキーで同じフレーズを弾く移調練習',
+    ],
+    practiceTips: '挫折しないためのコツ',
+    practiceTipsList: [
+      '毎日少しずつ（15-30分）続けることが大切',
+      '一度に多くを覚えようとしない',
+      'メトロノームを使って正確なリズムを身につける',
+      '録音して自分の演奏を客観的に聴く',
+      '好きな曲やジャンルに関連するスケールから始める',
+    ],
+    practiceSummary: 'まとめ',
+    practiceSummaryDesc: 'スケール練習は地道ですが、確実に上達につながります。焦らず段階的に取り組み、実際の音楽で使うことを意識しながら練習しましょう。このサイトのスケール可視化機能を活用して、効率的に練習を進めてください。',
+    practiceCta: 'スケール可視化ツールを使う',
+
     // プライバシーポリシー
     privacyTitle: 'プライバシーポリシー',
     privacyIntro: 'ギタースケールわかる君（以下、「当サイト」といいます）は、ユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます）を定めます。',
@@ -734,6 +900,61 @@ export const translations: Record<Language, Translations> = {
     contactNote1: '通常、3営業日以内にご返信いたします。',
     contactNote2: 'お問い合わせ内容によっては、回答にお時間をいただく場合があります。',
     contactNote3: '営業目的のお問い合わせには回答いたしかねます。',
+
+    // 利用規約ページ
+    termsTitle: '利用規約',
+    termsIntro: '本利用規約（以下「本規約」）は、株式会社モテコロ（以下「当社」）が提供する「ギタースケールわかる君」（以下「本サービス」）の利用条件を定めるものです。本サービスをご利用になる前に、本規約をよくお読みください。',
+    termsSection1: '第1条（適用範囲）',
+    termsSection1Desc: '本規約は、本サービスの利用に関する当社とユーザーとの間の権利義務関係を定めることを目的とし、ユーザーと当社との間の本サービスの利用に関わる一切の関係に適用されます。',
+    termsSection2: '第2条（サービス内容）',
+    termsSection2List: [
+      'ギタースケールの可視化表示機能',
+      '音源ファイルからのスケール自動解析機能',
+      'スケールの再生機能',
+      'スケールに関する教育コンテンツの提供',
+      'その他当社が提供する関連サービス',
+    ],
+    termsSection3: '第3条（禁止事項）',
+    termsSection3List: [
+      '法令または公序良俗に違反する行為',
+      '当社または第三者の知的財産権、プライバシー、名誉、その他の権利を侵害する行為',
+      '本サービスの運営を妨害する行為',
+      '他のユーザーに迷惑をかける行為',
+      '本サービスを商用目的で利用する行為（当社の事前許可がある場合を除く）',
+      '本サービスのリバースエンジニアリング、逆コンパイル、逆アセンブル',
+      '自動化ツールを使用したアクセス',
+      'その他当社が不適切と判断する行為',
+    ],
+    termsSection4: '第4条（知的財産権）',
+    termsSection4Desc: '本サービスに関する一切の知的財産権は当社または正当な権利者に帰属します。本規約に基づく本サービスの利用許諾は、本サービスに関する当社または正当な権利者の知的財産権の使用許諾を意味するものではありません。',
+    termsSection5: '第5条（免責事項）',
+    termsSection5Desc: '当社は、本サービスがユーザーの特定の目的に適合すること、期待する機能・正確性・有用性を有すること、ユーザーによる本サービスの利用がユーザーに適用のある法令等に適合すること、継続的に利用できること、および不具合が生じないことについて、明示または黙示を問わず何ら保証するものではありません。当社は、本サービスに起因してユーザーに生じたあらゆる損害について一切の責任を負いません。',
+    termsSection6: '第6条（サービスの変更・停止）',
+    termsSection6Desc: '当社は、ユーザーに事前に通知することなく、本サービスの内容を変更し、または本サービスの提供を停止もしくは中止することができるものとします。',
+    termsSection7: '第7条（利用規約の変更）',
+    termsSection7Desc: '当社は、必要と判断した場合には、ユーザーに事前に通知することなくいつでも本規約を変更することができます。変更後の利用規約は、本サービス上に掲載した時点から効力を生じるものとします。',
+    termsSection8: '第8条（準拠法・管轄裁判所）',
+    termsSection8Desc: '本規約の解釈にあたっては、日本法を準拠法とします。本サービスに関して紛争が生じた場合には、東京地方裁判所を第一審の専属的合意管轄裁判所とします。',
+    termsEnacted: '制定日：2025年1月15日',
+    termsUpdated: '最終更新日：2025年1月25日',
+    termsOfService: '利用規約',
+
+    // メインページ説明セクション
+    homeAboutTitle: 'ギタースケールわかる君とは？',
+    homeAboutDesc: 'ギタースケールを視覚的に学べる無料のWebアプリケーションです。13種類以上のスケールをギター指板上に表示し、理論と実践を結びつけます。',
+    homeFeature1: 'スケールの可視化',
+    homeFeature1Desc: 'メジャー、マイナー、ペンタトニック、モードスケールなど、ギタリストに必要な主要スケールを指板上に表示。ルート音と構成音が一目でわかります。',
+    homeFeature2: '音源解析',
+    homeFeature2Desc: '音源ファイルをアップロードするだけで、AIが自動的に楽曲のキーとスケールを検出。コピーしたい曲のスケールを素早く把握できます。',
+    homeFeature3: 'スケール再生',
+    homeFeature3Desc: '選択したスケールの音を実際に聴くことができます。目と耳の両方でスケールを覚え、効率的な練習が可能です。',
+    homeTargetUsers: 'こんな方におすすめ',
+    homeTargetList: [
+      'スケールの覚え方がわからない初心者の方',
+      'アドリブやソロを練習したいギタリスト',
+      '楽曲のキーやスケールを知りたい作曲者・アレンジャー',
+      '音楽理論をより深く理解したい方',
+    ],
   },
 
   en: {
@@ -1041,6 +1262,87 @@ export const translations: Record<Language, Translations> = {
     bluesViewA: 'View A Blues Scale',
     bluesViewE: 'View E Blues Scale',
 
+    // Harmonic Minor Article
+    harmonicTitle: 'The Appeal and Usage of Harmonic Minor Scale',
+    harmonicDesc: 'The harmonic minor scale is used across genres from classical to metal. Learn about its distinctive sound and practical applications.',
+    harmonicWhat: 'What is the Harmonic Minor Scale?',
+    harmonicWhatDesc1: 'The harmonic minor scale is a natural minor scale with the 7th degree raised by a half step. This allows the formation of a dominant chord (V7) with strong resolution in minor keys.',
+    harmonicWhatDesc2: 'The most distinctive feature of this scale is the augmented 2nd interval (1.5 steps) between the 6th and 7th degrees. This unique interval creates an exotic sound loved in Middle Eastern music, classical music, and even neoclassical metal.',
+    harmonicStructure: 'Scale Structure',
+    harmonicStructureDesc: 'The scale follows the pattern: whole-half-whole-whole-half-augmented 2nd-half.',
+    harmonicCharacteristic: 'Characteristic Sound',
+    harmonicCharacteristicDesc: 'The augmented 2nd interval between the 6th and 7th degrees creates the exotic and dramatic sound unique to this scale. This sound is frequently heard in classical music pieces in minor keys.',
+    harmonicUsage: 'Practical Applications',
+    harmonicUsage1: 'Over V7 Chords',
+    harmonicUsage1Desc: 'Use over the dominant seventh chord in minor keys (e.g., E7 in the key of Am) for smooth resolution to the tonic.',
+    harmonicUsage2: 'Neoclassical Phrases',
+    harmonicUsage2Desc: 'In neoclassical metal, exemplified by Yngwie Malmsteen, high-speed arpeggios and sequence phrases using this scale are standard.',
+    harmonicUsage3: 'Exotic Melodies',
+    harmonicUsage3Desc: 'Effective for creating Middle Eastern or Spanish-flavored melodies. Also commonly used in flamenco guitar.',
+    harmonicComparison: 'Comparison with Natural Minor',
+    harmonicComparisonDesc: 'While natural minor expresses calm sadness, harmonic minor has a more dramatic and tense sound. Using both expands your expressive range significantly.',
+    harmonicPractice: 'Effective Practice Methods',
+    harmonicPracticeList: [
+      'Practice 3-note-per-string patterns to cover the entire fretboard',
+      'Consciously practice over dominant seventh (V7) chords',
+      'Repeatedly practice phrases containing the augmented 2nd interval',
+      'Copy phrases from classical music or neoclassical metal',
+    ],
+    harmonicSummary: 'Summary',
+    harmonicSummaryDesc: 'The harmonic minor scale brings strong resolution and dramatic sound to minor key compositions. It is a highly versatile scale used across classical, flamenco, metal, and various other genres.',
+    harmonicCta: 'View Harmonic Minor on Fretboard',
+    harmonicViewA: 'View A Harmonic Minor',
+    harmonicViewE: 'View E Harmonic Minor',
+
+    // Scale Practice Article
+    practiceTitle: 'Scale Practice Guide for Guitar Beginners [Efficient Learning Methods]',
+    practiceDesc: 'Learn efficient practice methods for memorizing scales. Tips to avoid frustration and step-by-step practice guidance for beginners.',
+    practiceIntro: 'Why Scale Practice is Important',
+    practiceIntroDesc: 'Scales are the foundation of guitar playing, forming the basis for improvisation, composition, and transcription. However, random practice won\'t improve efficiency. Taking a structured, step-by-step approach is the fastest path to improvement.',
+    practiceStep1: 'Step 1: Start with Pentatonic',
+    practiceStep1Desc: 'Don\'t try to learn 7-note scales immediately. Start with the 5-note pentatonic scale. It\'s easier to learn and commonly used in real songs.',
+    practiceStep1List: [
+      'Learn the first position of A minor pentatonic',
+      'Practice ascending and descending with a metronome',
+      'Start at BPM 60 and gradually increase tempo',
+      'Practice at least 15 minutes daily until fingers move smoothly',
+    ],
+    practiceStep2: 'Step 2: Add More Positions',
+    practiceStep2Desc: 'Once you can play one position, challenge yourself with the next. The goal is to play scales across the entire fretboard.',
+    practiceStep2List: [
+      'Learn the 5 pentatonic positions in order',
+      'Practice smooth transitions between positions',
+      'Play the same phrase in different positions',
+      'Visually understand scale patterns on the fretboard',
+    ],
+    practiceStep3: 'Step 3: Expand to 7-Note Scales',
+    practiceStep3Desc: 'Once comfortable with pentatonic, challenge yourself with 7-note scales like major or natural minor scales.',
+    practiceStep3List: [
+      'Start with the C major scale',
+      'Practice while noting differences from pentatonic',
+      'Use 3-note-per-string patterns',
+      'Sing the scale degrees (1,2,3,4,5,6,7) while playing',
+    ],
+    practiceStep4: 'Step 4: Apply to Real Music',
+    practiceStep4Desc: 'It\'s important to practice using scales over actual songs and backing tracks, not just memorizing them.',
+    practiceStep4List: [
+      'Improvise over YouTube backing tracks',
+      'Copy solos from your favorite songs',
+      'Create simple melodies using scale notes',
+      'Practice transposition by playing the same phrase in different keys',
+    ],
+    practiceTips: 'Tips to Avoid Frustration',
+    practiceTipsList: [
+      'Practice a little bit (15-30 minutes) every day',
+      'Don\'t try to learn too much at once',
+      'Use a metronome to develop accurate rhythm',
+      'Record yourself and listen objectively',
+      'Start with scales related to your favorite songs or genres',
+    ],
+    practiceSummary: 'Summary',
+    practiceSummaryDesc: 'Scale practice is steady but definitely leads to improvement. Take it step by step without rushing, and practice with the intention of using scales in real music. Use this site\'s scale visualization feature to practice efficiently.',
+    practiceCta: 'Use Scale Visualizer',
+
     // Privacy Policy
     privacyTitle: 'Privacy Policy',
     privacyIntro: 'Guitar Scale Master ("this site") establishes this Privacy Policy regarding the handling of users\' personal information.',
@@ -1120,6 +1422,61 @@ export const translations: Record<Language, Translations> = {
     contactNote1: 'We typically respond within 3 business days.',
     contactNote2: 'Depending on the content, responses may take additional time.',
     contactNote3: 'We cannot respond to business solicitations.',
+
+    // 利用規約ページ
+    termsTitle: 'Terms of Service',
+    termsIntro: 'These Terms of Service (hereinafter "Terms") set forth the conditions of use for "Guitar Scale Master" (hereinafter "Service") provided by Motekoro Inc. (hereinafter "Company"). Please read these Terms carefully before using the Service.',
+    termsSection1: 'Article 1 (Scope of Application)',
+    termsSection1Desc: 'These Terms are intended to define the rights and obligations between the Company and users regarding the use of the Service, and apply to all relationships between users and the Company in connection with the use of the Service.',
+    termsSection2: 'Article 2 (Service Description)',
+    termsSection2List: [
+      'Guitar scale visualization feature',
+      'Automatic scale analysis from audio files',
+      'Scale playback feature',
+      'Educational content about scales',
+      'Other related services provided by the Company',
+    ],
+    termsSection3: 'Article 3 (Prohibited Activities)',
+    termsSection3List: [
+      'Actions that violate laws or public order and morals',
+      'Actions that infringe on the intellectual property rights, privacy, reputation, or other rights of the Company or third parties',
+      'Actions that interfere with the operation of the Service',
+      'Actions that cause inconvenience to other users',
+      'Commercial use of the Service without prior permission from the Company',
+      'Reverse engineering, decompiling, or disassembling of the Service',
+      'Access using automated tools',
+      'Other actions deemed inappropriate by the Company',
+    ],
+    termsSection4: 'Article 4 (Intellectual Property Rights)',
+    termsSection4Desc: 'All intellectual property rights related to the Service belong to the Company or legitimate rights holders. The license to use the Service under these Terms does not imply permission to use the intellectual property of the Company or legitimate rights holders.',
+    termsSection5: 'Article 5 (Disclaimer)',
+    termsSection5Desc: 'The Company makes no warranties, express or implied, that the Service will meet users\' specific purposes, have the expected functionality, accuracy, or usefulness, comply with applicable laws, be continuously available, or be free from defects. The Company shall not be liable for any damages arising from the Service.',
+    termsSection6: 'Article 6 (Service Changes and Suspension)',
+    termsSection6Desc: 'The Company may change, suspend, or discontinue the Service without prior notice to users.',
+    termsSection7: 'Article 7 (Changes to Terms of Service)',
+    termsSection7Desc: 'The Company may change these Terms at any time without prior notice when deemed necessary. The revised Terms shall take effect upon posting on the Service.',
+    termsSection8: 'Article 8 (Governing Law and Jurisdiction)',
+    termsSection8Desc: 'These Terms shall be governed by and construed in accordance with the laws of Japan. Any disputes arising in connection with the Service shall be subject to the exclusive jurisdiction of the Tokyo District Court as the court of first instance.',
+    termsEnacted: 'Enacted: January 15, 2025',
+    termsUpdated: 'Last Updated: January 25, 2025',
+    termsOfService: 'Terms of Service',
+
+    // メインページ説明セクション
+    homeAboutTitle: 'What is Guitar Scale Master?',
+    homeAboutDesc: 'A free web application for visually learning guitar scales. Display 13+ types of scales on the guitar fretboard, connecting theory and practice.',
+    homeFeature1: 'Scale Visualization',
+    homeFeature1Desc: 'Display major, minor, pentatonic, mode scales, and other essential scales for guitarists on the fretboard. Root notes and scale tones are instantly recognizable.',
+    homeFeature2: 'Audio Analysis',
+    homeFeature2Desc: 'Just upload an audio file and AI will automatically detect the key and scale of the song. Quickly identify the scale of any song you want to cover.',
+    homeFeature3: 'Scale Playback',
+    homeFeature3Desc: 'Listen to the selected scale in real-time. Learn scales with both eyes and ears for more efficient practice.',
+    homeTargetUsers: 'Recommended For',
+    homeTargetList: [
+      'Beginners who want to learn how to memorize scales',
+      'Guitarists looking to practice improvisation and solos',
+      'Composers and arrangers who want to know the key and scale of a song',
+      'Anyone wanting to deepen their understanding of music theory',
+    ],
   },
 
   zh: {
@@ -1427,6 +1784,87 @@ export const translations: Record<Language, Translations> = {
     bluesViewA: '查看A布鲁斯音阶',
     bluesViewE: '查看E布鲁斯音阶',
 
+    // 和声小调记事
+    harmonicTitle: '和声小调音阶的魅力与用法',
+    harmonicDesc: '和声小调音阶从古典到金属乐广泛使用。了解其独特的音色和实际应用方法。',
+    harmonicWhat: '什么是和声小调音阶？',
+    harmonicWhatDesc1: '和声小调音阶是将自然小调音阶的第7音升高半音的音阶。这使得在小调中也能形成具有强烈解决感的属七和弦（V7）。',
+    harmonicWhatDesc2: '这个音阶最大的特点是第6音和第7音之间有增二度（1.5个全音）的音程。这种独特的音程创造出异域风情的声音，在中东音乐、古典音乐甚至新古典金属中都很受欢迎。',
+    harmonicStructure: '音阶结构',
+    harmonicStructureDesc: '音阶遵循全音-半音-全音-全音-半音-增二度-半音的模式。',
+    harmonicCharacteristic: '特征音色',
+    harmonicCharacteristicDesc: '第6音和第7音之间的增二度音程创造出这个音阶独特的异域和戏剧性音色。这种声音在小调古典音乐作品中经常听到。',
+    harmonicUsage: '实际应用',
+    harmonicUsage1: '在V7和弦上使用',
+    harmonicUsage1Desc: '在小调的属七和弦（例如Am调中的E7）上使用，可以平滑地解决到主和弦。',
+    harmonicUsage2: '新古典乐句',
+    harmonicUsage2Desc: '在以Yngwie Malmsteen为代表的新古典金属中，使用此音阶的高速琶音和音序乐句是标准配置。',
+    harmonicUsage3: '异域旋律',
+    harmonicUsage3Desc: '有效地创造中东风格或西班牙风格的旋律。在弗拉门戈吉他中也常用。',
+    harmonicComparison: '与自然小调的比较',
+    harmonicComparisonDesc: '自然小调表达平静的悲伤，而和声小调具有更戏剧性和紧张的声音。同时使用两者可以大大扩展您的表现力。',
+    harmonicPractice: '有效的练习方法',
+    harmonicPracticeList: [
+      '练习每弦三音模式以覆盖整个指板',
+      '有意识地在属七（V7）和弦上练习',
+      '反复练习包含增二度音程的乐句',
+      '复制古典音乐或新古典金属的乐句',
+    ],
+    harmonicSummary: '总结',
+    harmonicSummaryDesc: '和声小调音阶为小调作品带来强烈的解决感和戏剧性的声音。它是一个在古典、弗拉门戈、金属等各种风格中都可以使用的高度通用的音阶。',
+    harmonicCta: '在指板上查看和声小调',
+    harmonicViewA: '查看A和声小调',
+    harmonicViewE: '查看E和声小调',
+
+    // 音阶练习记事
+    practiceTitle: '吉他初学者的音阶练习法【高效记忆方法】',
+    practiceDesc: '为初学者讲解高效记忆音阶的练习方法。介绍避免挫折的技巧和循序渐进的练习步骤。',
+    practiceIntro: '为什么音阶练习很重要',
+    practiceIntroDesc: '音阶是吉他演奏的基础，是即兴演奏、作曲、扒谱等所有音乐活动的基石。然而，盲目练习无法提高效率。正确的方法和循序渐进的练习是进步的捷径。',
+    practiceStep1: '第一步：从五声音阶开始',
+    practiceStep1Desc: '不要一开始就尝试学习七音音阶。先从五音组成的五声音阶开始。它更容易记忆，在实际歌曲中也常用。',
+    practiceStep1List: [
+      '学习A小调五声音阶的第一把位',
+      '配合节拍器练习上行和下行',
+      '从BPM60开始，逐渐提高速度',
+      '每天至少练习15分钟，直到手指灵活运动',
+    ],
+    practiceStep2: '第二步：增加把位',
+    practiceStep2Desc: '一旦能弹好一个把位，就挑战下一个。目标是能够在整个指板上弹奏音阶。',
+    practiceStep2List: [
+      '依次学习5个五声音阶把位',
+      '练习把位之间的平滑转换',
+      '在不同把位弹奏相同的乐句',
+      '视觉上理解指板上的音阶模式',
+    ],
+    practiceStep3: '第三步：扩展到七音音阶',
+    practiceStep3Desc: '熟悉五声音阶后，挑战大调音阶或自然小调音阶等七音音阶。',
+    practiceStep3List: [
+      '从C大调音阶开始',
+      '注意与五声音阶的区别进行练习',
+      '使用每弦三音模式',
+      '边弹边唱音阶级数（1,2,3,4,5,6,7）',
+    ],
+    practiceStep4: '第四步：在实际音乐中应用',
+    practiceStep4Desc: '不仅要记住音阶，还要配合实际歌曲和伴奏进行使用练习。',
+    practiceStep4List: [
+      '配合YouTube伴奏进行即兴演奏',
+      '复制喜欢的歌曲的独奏',
+      '使用音阶音符创作简单的旋律',
+      '在不同调中弹奏相同乐句的移调练习',
+    ],
+    practiceTips: '避免挫折的技巧',
+    practiceTipsList: [
+      '每天坚持少量练习（15-30分钟）很重要',
+      '不要一次学太多',
+      '使用节拍器培养准确的节奏感',
+      '录音并客观地听自己的演奏',
+      '从与喜欢的歌曲或风格相关的音阶开始',
+    ],
+    practiceSummary: '总结',
+    practiceSummaryDesc: '音阶练习虽然枯燥，但绝对会带来进步。不要急躁，循序渐进地练习，并意识到在实际音乐中的应用。利用本站的音阶可视化功能高效练习吧。',
+    practiceCta: '使用音阶可视化工具',
+
     // 隐私政策
     privacyTitle: '隐私政策',
     privacyIntro: '吉他音阶大师（"本站"）就用户个人信息的处理制定本隐私政策。',
@@ -1506,6 +1944,61 @@ export const translations: Record<Language, Translations> = {
     contactNote1: '我们通常在3个工作日内回复。',
     contactNote2: '根据内容，回复可能需要额外时间。',
     contactNote3: '我们无法回应商业推销。',
+
+    // 利用規約ページ
+    termsTitle: '使用条款',
+    termsIntro: '本使用条款（以下简称"条款"）规定了株式会社Motekoro（以下简称"公司"）提供的"吉他音阶大师"（以下简称"服务"）的使用条件。在使用本服务之前，请仔细阅读本条款。',
+    termsSection1: '第1条（适用范围）',
+    termsSection1Desc: '本条款旨在明确公司与用户之间关于使用本服务的权利义务关系，适用于用户与公司之间与本服务使用相关的所有关系。',
+    termsSection2: '第2条（服务内容）',
+    termsSection2List: [
+      '吉他音阶可视化功能',
+      '音频文件自动音阶分析功能',
+      '音阶播放功能',
+      '音阶相关教育内容',
+      '公司提供的其他相关服务',
+    ],
+    termsSection3: '第3条（禁止事项）',
+    termsSection3List: [
+      '违反法律或公序良俗的行为',
+      '侵犯公司或第三方的知识产权、隐私、名誉或其他权利的行为',
+      '妨碍本服务运营的行为',
+      '给其他用户造成困扰的行为',
+      '未经公司事先许可将本服务用于商业目的',
+      '对本服务进行逆向工程、反编译或反汇编',
+      '使用自动化工具访问',
+      '公司认为不当的其他行为',
+    ],
+    termsSection4: '第4条（知识产权）',
+    termsSection4Desc: '与本服务相关的所有知识产权归公司或合法权利人所有。根据本条款授予的本服务使用许可并不意味着允许使用公司或合法权利人的知识产权。',
+    termsSection5: '第5条（免责声明）',
+    termsSection5Desc: '公司不对本服务是否符合用户的特定目的、是否具有预期的功能、准确性或实用性、是否符合适用的法律法规、是否可持续使用以及是否不存在缺陷作出任何明示或暗示的保证。公司对因本服务引起的任何损害不承担任何责任。',
+    termsSection6: '第6条（服务的变更和停止）',
+    termsSection6Desc: '公司可以在不事先通知用户的情况下变更本服务的内容，或停止或中止本服务的提供。',
+    termsSection7: '第7条（使用条款的变更）',
+    termsSection7Desc: '公司认为必要时，可以在不事先通知用户的情况下随时变更本条款。变更后的条款自在本服务上发布之时起生效。',
+    termsSection8: '第8条（准据法和管辖法院）',
+    termsSection8Desc: '本条款的解释以日本法律为准据法。与本服务相关的任何争议，以东京地方法院为第一审的专属合意管辖法院。',
+    termsEnacted: '制定日期：2025年1月15日',
+    termsUpdated: '最后更新：2025年1月25日',
+    termsOfService: '使用条款',
+
+    // メインページ説明セクション
+    homeAboutTitle: '什么是吉他音阶大师？',
+    homeAboutDesc: '一款免费的网络应用程序，可视化学习吉他音阶。在吉他指板上显示13种以上的音阶，将理论与实践相结合。',
+    homeFeature1: '音阶可视化',
+    homeFeature1Desc: '在指板上显示大调、小调、五声音阶、调式音阶等吉他手必备的主要音阶。根音和构成音一目了然。',
+    homeFeature2: '音频分析',
+    homeFeature2Desc: '只需上传音频文件，AI就会自动检测歌曲的调性和音阶。快速把握想要翻奏的歌曲的音阶。',
+    homeFeature3: '音阶播放',
+    homeFeature3Desc: '可以实时聆听所选音阶的声音。通过视觉和听觉同时记忆音阶，实现高效练习。',
+    homeTargetUsers: '推荐人群',
+    homeTargetList: [
+      '不知道如何记忆音阶的初学者',
+      '想练习即兴演奏和独奏的吉他手',
+      '想了解歌曲调性和音阶的作曲家和编曲者',
+      '想深入理解音乐理论的人',
+    ],
   },
 
   es: {
@@ -1813,6 +2306,87 @@ export const translations: Record<Language, Translations> = {
     bluesViewA: 'Ver Escala de Blues en A',
     bluesViewE: 'Ver Escala de Blues en E',
 
+    // Artículo de Escala Menor Armónica
+    harmonicTitle: 'El Encanto y Uso de la Escala Menor Armónica',
+    harmonicDesc: 'La escala menor armónica se usa en géneros desde clásico hasta metal. Aprende sobre su sonido distintivo y aplicaciones prácticas.',
+    harmonicWhat: '¿Qué es la Escala Menor Armónica?',
+    harmonicWhatDesc1: 'La escala menor armónica es una escala menor natural con el 7mo grado elevado medio tono. Esto permite formar un acorde dominante (V7) con fuerte resolución en tonalidades menores.',
+    harmonicWhatDesc2: 'La característica más distintiva de esta escala es el intervalo de 2da aumentada (1.5 tonos) entre el 6to y 7mo grado. Este intervalo único crea un sonido exótico amado en música del Medio Oriente, música clásica e incluso metal neoclásico.',
+    harmonicStructure: 'Estructura de la Escala',
+    harmonicStructureDesc: 'La escala sigue el patrón: tono-semitono-tono-tono-semitono-2da aumentada-semitono.',
+    harmonicCharacteristic: 'Sonido Característico',
+    harmonicCharacteristicDesc: 'El intervalo de 2da aumentada entre el 6to y 7mo grado crea el sonido exótico y dramático único de esta escala. Este sonido se escucha frecuentemente en piezas clásicas en tonalidades menores.',
+    harmonicUsage: 'Aplicaciones Prácticas',
+    harmonicUsage1: 'Sobre Acordes V7',
+    harmonicUsage1Desc: 'Úsala sobre el acorde de séptima dominante en tonalidades menores (ej: E7 en tonalidad de Am) para una resolución suave a la tónica.',
+    harmonicUsage2: 'Frases Neoclásicas',
+    harmonicUsage2Desc: 'En el metal neoclásico, ejemplificado por Yngwie Malmsteen, los arpegios a alta velocidad y frases de secuencia usando esta escala son estándar.',
+    harmonicUsage3: 'Melodías Exóticas',
+    harmonicUsage3Desc: 'Efectiva para crear melodías con sabor del Medio Oriente o español. También se usa comúnmente en guitarra flamenca.',
+    harmonicComparison: 'Comparación con Menor Natural',
+    harmonicComparisonDesc: 'Mientras que la menor natural expresa tristeza calmada, la menor armónica tiene un sonido más dramático y tenso. Usar ambas expande significativamente tu rango expresivo.',
+    harmonicPractice: 'Métodos de Práctica Efectivos',
+    harmonicPracticeList: [
+      'Practica patrones de 3 notas por cuerda para cubrir todo el diapasón',
+      'Practica conscientemente sobre acordes de séptima dominante (V7)',
+      'Practica repetidamente frases que contengan el intervalo de 2da aumentada',
+      'Copia frases de música clásica o metal neoclásico',
+    ],
+    harmonicSummary: 'Resumen',
+    harmonicSummaryDesc: 'La escala menor armónica aporta fuerte resolución y sonido dramático a composiciones en tonalidades menores. Es una escala muy versátil usada en clásico, flamenco, metal y varios otros géneros.',
+    harmonicCta: 'Ver Menor Armónica en el Diapasón',
+    harmonicViewA: 'Ver A Menor Armónica',
+    harmonicViewE: 'Ver E Menor Armónica',
+
+    // Artículo de Práctica de Escalas
+    practiceTitle: 'Guía de Práctica de Escalas para Principiantes [Métodos Eficientes]',
+    practiceDesc: 'Aprende métodos de práctica eficientes para memorizar escalas. Consejos para evitar la frustración y guía paso a paso para principiantes.',
+    practiceIntro: 'Por qué la Práctica de Escalas es Importante',
+    practiceIntroDesc: 'Las escalas son la base de tocar guitarra, formando los cimientos para improvisación, composición y transcripción. Sin embargo, practicar al azar no mejorará la eficiencia. Un enfoque estructurado y paso a paso es el camino más rápido hacia la mejora.',
+    practiceStep1: 'Paso 1: Comienza con Pentatónica',
+    practiceStep1Desc: 'No intentes aprender escalas de 7 notas inmediatamente. Comienza con la escala pentatónica de 5 notas. Es más fácil de aprender y se usa comúnmente en canciones reales.',
+    practiceStep1List: [
+      'Aprende la primera posición de A menor pentatónica',
+      'Practica ascendiendo y descendiendo con metrónomo',
+      'Comienza a 60 BPM y aumenta gradualmente el tempo',
+      'Practica al menos 15 minutos diarios hasta que los dedos se muevan suavemente',
+    ],
+    practiceStep2: 'Paso 2: Añade Más Posiciones',
+    practiceStep2Desc: 'Una vez que puedas tocar una posición, desafíate con la siguiente. El objetivo es tocar escalas en todo el diapasón.',
+    practiceStep2List: [
+      'Aprende las 5 posiciones pentatónicas en orden',
+      'Practica transiciones suaves entre posiciones',
+      'Toca la misma frase en diferentes posiciones',
+      'Entiende visualmente los patrones de escala en el diapasón',
+    ],
+    practiceStep3: 'Paso 3: Expande a Escalas de 7 Notas',
+    practiceStep3Desc: 'Una vez cómodo con pentatónica, desafíate con escalas de 7 notas como mayor o menor natural.',
+    practiceStep3List: [
+      'Comienza con la escala de C mayor',
+      'Practica notando las diferencias con pentatónica',
+      'Usa patrones de 3 notas por cuerda',
+      'Canta los grados (1,2,3,4,5,6,7) mientras tocas',
+    ],
+    practiceStep4: 'Paso 4: Aplica a Música Real',
+    practiceStep4Desc: 'Es importante practicar usando escalas sobre canciones reales y pistas de acompañamiento, no solo memorizarlas.',
+    practiceStep4List: [
+      'Improvisa sobre pistas de YouTube',
+      'Copia solos de tus canciones favoritas',
+      'Crea melodías simples usando notas de la escala',
+      'Practica transposición tocando la misma frase en diferentes tonalidades',
+    ],
+    practiceTips: 'Consejos para Evitar la Frustración',
+    practiceTipsList: [
+      'Practica un poco (15-30 minutos) todos los días',
+      'No intentes aprender demasiado de una vez',
+      'Usa metrónomo para desarrollar ritmo preciso',
+      'Grábate y escucha objetivamente',
+      'Comienza con escalas relacionadas a tus canciones o géneros favoritos',
+    ],
+    practiceSummary: 'Resumen',
+    practiceSummaryDesc: 'La práctica de escalas es constante pero definitivamente lleva a la mejora. Avanza paso a paso sin prisa, y practica con la intención de usar las escalas en música real. Usa la función de visualización de escalas de este sitio para practicar eficientemente.',
+    practiceCta: 'Usar Visualizador de Escalas',
+
     // Política de Privacidad
     privacyTitle: 'Política de Privacidad',
     privacyIntro: 'Maestro de Escalas de Guitarra ("este sitio") establece esta Política de Privacidad respecto al manejo de información personal de los usuarios.',
@@ -1892,6 +2466,61 @@ export const translations: Record<Language, Translations> = {
     contactNote1: 'Típicamente respondemos dentro de 3 días hábiles.',
     contactNote2: 'Dependiendo del contenido, las respuestas pueden tomar tiempo adicional.',
     contactNote3: 'No podemos responder a solicitudes comerciales.',
+
+    // 利用規約ページ
+    termsTitle: 'Términos de Servicio',
+    termsIntro: 'Estos Términos de Servicio (en adelante "Términos") establecen las condiciones de uso de "Maestro de Escalas de Guitarra" (en adelante "Servicio") proporcionado por Motekoro Inc. (en adelante "Empresa"). Por favor, lea estos Términos cuidadosamente antes de usar el Servicio.',
+    termsSection1: 'Artículo 1 (Ámbito de Aplicación)',
+    termsSection1Desc: 'Estos Términos tienen como objetivo definir los derechos y obligaciones entre la Empresa y los usuarios respecto al uso del Servicio, y se aplican a todas las relaciones entre usuarios y la Empresa en conexión con el uso del Servicio.',
+    termsSection2: 'Artículo 2 (Descripción del Servicio)',
+    termsSection2List: [
+      'Función de visualización de escalas de guitarra',
+      'Análisis automático de escalas desde archivos de audio',
+      'Función de reproducción de escalas',
+      'Contenido educativo sobre escalas',
+      'Otros servicios relacionados proporcionados por la Empresa',
+    ],
+    termsSection3: 'Artículo 3 (Actividades Prohibidas)',
+    termsSection3List: [
+      'Acciones que violen las leyes o el orden público y la moral',
+      'Acciones que infrinjan los derechos de propiedad intelectual, privacidad, reputación u otros derechos de la Empresa o terceros',
+      'Acciones que interfieran con la operación del Servicio',
+      'Acciones que causen inconvenientes a otros usuarios',
+      'Uso comercial del Servicio sin permiso previo de la Empresa',
+      'Ingeniería inversa, descompilación o desensamblaje del Servicio',
+      'Acceso mediante herramientas automatizadas',
+      'Otras acciones consideradas inapropiadas por la Empresa',
+    ],
+    termsSection4: 'Artículo 4 (Derechos de Propiedad Intelectual)',
+    termsSection4Desc: 'Todos los derechos de propiedad intelectual relacionados con el Servicio pertenecen a la Empresa o a los legítimos titulares de derechos. La licencia para usar el Servicio bajo estos Términos no implica permiso para usar la propiedad intelectual de la Empresa o los legítimos titulares de derechos.',
+    termsSection5: 'Artículo 5 (Descargo de Responsabilidad)',
+    termsSection5Desc: 'La Empresa no garantiza, expresa o implícitamente, que el Servicio cumpla con los propósitos específicos de los usuarios, tenga la funcionalidad, precisión o utilidad esperada, cumpla con las leyes aplicables, esté disponible continuamente o esté libre de defectos. La Empresa no será responsable por ningún daño derivado del Servicio.',
+    termsSection6: 'Artículo 6 (Cambios y Suspensión del Servicio)',
+    termsSection6Desc: 'La Empresa puede cambiar, suspender o descontinuar el Servicio sin previo aviso a los usuarios.',
+    termsSection7: 'Artículo 7 (Cambios en los Términos de Servicio)',
+    termsSection7Desc: 'La Empresa puede cambiar estos Términos en cualquier momento sin previo aviso cuando lo considere necesario. Los Términos revisados entrarán en vigor tras su publicación en el Servicio.',
+    termsSection8: 'Artículo 8 (Ley Aplicable y Jurisdicción)',
+    termsSection8Desc: 'Estos Términos se regirán e interpretarán de acuerdo con las leyes de Japón. Cualquier disputa relacionada con el Servicio estará sujeta a la jurisdicción exclusiva del Tribunal de Distrito de Tokio como tribunal de primera instancia.',
+    termsEnacted: 'Fecha de vigencia: 15 de enero de 2025',
+    termsUpdated: 'Última actualización: 25 de enero de 2025',
+    termsOfService: 'Términos de Servicio',
+
+    // メインページ説明セクション
+    homeAboutTitle: '¿Qué es Maestro de Escalas de Guitarra?',
+    homeAboutDesc: 'Una aplicación web gratuita para aprender escalas de guitarra visualmente. Muestra más de 13 tipos de escalas en el diapasón de la guitarra, conectando teoría y práctica.',
+    homeFeature1: 'Visualización de Escalas',
+    homeFeature1Desc: 'Muestra escalas mayores, menores, pentatónicas, modales y otras escalas esenciales para guitarristas en el diapasón. Las notas raíz y los tonos de escala son instantáneamente reconocibles.',
+    homeFeature2: 'Análisis de Audio',
+    homeFeature2Desc: 'Solo sube un archivo de audio y la IA detectará automáticamente la tonalidad y escala de la canción. Identifica rápidamente la escala de cualquier canción que quieras tocar.',
+    homeFeature3: 'Reproducción de Escalas',
+    homeFeature3Desc: 'Escucha la escala seleccionada en tiempo real. Aprende escalas con ojos y oídos para una práctica más eficiente.',
+    homeTargetUsers: 'Recomendado Para',
+    homeTargetList: [
+      'Principiantes que quieren aprender a memorizar escalas',
+      'Guitarristas que buscan practicar improvisación y solos',
+      'Compositores y arreglistas que quieren conocer la tonalidad y escala de una canción',
+      'Cualquiera que quiera profundizar su comprensión de la teoría musical',
+    ],
   },
 };
 

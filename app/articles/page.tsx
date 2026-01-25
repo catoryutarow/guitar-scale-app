@@ -11,6 +11,20 @@ export default function ArticlesPage() {
 
   const articles = [
     {
+      slug: 'scale-practice',
+      title: t.practiceTitle,
+      description: t.practiceDesc,
+      date: '2025-01-22',
+      category: t.articleCategory.beginner,
+    },
+    {
+      slug: 'harmonic-minor',
+      title: t.harmonicTitle,
+      description: t.harmonicDesc,
+      date: '2025-01-20',
+      category: t.articleCategory.intermediate,
+    },
+    {
       slug: 'pentatonic-basics',
       title: t.pentatonicTitle,
       description: t.pentatonicDesc,

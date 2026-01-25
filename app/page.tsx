@@ -16,6 +16,7 @@ import { TuningId, TUNINGS, transposeTuning } from '@/lib/tunings';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import ArticleCarousel from '@/components/ArticleCarousel';
 
 function HomeContent() {
   const { t } = useLanguage();
@@ -175,6 +176,67 @@ function HomeContent() {
             numFrets={15}
           />
         </div>
+
+        {/* サービス説明セクション */}
+        <section className="mt-16 mb-8">
+          <div className="bg-white rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+              {t.homeAboutTitle}
+            </h2>
+            <p className="text-gray-700 text-center mb-8 max-w-2xl mx-auto">
+              {t.homeAboutDesc}
+            </p>
+
+            {/* 機能紹介 */}
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="text-center p-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-gray-800 mb-2">{t.homeFeature1}</h3>
+                <p className="text-sm text-gray-600">{t.homeFeature1Desc}</p>
+              </div>
+
+              <div className="text-center p-4">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-gray-800 mb-2">{t.homeFeature2}</h3>
+                <p className="text-sm text-gray-600">{t.homeFeature2Desc}</p>
+              </div>
+
+              <div className="text-center p-4">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 0112.728 0" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-gray-800 mb-2">{t.homeFeature3}</h3>
+                <p className="text-sm text-gray-600">{t.homeFeature3Desc}</p>
+              </div>
+            </div>
+
+            {/* こんな方におすすめ */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="font-semibold text-gray-800 mb-4 text-center">{t.homeTargetUsers}</h3>
+              <ul className="grid md:grid-cols-2 gap-3 max-w-2xl mx-auto">
+                {t.homeTargetList.map((item, index) => (
+                  <li key={index} className="flex items-start text-sm text-gray-700">
+                    <span className="text-green-500 mr-2 mt-0.5">&#10003;</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* コラム記事カルーセル */}
+        <ArticleCarousel />
 
         {/* フローティングヘルプボタン */}
         <HelpButton />

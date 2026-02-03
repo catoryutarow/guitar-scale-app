@@ -11,7 +11,6 @@
 'use client';
 
 import { useState } from 'react';
-import { upload } from '@vercel/blob/client';
 import FileUploadZone from './FileUploadZone';
 import AnalysisProgress from './AnalysisProgress';
 import ChordTimeline from './ChordTimeline';
@@ -62,16 +61,43 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
       setStatus('uploading');
       setProgress(0);
 
-      // クライアントサイドから直接Vercel Blobにアップロード
+      // ファイルをアップロード
       setProgress(30);
 
-      const blob = await upload(file.name, file, {
-        access: 'public',
-        handleUploadUrl: '/api/upload',
-      });
+      // ローカル開発時はローカルAPIを使用、本番環境はVercel Blobを使用
+      const isLocal = process.env.NODE_ENV === 'development' ||
+                      window.location.hostname === 'localhost';
 
-      const jobId = `job_${Date.now()}_${Math.random().toString(36).substring(7)}`;
-      const fileUrl = blob.url;
+      let jobId: string;
+      let fileUrl: string;
+
+      if (isLocal) {
+        // ローカル開発: FormDataで直接アップロード
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const uploadResponse = await fetch('/api/upload-local', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error('ファイルのアップロードに失敗しました');
+        }
+
+        const uploadResult = await uploadResponse.json();
+        jobId = uploadResult.jobId;
+        fileUrl = uploadResult.url;
+      } else {
+        // 本番環境: Vercel Blobを使用
+        const { upload } = await import('@vercel/blob/client');
+        const blob = await upload(file.name, file, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+        });
+        jobId = `job_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+        fileUrl = blob.url;
+      }
 
       console.log('Upload completed:', {
         jobId,

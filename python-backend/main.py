@@ -457,13 +457,13 @@ def analyze_audio_real(file_path: str, options: Dict) -> AnalysisResult:
 
 def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
     """
-    librosaベースの音源解析ロジック
+    librosaベースの音源解析ロジック（高精度版）
 
-    Phase 4 実装内容：
-    - librosa で音源を読み込み（先頭60秒に制限）
-    - テンポ検出
-    - キー/スケール推定（簡易アルゴリズム）
-    - 簡易コード進行検出（4秒ごとの区間分割）
+    改善点：
+    - ラウドネスベースのセグメント選択（最もエネルギーの高い区間を解析）
+    - HPSS（Harmonic-Percussive Source Separation）でハーモニック成分を抽出
+    - CQT/CENSベースのChroma特徴量で安定したピッチ検出
+    - ビート同期コード検出
 
     Args:
         file_path: 音源ファイルのパス
@@ -473,33 +473,57 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
         AnalysisResult: 解析結果
     """
 
-    print(f"\n[Librosa Analysis] Starting analysis...")
+    print(f"\n[Librosa Analysis] Starting high-precision analysis...")
     print(f"  File: {file_path}")
 
-    # 1. 音声読み込み（先頭60秒に制限して負荷軽減）
+    # 1. 音声読み込み（全体を読み込んでから最適な区間を選択）
     try:
-        print(f"  Step 1/5: Loading audio file...")
-        y, sr = librosa.load(file_path, sr=None, mono=True, duration=60.0)
-        duration = len(y) / sr
-        print(f"    ✓ Loaded: {duration:.2f}s, sr={sr}Hz, samples={len(y)}")
+        print(f"  Step 1/6: Loading audio file...")
+        y_full, sr = librosa.load(file_path, sr=22050, mono=True)  # 22050Hzで統一
+        full_duration = len(y_full) / sr
+        print(f"    ✓ Loaded: {full_duration:.2f}s, sr={sr}Hz, samples={len(y_full)}")
     except Exception as e:
         print(f"    ✗ Failed to load audio file: {str(e)}")
         raise Exception(f"Failed to load audio file: {str(e)}")
 
-    # 2. テンポ推定
+    # 2. ラウドネスベースの最適区間選択
     try:
-        print(f"  Step 2/5: Detecting tempo...")
-        tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
+        print(f"  Step 2/6: Selecting optimal segment by loudness...")
+        y, start_time, end_time = select_loudest_segment(y_full, sr, target_duration=30.0)
+        duration = len(y) / sr
+        print(f"    ✓ Selected segment: {start_time:.1f}s - {end_time:.1f}s ({duration:.1f}s)")
+    except Exception as e:
+        print(f"    ⚠ Segment selection failed: {e}, using first 30s")
+        y = y_full[:int(30.0 * sr)]
+        duration = len(y) / sr
+        start_time = 0.0
+        end_time = duration
+
+    # 3. HPSS（ハーモニック・パーカッシブ分離）
+    try:
+        print(f"  Step 3/6: Applying Harmonic-Percussive separation...")
+        y_harmonic, y_percussive = librosa.effects.hpss(y)
+        print(f"    ✓ Separated harmonic and percussive components")
+    except Exception as e:
+        print(f"    ⚠ HPSS failed: {e}, using original signal")
+        y_harmonic = y
+
+    # 4. テンポ・ビート推定（パーカッシブ成分を使用）
+    try:
+        print(f"  Step 4/6: Detecting tempo and beats...")
+        tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
         tempo = float(tempo)
-        print(f"    ✓ Tempo detected: {tempo:.1f} BPM")
+        beats = librosa.frames_to_time(beat_frames, sr=sr)
+        print(f"    ✓ Tempo detected: {tempo:.1f} BPM, {len(beats)} beats")
     except Exception as e:
         print(f"    ⚠ Tempo detection failed: {e}, using default 120 BPM")
         tempo = 120.0
+        beats = []
 
-    # 3. キー/スケール推定（簡易）
+    # 5. キー/スケール推定（ハーモニック成分 + 改良版アルゴリズム）
     try:
-        print(f"  Step 3/5: Estimating key and scale...")
-        detected_key, scale_name, confidence = estimate_key_simple(y, sr)
+        print(f"  Step 5/6: Estimating key and scale (enhanced)...")
+        detected_key, scale_name, confidence = estimate_key_enhanced(y_harmonic, sr)
         print(f"    ✓ Key detected: {detected_key} {scale_name} (confidence: {confidence:.2f})")
     except Exception as e:
         print(f"    ⚠ Key detection failed: {e}, using default G major")
@@ -507,34 +531,37 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
         scale_name = "メジャー"
         confidence = 0.5
 
-    # 4. 簡易コード進行検出
+    # 6. ビート同期コード進行検出（ハーモニック成分を使用）
     try:
-        print(f"  Step 4/5: Detecting chord progression...")
-        chord_progression = detect_chords_simple(y, sr, detected_key, scale_name)
+        print(f"  Step 6/6: Detecting chord progression (beat-synced)...")
+        if len(beats) >= 4:
+            chord_progression = detect_chords_beat_synced(
+                y_harmonic, sr, beats, detected_key, scale_name, start_time
+            )
+        else:
+            chord_progression = detect_chords_enhanced(
+                y_harmonic, sr, detected_key, scale_name, start_time
+            )
         print(f"    ✓ Detected {len(chord_progression)} chord segments")
         if len(chord_progression) > 0:
             print(f"    First chord: {chord_progression[0].chord} ({chord_progression[0].startTime:.1f}s - {chord_progression[0].endTime:.1f}s)")
     except Exception as e:
         print(f"    ⚠ Chord detection failed: {e}, using fallback")
-        chord_progression = generate_fallback_chords(detected_key, duration)
+        chord_progression = generate_fallback_chords(detected_key, full_duration)
 
-    # 5. スケールマッチング
+    # スケールマッチング
     try:
-        print(f"  Step 5/5: Generating scale matches...")
         scale_match = generate_scale_match(detected_key, scale_name, chord_progression)
         print(f"    ✓ Generated {len(scale_match.matchingScales)} scale matches")
-        if len(scale_match.matchingScales) > 0:
-            top_match = scale_match.matchingScales[0]
-            print(f"    Top match: {top_match.rootNote} {top_match.scale} (match rate: {top_match.matchRate:.2%})")
     except Exception as e:
         print(f"    ⚠ Scale matching failed: {e}")
         scale_match = ScaleMatchResult(matchingScales=[])
 
-    # 6. メタデータの構築
+    # メタデータの構築
     metadata = AnalysisMetadata(
-        duration=duration,
+        duration=full_duration,  # 元ファイルの長さを返す
         tempo=tempo,
-        timeSignature="4/4",  # 固定
+        timeSignature="4/4",
         detectedKey=detected_key,
         scale=scale_name,
         confidence=confidence
@@ -542,6 +569,7 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
 
     print(f"\n[Librosa Analysis] Analysis completed successfully!")
     print(f"  Result: {detected_key} {scale_name}, {tempo:.1f} BPM, {len(chord_progression)} chords")
+    print(f"  Analyzed segment: {start_time:.1f}s - {end_time:.1f}s (loudest {duration:.1f}s)")
     print("=" * 60)
 
     return AnalysisResult(
@@ -550,6 +578,369 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
         scaleMatch=scale_match,
         stems=None  # Phase 4 では未実装
     )
+
+
+def select_loudest_segment(y, sr, target_duration=30.0, hop_length=512):
+    """
+    ラウドネスベースで最も音量が高い区間を選択
+
+    RMSエネルギーを計算し、最もエネルギーが集中している区間を返す。
+    これにより、イントロの静かな部分やアウトロを避け、
+    コード進行が明確なサビ/コーラス部分を優先的に解析できる。
+
+    Args:
+        y: 音声波形
+        sr: サンプリングレート
+        target_duration: 切り出す長さ（秒）
+        hop_length: RMS計算のホップ長
+
+    Returns:
+        Tuple[ndarray, float, float]: (選択された区間の波形, 開始時刻, 終了時刻)
+    """
+    full_duration = len(y) / sr
+
+    # 短い音源の場合はそのまま返す
+    if full_duration <= target_duration:
+        return y, 0.0, full_duration
+
+    # RMSエネルギーを計算
+    rms = librosa.feature.rms(y=y, hop_length=hop_length)[0]
+
+    # 移動平均でスムージング（target_duration相当のウィンドウ）
+    window_frames = int(target_duration * sr / hop_length)
+    if window_frames >= len(rms):
+        return y[:int(target_duration * sr)], 0.0, target_duration
+
+    # 畳み込みで移動平均RMSを計算
+    kernel = np.ones(window_frames) / window_frames
+    smoothed_rms = np.convolve(rms, kernel, mode='valid')
+
+    # 最大RMSの位置を取得
+    best_frame = np.argmax(smoothed_rms)
+    best_start_time = best_frame * hop_length / sr
+    best_end_time = best_start_time + target_duration
+
+    # 範囲外チェック
+    if best_end_time > full_duration:
+        best_end_time = full_duration
+        best_start_time = max(0, full_duration - target_duration)
+
+    # 波形を切り出し
+    start_sample = int(best_start_time * sr)
+    end_sample = int(best_end_time * sr)
+
+    return y[start_sample:end_sample], best_start_time, best_end_time
+
+
+def estimate_key_enhanced(y_harmonic, sr):
+    """
+    改良版キー推定アルゴリズム
+
+    ハーモニック成分からCQTベースのChroma特徴量を計算し、
+    Krumhansl-Schmuckler key-finding algorithmの改良版で推定。
+
+    改善点：
+    - CQTベースのChroma（周波数解像度が高い）
+    - CENS正規化（エネルギー正規化＋スムージング）
+    - 複数のプロファイル比較
+
+    Returns:
+        Tuple[str, str, float]: (rootNote, scale, confidence)
+    """
+    # CQTベースのChroma（より精度が高い）
+    chroma_cqt = librosa.feature.chroma_cqt(y=y_harmonic, sr=sr, hop_length=512)
+
+    # CENS（Chroma Energy Normalized Statistics）で安定化
+    chroma_cens = librosa.feature.chroma_cens(y=y_harmonic, sr=sr, hop_length=512)
+
+    # 両方を組み合わせ（CQTの精度 + CENSの安定性）
+    chroma_combined = (chroma_cqt + chroma_cens) / 2
+
+    # 時間軸で平均化
+    chroma_mean = np.mean(chroma_combined, axis=1)
+
+    # 正規化
+    chroma_mean = chroma_mean / (np.sum(chroma_mean) + 1e-8)
+
+    # Krumhansl-Kessler プロファイル（改良版）
+    # メジャー: 経験的に調整された重み
+    major_profile = np.array([6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88])
+
+    # マイナー: 経験的に調整された重み
+    minor_profile = np.array([6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17])
+
+    # 正規化
+    major_profile = major_profile / np.sum(major_profile)
+    minor_profile = minor_profile / np.sum(minor_profile)
+
+    note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+
+    best_score = -1.0
+    best_key = 'C'
+    best_scale = 'メジャー'
+
+    for i in range(12):
+        # メジャー
+        shifted_major = np.roll(major_profile, i)
+        major_corr = np.corrcoef(chroma_mean, shifted_major)[0, 1]
+
+        if major_corr > best_score:
+            best_score = major_corr
+            best_key = note_names[i]
+            best_scale = 'メジャー'
+
+        # マイナー
+        shifted_minor = np.roll(minor_profile, i)
+        minor_corr = np.corrcoef(chroma_mean, shifted_minor)[0, 1]
+
+        if minor_corr > best_score:
+            best_score = minor_corr
+            best_key = note_names[i]
+            best_scale = 'マイナー'
+
+    # 信頼度（相関係数を0-1にマッピング）
+    confidence = (best_score + 1.0) / 2.0
+    confidence = max(0.0, min(1.0, confidence))
+
+    return best_key, best_scale, confidence
+
+
+def detect_chords_beat_synced(y_harmonic, sr, beats, key_root, key_scale, time_offset=0.0):
+    """
+    ビート同期コード進行検出
+
+    ビート位置に合わせてコードを検出することで、
+    固定時間区切りより自然なコード進行を取得。
+
+    Args:
+        y_harmonic: ハーモニック成分
+        sr: サンプリングレート
+        beats: ビート位置の配列（秒）
+        key_root: キーのルート音
+        key_scale: スケール名
+        time_offset: 元音源での開始時刻オフセット
+
+    Returns:
+        List[ChordInfo]: コード進行
+    """
+    chord_progression = []
+    note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+
+    # 4拍（1小節）ごとにグループ化
+    bars = []
+    for i in range(0, len(beats) - 3, 4):
+        bar_start = beats[i]
+        bar_end = beats[min(i + 4, len(beats) - 1)]
+        bars.append((bar_start, bar_end))
+
+    # 最後の端数も追加
+    if len(beats) > 0 and len(bars) > 0:
+        last_bar_end = bars[-1][1]
+        if beats[-1] > last_bar_end:
+            bars.append((last_bar_end, beats[-1]))
+
+    for bar_start, bar_end in bars:
+        start_sample = int(bar_start * sr)
+        end_sample = int(bar_end * sr)
+        segment = y_harmonic[start_sample:end_sample]
+
+        if len(segment) < 1024:
+            continue
+
+        # CQTベースのChromaを計算
+        chroma = librosa.feature.chroma_cqt(y=segment, sr=sr, hop_length=256)
+        chroma_mean = np.mean(chroma, axis=1)
+
+        # コードを推定
+        chord_name, root_note, quality, confidence = match_chord_enhanced(
+            chroma_mean, note_names, key_root, key_scale
+        )
+
+        chord_progression.append(ChordInfo(
+            startTime=bar_start + time_offset,
+            endTime=bar_end + time_offset,
+            chord=chord_name,
+            rootNote=root_note,
+            quality=quality,
+            confidence=confidence
+        ))
+
+    # 連続する同じコードをマージ
+    chord_progression = merge_consecutive_chords(chord_progression)
+
+    return chord_progression
+
+
+def detect_chords_enhanced(y_harmonic, sr, key_root, key_scale, time_offset=0.0):
+    """
+    改良版コード検出（ビート情報がない場合のフォールバック）
+
+    2秒区切りでより細かくコードを検出。
+
+    Returns:
+        List[ChordInfo]: コード進行
+    """
+    duration = len(y_harmonic) / sr
+    segment_duration = 2.0  # 2秒ごと（従来の4秒より細かく）
+    num_segments = int(np.ceil(duration / segment_duration))
+
+    chord_progression = []
+    note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+
+    for seg_idx in range(num_segments):
+        start_time = seg_idx * segment_duration
+        end_time = min((seg_idx + 1) * segment_duration, duration)
+
+        start_sample = int(start_time * sr)
+        end_sample = int(end_time * sr)
+        segment = y_harmonic[start_sample:end_sample]
+
+        if len(segment) < 1024:
+            continue
+
+        # CQTベースのChroma
+        chroma = librosa.feature.chroma_cqt(y=segment, sr=sr, hop_length=256)
+        chroma_mean = np.mean(chroma, axis=1)
+
+        chord_name, root_note, quality, confidence = match_chord_enhanced(
+            chroma_mean, note_names, key_root, key_scale
+        )
+
+        chord_progression.append(ChordInfo(
+            startTime=start_time + time_offset,
+            endTime=end_time + time_offset,
+            chord=chord_name,
+            rootNote=root_note,
+            quality=quality,
+            confidence=confidence
+        ))
+
+    # 連続する同じコードをマージ
+    chord_progression = merge_consecutive_chords(chord_progression)
+
+    return chord_progression
+
+
+def match_chord_enhanced(chroma_values, note_names, key_root, key_scale):
+    """
+    改良版コードマッチング
+
+    ダイアトニックコード + よく使われる借用コードも含めてマッチング。
+
+    Returns:
+        Tuple[str, str, str, float]: (chord_name, root_note, quality, confidence)
+    """
+    root_index = note_names.index(key_root)
+
+    # ダイアトニックコード + 借用コード
+    if key_scale == 'メジャー':
+        chord_templates = [
+            {'offset': 0, 'quality': 'maj', 'degree': 'I'},
+            {'offset': 2, 'quality': 'min', 'degree': 'ii'},
+            {'offset': 4, 'quality': 'min', 'degree': 'iii'},
+            {'offset': 5, 'quality': 'maj', 'degree': 'IV'},
+            {'offset': 7, 'quality': 'maj', 'degree': 'V'},
+            {'offset': 9, 'quality': 'min', 'degree': 'vi'},
+            {'offset': 11, 'quality': 'dim', 'degree': 'vii°'},
+            # 借用コード
+            {'offset': 10, 'quality': 'maj', 'degree': 'bVII'},  # ♭VII
+            {'offset': 8, 'quality': 'maj', 'degree': 'bVI'},   # ♭VI
+        ]
+    else:
+        chord_templates = [
+            {'offset': 0, 'quality': 'min', 'degree': 'i'},
+            {'offset': 2, 'quality': 'dim', 'degree': 'ii°'},
+            {'offset': 3, 'quality': 'maj', 'degree': 'III'},
+            {'offset': 5, 'quality': 'min', 'degree': 'iv'},
+            {'offset': 7, 'quality': 'min', 'degree': 'v'},
+            {'offset': 7, 'quality': 'maj', 'degree': 'V'},    # ハーモニックマイナーのV
+            {'offset': 8, 'quality': 'maj', 'degree': 'VI'},
+            {'offset': 10, 'quality': 'maj', 'degree': 'VII'},
+        ]
+
+    best_match_score = -1.0
+    best_chord = chord_templates[0]
+
+    # 正規化
+    chroma_norm = chroma_values / (np.sum(chroma_values) + 1e-8)
+
+    for chord_info in chord_templates:
+        chord_root_index = (root_index + chord_info['offset']) % 12
+
+        # コードテンプレート（ルート、3度、5度）
+        chord_template = np.zeros(12)
+        chord_template[chord_root_index] = 1.0  # ルート
+
+        if chord_info['quality'] == 'maj':
+            chord_template[(chord_root_index + 4) % 12] = 0.7  # 長3度
+            chord_template[(chord_root_index + 7) % 12] = 0.5  # 完全5度
+        elif chord_info['quality'] == 'min':
+            chord_template[(chord_root_index + 3) % 12] = 0.7  # 短3度
+            chord_template[(chord_root_index + 7) % 12] = 0.5  # 完全5度
+        else:  # dim
+            chord_template[(chord_root_index + 3) % 12] = 0.7  # 短3度
+            chord_template[(chord_root_index + 6) % 12] = 0.5  # 減5度
+
+        # 正規化
+        chord_template = chord_template / (np.sum(chord_template) + 1e-8)
+
+        # コサイン類似度で一致度を計算
+        match_score = np.dot(chroma_norm, chord_template)
+
+        if match_score > best_match_score:
+            best_match_score = match_score
+            best_chord = chord_info
+
+    # コード名生成
+    chord_root_note = note_names[(root_index + best_chord['offset']) % 12]
+    if best_chord['quality'] == 'maj':
+        chord_name = chord_root_note
+    elif best_chord['quality'] == 'min':
+        chord_name = chord_root_note + 'm'
+    else:
+        chord_name = chord_root_note + 'dim'
+
+    confidence = min(1.0, max(0.0, best_match_score))
+
+    return chord_name, chord_root_note, best_chord['quality'], confidence
+
+
+def merge_consecutive_chords(chord_progression: List[ChordInfo]) -> List[ChordInfo]:
+    """
+    連続する同じコードをマージ
+
+    細かく検出したコードの中で、連続して同じコードが続く場合は
+    1つにまとめて可読性を向上。
+
+    Returns:
+        List[ChordInfo]: マージ後のコード進行
+    """
+    if not chord_progression:
+        return []
+
+    merged = []
+    current = chord_progression[0]
+
+    for next_chord in chord_progression[1:]:
+        if next_chord.chord == current.chord:
+            # 同じコードなら終了時刻を延長
+            current = ChordInfo(
+                startTime=current.startTime,
+                endTime=next_chord.endTime,
+                chord=current.chord,
+                rootNote=current.rootNote,
+                quality=current.quality,
+                confidence=(current.confidence + next_chord.confidence) / 2
+            )
+        else:
+            # 違うコードなら現在のコードを確定して次へ
+            merged.append(current)
+            current = next_chord
+
+    # 最後のコードを追加
+    merged.append(current)
+
+    return merged
 
 
 def estimate_key_simple(y, sr):

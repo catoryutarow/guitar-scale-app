@@ -30,9 +30,9 @@ scipy>=1.10,<1.12  # librosa/essentia互換性
 # torchaudio==2.1.0
 
 # コード解析（Essentia - 高精度キー検出・コード認識）
-# Note: Essentiaはオプション - Dockerビルド時にインストール
-# ローカルmacOSではlibrosaフォールバックを使用
-essentia>=2.1b5; sys_platform == 'linux'
+# Note: EssentiaはPython 3.11との互換性問題があるため一時的に無効化
+# 将来的にEssentia 2.1b6以降で修正される予定
+# essentia>=2.1b5; sys_platform == 'linux'
 
 # その他ユーティリティ
 python-dotenv==1.0.0

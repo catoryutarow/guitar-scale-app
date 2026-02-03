@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { locales, isValidLocale, type Locale } from '@/lib/locale-config';
-import { generatePageMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
+import { generateArticleMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
 import { getTranslation } from '@/lib/i18n';
 import PentatonicBasicsPageClient from './PentatonicBasicsPageClient';
 
@@ -19,7 +19,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return generatePageMetadata(locale, '/articles/pentatonic-basics', 'pentatonicTitle', 'pentatonicDescription');
+  return generateArticleMetadata(locale, '/articles/pentatonic-basics', 'pentatonicTitle', 'pentatonicDescription', '2025-01-15');
 }
 
 export default async function PentatonicBasicsPage({

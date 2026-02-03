@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { locales, isValidLocale } from '@/lib/locale-config';
-import { generatePageMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
+import { generateArticleMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
 import { getTranslation } from '@/lib/i18n';
 import ModeScalesPageClient from './ModeScalesPageClient';
 
@@ -19,7 +19,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return generatePageMetadata(locale, '/articles/mode-scales', 'modeScalesTitle', 'modeScalesDescription');
+  return generateArticleMetadata(locale, '/articles/mode-scales', 'modeScalesTitle', 'modeScalesDescription', '2025-01-10');
 }
 
 export default async function ModeScalesPage({

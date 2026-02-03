@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { locales, isValidLocale } from '@/lib/locale-config';
-import { generatePageMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
+import { generateArticleMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
 import { getTranslation } from '@/lib/i18n';
 import HarmonicMinorPageClient from './HarmonicMinorPageClient';
 
@@ -19,7 +19,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return generatePageMetadata(locale, '/articles/harmonic-minor', 'harmonicMinorTitle', 'harmonicMinorDescription');
+  return generateArticleMetadata(locale, '/articles/harmonic-minor', 'harmonicMinorTitle', 'harmonicMinorDescription', '2025-01-20');
 }
 
 export default async function HarmonicMinorPage({

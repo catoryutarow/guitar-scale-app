@@ -21,6 +21,8 @@ export function middleware(request: NextRequest) {
     '/sitemap.xml',
     '/manifest.webmanifest',
     '/.well-known/',
+    '/opengraph-image',
+    '/twitter-image',
   ];
 
   // 静的ファイル拡張子
@@ -59,7 +61,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   // ミドルウェアを適用するパスのマッチャー
   matcher: [
-    // APIルート、_next、静的ファイルを除外
-    '/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-touch-icon.png|robots.txt|sitemap.xml|manifest.webmanifest).*)',
+    // APIルート、_next、静的ファイル、OG画像を除外
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-touch-icon.png|robots.txt|sitemap.xml|manifest.webmanifest|opengraph-image|twitter-image).*)',
   ],
 };

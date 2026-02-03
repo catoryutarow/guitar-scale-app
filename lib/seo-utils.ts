@@ -45,6 +45,53 @@ export function generatePageMetadata(
 }
 
 /**
+ * 記事ページ用のメタデータを生成（OG type: article）
+ */
+export function generateArticleMetadata(
+  locale: Locale,
+  path: string,
+  titleKey: keyof ReturnType<typeof getTranslation>['seo'],
+  descriptionKey: keyof ReturnType<typeof getTranslation>['seo'],
+  publishedTime: string,
+  modifiedTime?: string
+): Metadata {
+  const t = getTranslation(locale);
+
+  return {
+    title: t.seo[titleKey] as string,
+    description: t.seo[descriptionKey] as string,
+    openGraph: {
+      title: t.seo[titleKey] as string,
+      description: t.seo[descriptionKey] as string,
+      url: `${baseUrl}/${locale}${path}`,
+      type: 'article',
+      locale: ogLocales[locale],
+      publishedTime,
+      modifiedTime: modifiedTime || publishedTime,
+      authors: ['モテコロ株式会社'],
+      images: [
+        {
+          url: `${baseUrl}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: t.seo[titleKey] as string,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.seo[titleKey] as string,
+      description: t.seo[descriptionKey] as string,
+      images: [`${baseUrl}/opengraph-image`],
+    },
+    alternates: {
+      canonical: `${baseUrl}/${locale}${path}`,
+      languages: generateLanguageAlternates(path),
+    },
+  };
+}
+
+/**
  * 記事ページ用のArticle JSON-LDを生成
  */
 export function generateArticleJsonLd(
@@ -62,6 +109,12 @@ export function generateArticleJsonLd(
     '@type': 'Article',
     headline: t.seo[titleKey] as string,
     description: t.seo[descriptionKey] as string,
+    image: {
+      '@type': 'ImageObject',
+      url: `${baseUrl}/opengraph-image`,
+      width: 1200,
+      height: 630,
+    },
     datePublished,
     dateModified: dateModified || datePublished,
     author: {

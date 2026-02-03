@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { locales, isValidLocale } from '@/lib/locale-config';
-import { generatePageMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
+import { generateArticleMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
 import { getTranslation } from '@/lib/i18n';
 import BluesScalePageClient from './BluesScalePageClient';
 
@@ -19,7 +19,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return generatePageMetadata(locale, '/articles/blues-scale', 'bluesScaleTitle', 'bluesScaleDescription');
+  return generateArticleMetadata(locale, '/articles/blues-scale', 'bluesScaleTitle', 'bluesScaleDescription', '2025-01-05');
 }
 
 export default async function BluesScalePage({

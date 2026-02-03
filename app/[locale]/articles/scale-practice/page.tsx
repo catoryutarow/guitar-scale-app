@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { locales, isValidLocale } from '@/lib/locale-config';
-import { generatePageMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
+import { generateArticleMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-utils';
 import { getTranslation } from '@/lib/i18n';
 import ScalePracticePageClient from './ScalePracticePageClient';
 
@@ -19,7 +19,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return generatePageMetadata(locale, '/articles/scale-practice', 'scalePracticeTitle', 'scalePracticeDescription');
+  return generateArticleMetadata(locale, '/articles/scale-practice', 'scalePracticeTitle', 'scalePracticeDescription', '2025-01-22');
 }
 
 export default async function ScalePracticePage({

@@ -64,11 +64,10 @@ export async function generateMetadata({
       description: t.seo.siteDescription,
       images: [
         {
-          url: '/og-image.svg',
+          url: '/opengraph-image',
           width: 1200,
           height: 630,
           alt: t.seo.siteTitle,
-          type: 'image/svg+xml',
         },
       ],
     },
@@ -76,7 +75,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: t.seo.siteTitle,
       description: t.seo.siteDescription,
-      images: ['/og-image.svg'],
+      images: ['/opengraph-image'],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}`,

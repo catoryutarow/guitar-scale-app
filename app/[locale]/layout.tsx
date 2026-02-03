@@ -159,6 +159,31 @@ export default async function LocaleLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Google Funding Choices - GDPR consent for EEA/UK/CH (TCF v2.3) */}
+        <Script
+          id="funding-choices"
+          src="https://fundingchoicesmessages.google.com/i/pub-6073787861747774?ers=1"
+          strategy="beforeInteractive"
+        />
+        <Script id="funding-choices-init" strategy="beforeInteractive">
+          {`(function() {
+            function signalGooglefcPresent() {
+              if (!window.frames['googlefcPresent']) {
+                if (document.body) {
+                  var iframe = document.createElement('iframe');
+                  iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+                  iframe.style.display = 'none';
+                  iframe.name = 'googlefcPresent';
+                  document.body.appendChild(iframe);
+                } else {
+                  setTimeout(signalGooglefcPresent, 0);
+                }
+              }
+            }
+            signalGooglefcPresent();
+          })();`}
+        </Script>
+        {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8PHC5QFD29"
           strategy="afterInteractive"

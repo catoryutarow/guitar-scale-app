@@ -1,16 +1,10 @@
-# Python 3.11 + ffmpeg �+��Ϥ���
+# Python 3.11 + ffmpeg
 FROM python:3.11-slim
 
-# ffmpeg + Essentia依存ライブラリをインストール
+# ffmpeg + オーディオ処理ライブラリをインストール
 RUN apt-get update && apt-get install -y \
     ffmpeg \
     libsndfile1 \
-    libfftw3-dev \
-    libyaml-dev \
-    libavcodec-dev \
-    libavformat-dev \
-    libavutil-dev \
-    libswresample-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # \mǣ���-�

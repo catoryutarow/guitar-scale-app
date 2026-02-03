@@ -12,7 +12,7 @@ services:
     environment:
       # 実音源解析モードを有効化
       - USE_REAL_ANALYSIS=true
-      # Essentiaベースの高精度解析（現在無効 - Python 3.11互換性問題）
+      # Essentiaベースの高精度解析（ARM64未サポートのため無効）
       - USE_ESSENTIA=false
     restart: unless-stopped
     healthcheck:

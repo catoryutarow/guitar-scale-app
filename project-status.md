@@ -109,11 +109,11 @@ guitar-scale-app/
 | Phase 5 | ⏳ Planned | 本番環境最適化 |
 
 ### Recent Commits
+- `9df44b8` - AdSense対応強化（CMP追加、firebase-debug.log除外）
+- `4e37f05` - google対策改善2
 - `f44a862` - google対策改善
 - `f2dc775` - google対策改善
 - `68df280` - ドメイン修正
-- `4424768` - google対策改善
-- `fc99041` - GA4トラッキングコード追加
 
 ---
 
@@ -167,6 +167,13 @@ guitar-scale-app/
 - [x] Article JSON-LD（記事ページ）+ image フィールド
 - [x] BreadcrumbList JSON-LD（記事ページ）
 
+#### AdSense/GDPR対応 - 完了
+- [x] `/ads.txt` ミドルウェア除外・200 OK確認済み
+- [x] Google Funding Choices (CMP) スクリプト追加
+  - EEA/UK/CH向けTCF v2.3対応
+  - 審査通過後、AdSense管理画面でGDPRメッセージ設定が必要
+- [x] firebase-debug.log を .gitignore に追加
+
 ### 🔄 High Priority
 
 #### Backend Implementation (Phase 4)
@@ -182,11 +189,6 @@ guitar-scale-app/
 - [ ] バリデーション強化
 
 ### ⚠️ Medium Priority
-
-#### AdSense/GDPR対応
-- [ ] EEA/UK/CH向けCMP導入（必要な場合のみ）
-  - Google認定CMP（Cookiebot等）
-  - TCF v2.3対応（2026年2月28日期限）
 
 #### Testing
 - [ ] E2Eテスト追加

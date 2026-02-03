@@ -437,6 +437,38 @@ export interface Translations {
   notFoundTitle: string;
   notFoundMessage: string;
   notFoundBackHome: string;
+
+  // SEOメタデータ
+  seo: {
+    siteTitle: string;
+    siteDescription: string;
+    homeTitle: string;
+    homeDescription: string;
+    aboutTitle: string;
+    aboutDescription: string;
+    articlesTitle: string;
+    articlesDescription: string;
+    analysisTitle: string;
+    analysisDescription: string;
+    contactTitle: string;
+    contactDescription: string;
+    termsTitle: string;
+    termsDescription: string;
+    privacyTitle: string;
+    privacyDescription: string;
+    companyTitle: string;
+    companyDescription: string;
+    pentatonicTitle: string;
+    pentatonicDescription: string;
+    modeScalesTitle: string;
+    modeScalesDescription: string;
+    bluesScaleTitle: string;
+    bluesScaleDescription: string;
+    harmonicMinorTitle: string;
+    harmonicMinorDescription: string;
+    scalePracticeTitle: string;
+    scalePracticeDescription: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -965,6 +997,38 @@ export const translations: Record<Language, Translations> = {
     notFoundTitle: 'ページが見つかりません',
     notFoundMessage: 'お探しのページは存在しないか、移動した可能性があります。',
     notFoundBackHome: 'ホームに戻る',
+
+    // SEOメタデータ
+    seo: {
+      siteTitle: 'ギタースケールわかる君',
+      siteDescription: 'ギタースケールを視覚的に学べる無料ウェブアプリ。40種類以上のスケールをギター指板上で確認、音源自動解析でキー判定も可能。初心者からプロまで使えるギター練習ツール。',
+      homeTitle: 'ギタースケールわかる君 | ギタースケールを視覚的に学べる無料アプリ',
+      homeDescription: 'ギタースケールを視覚的に学べる無料ウェブアプリ。40種類以上のスケールをギター指板上で確認、音源自動解析でキー判定も可能。初心者からプロまで使えるギター練習ツール。',
+      aboutTitle: 'サービス紹介',
+      aboutDescription: 'ギタースケールわかる君は、ギタースケールを視覚的に学べる無料ウェブアプリです。初心者からプロまで使える機能をご紹介します。',
+      articlesTitle: 'ギターコラム記事一覧',
+      articlesDescription: 'ギタースケールの基礎知識や練習方法、音楽理論を解説するコラム記事一覧です。ペンタトニックスケールやブルーススケールなど、様々なスケールの特徴と使い方を学べます。',
+      analysisTitle: '音源解析 - キー・スケール自動判定',
+      analysisDescription: '音源ファイルをアップロードして、キーやスケールを自動解析。AIがコード進行を分析し、最適なスケールを提案します。',
+      contactTitle: 'お問い合わせ',
+      contactDescription: 'ギタースケールわかる君へのお問い合わせはこちらから。ご質問やご要望をお聞かせください。',
+      termsTitle: '利用規約',
+      termsDescription: 'ギタースケールわかる君の利用規約です。サービスのご利用前に必ずお読みください。',
+      privacyTitle: 'プライバシーポリシー',
+      privacyDescription: 'ギタースケールわかる君のプライバシーポリシーです。個人情報の取り扱いについてご確認ください。',
+      companyTitle: '運営会社情報',
+      companyDescription: 'ギタースケールわかる君を運営するモテコロ株式会社の会社情報です。',
+      pentatonicTitle: 'ペンタトニックスケール入門',
+      pentatonicDescription: 'ギター初心者に最適なペンタトニックスケールの基礎を解説。メジャーペンタとマイナーペンタの違い、使い方を学びましょう。',
+      modeScalesTitle: 'モードスケール完全ガイド',
+      modeScalesDescription: 'ドリアン、リディアン、ミクソリディアンなど7つのモードスケールを解説。各モードの特徴と実践的な使い方を学べます。',
+      bluesScaleTitle: 'ブルーススケールとブルーノート',
+      bluesScaleDescription: 'ブルーススケールの構造とブルーノートの効果的な使い方を解説。ベンドやビブラートなどのテクニックも紹介します。',
+      harmonicMinorTitle: 'ハーモニックマイナースケール活用法',
+      harmonicMinorDescription: 'クラシカルでエキゾチックな響きを持つハーモニックマイナースケールの特徴と、実践的な活用方法を解説します。',
+      scalePracticeTitle: 'スケール練習法 - 効率的な上達方法',
+      scalePracticeDescription: 'ギタースケールを効率的に習得するための練習方法を段階別に解説。初心者から上級者まで使える実践的なテクニックを紹介。',
+    },
   },
 
   en: {
@@ -1492,6 +1556,38 @@ export const translations: Record<Language, Translations> = {
     notFoundTitle: 'Page Not Found',
     notFoundMessage: 'The page you are looking for does not exist or may have been moved.',
     notFoundBackHome: 'Back to Home',
+
+    // SEO Metadata
+    seo: {
+      siteTitle: 'Guitar Scale Master',
+      siteDescription: 'Free web app to visually learn guitar scales. View 40+ scales on the guitar fretboard, auto-analyze audio for key detection. A guitar practice tool for beginners to pros.',
+      homeTitle: 'Guitar Scale Master | Free Visual Guitar Scale Learning App',
+      homeDescription: 'Free web app to visually learn guitar scales. View 40+ scales on the guitar fretboard, auto-analyze audio for key detection. A guitar practice tool for beginners to pros.',
+      aboutTitle: 'About This Service',
+      aboutDescription: 'Guitar Scale Master is a free web app that lets you visually learn guitar scales. Discover features suitable for beginners to professionals.',
+      articlesTitle: 'Guitar Learning Articles',
+      articlesDescription: 'Articles explaining guitar scale basics, practice methods, and music theory. Learn about pentatonic scales, blues scales, and various other scales.',
+      analysisTitle: 'Audio Analysis - Auto Key & Scale Detection',
+      analysisDescription: 'Upload audio files to automatically analyze key and scales. AI analyzes chord progressions and suggests optimal scales.',
+      contactTitle: 'Contact Us',
+      contactDescription: 'Contact Guitar Scale Master here. Share your questions and feedback with us.',
+      termsTitle: 'Terms of Service',
+      termsDescription: 'Terms of Service for Guitar Scale Master. Please read before using the service.',
+      privacyTitle: 'Privacy Policy',
+      privacyDescription: 'Privacy Policy for Guitar Scale Master. Learn about how we handle personal information.',
+      companyTitle: 'Company Information',
+      companyDescription: 'Information about Motecoro Inc., the company operating Guitar Scale Master.',
+      pentatonicTitle: 'Introduction to Pentatonic Scale',
+      pentatonicDescription: 'Learn the basics of pentatonic scales, perfect for guitar beginners. Understand the difference between major and minor pentatonic scales.',
+      modeScalesTitle: 'Complete Guide to Mode Scales',
+      modeScalesDescription: 'Explaining 7 mode scales including Dorian, Lydian, and Mixolydian. Learn characteristics and practical applications of each mode.',
+      bluesScaleTitle: 'Blues Scale and Blue Notes',
+      bluesScaleDescription: 'Learn the structure of blues scale and effective use of blue notes. Includes techniques like bending and vibrato.',
+      harmonicMinorTitle: 'Harmonic Minor Scale Applications',
+      harmonicMinorDescription: 'Learn the characteristics and practical applications of the classical and exotic-sounding harmonic minor scale.',
+      scalePracticeTitle: 'Scale Practice Methods - Effective Learning',
+      scalePracticeDescription: 'Step-by-step practice methods for efficiently mastering guitar scales. Practical techniques for beginners to advanced players.',
+    },
   },
 
   zh: {
@@ -2019,6 +2115,38 @@ export const translations: Record<Language, Translations> = {
     notFoundTitle: '页面未找到',
     notFoundMessage: '您查找的页面不存在或可能已被移动。',
     notFoundBackHome: '返回首页',
+
+    // SEO元数据
+    seo: {
+      siteTitle: '吉他音阶大师',
+      siteDescription: '免费学习吉他音阶的可视化网页应用。在指板上查看40多种音阶，自动分析音频检测调性。适合初学者到专业人士的吉他练习工具。',
+      homeTitle: '吉他音阶大师 | 免费可视化吉他音阶学习应用',
+      homeDescription: '免费学习吉他音阶的可视化网页应用。在指板上查看40多种音阶，自动分析音频检测调性。适合初学者到专业人士的吉他练习工具。',
+      aboutTitle: '服务介绍',
+      aboutDescription: '吉他音阶大师是一款免费的可视化吉他音阶学习网页应用。了解适合初学者到专业人士的功能。',
+      articlesTitle: '吉他学习文章',
+      articlesDescription: '讲解吉他音阶基础知识、练习方法和乐理的文章。学习五声音阶、蓝调音阶等各种音阶。',
+      analysisTitle: '音频分析 - 自动检测调性和音阶',
+      analysisDescription: '上传音频文件自动分析调性和音阶。AI分析和弦进行并推荐最佳音阶。',
+      contactTitle: '联系我们',
+      contactDescription: '在这里联系吉他音阶大师。分享您的问题和反馈。',
+      termsTitle: '服务条款',
+      termsDescription: '吉他音阶大师的服务条款。使用服务前请阅读。',
+      privacyTitle: '隐私政策',
+      privacyDescription: '吉他音阶大师的隐私政策。了解我们如何处理个人信息。',
+      companyTitle: '公司信息',
+      companyDescription: '运营吉他音阶大师的Motecoro株式会社的公司信息。',
+      pentatonicTitle: '五声音阶入门',
+      pentatonicDescription: '学习五声音阶基础，非常适合吉他初学者。了解大调和小调五声音阶的区别。',
+      modeScalesTitle: '调式音阶完全指南',
+      modeScalesDescription: '讲解多利亚、利底亚、混合利底亚等7种调式音阶。学习每种调式的特点和实际应用。',
+      bluesScaleTitle: '蓝调音阶和蓝调音',
+      bluesScaleDescription: '学习蓝调音阶的结构和蓝调音的有效使用方法。包括推弦和颤音等技巧。',
+      harmonicMinorTitle: '和声小调音阶应用',
+      harmonicMinorDescription: '学习具有古典和异域风情的和声小调音阶的特点和实际应用方法。',
+      scalePracticeTitle: '音阶练习方法 - 高效学习',
+      scalePracticeDescription: '分阶段讲解高效掌握吉他音阶的练习方法。适合初学者到高级玩家的实用技巧。',
+    },
   },
 
   es: {
@@ -2546,6 +2674,38 @@ export const translations: Record<Language, Translations> = {
     notFoundTitle: 'Página No Encontrada',
     notFoundMessage: 'La página que busca no existe o puede haber sido movida.',
     notFoundBackHome: 'Volver al Inicio',
+
+    // Metadatos SEO
+    seo: {
+      siteTitle: 'Maestro de Escalas de Guitarra',
+      siteDescription: 'Aplicación web gratuita para aprender escalas de guitarra visualmente. Visualiza más de 40 escalas en el diapasón, analiza audio automáticamente para detectar tonalidades. Herramienta de práctica para principiantes y profesionales.',
+      homeTitle: 'Maestro de Escalas de Guitarra | App Gratuita de Aprendizaje Visual',
+      homeDescription: 'Aplicación web gratuita para aprender escalas de guitarra visualmente. Visualiza más de 40 escalas en el diapasón, analiza audio automáticamente para detectar tonalidades.',
+      aboutTitle: 'Acerca del Servicio',
+      aboutDescription: 'Maestro de Escalas de Guitarra es una aplicación web gratuita para aprender escalas visualmente. Descubre funciones para principiantes y profesionales.',
+      articlesTitle: 'Artículos de Aprendizaje de Guitarra',
+      articlesDescription: 'Artículos que explican los fundamentos de escalas de guitarra, métodos de práctica y teoría musical. Aprende sobre escalas pentatónicas, blues y más.',
+      analysisTitle: 'Análisis de Audio - Detección Automática de Tonalidad',
+      analysisDescription: 'Sube archivos de audio para analizar automáticamente tonalidad y escalas. La IA analiza progresiones de acordes y sugiere escalas óptimas.',
+      contactTitle: 'Contáctanos',
+      contactDescription: 'Contacta a Maestro de Escalas de Guitarra aquí. Comparte tus preguntas y comentarios.',
+      termsTitle: 'Términos de Servicio',
+      termsDescription: 'Términos de Servicio de Maestro de Escalas de Guitarra. Por favor lee antes de usar el servicio.',
+      privacyTitle: 'Política de Privacidad',
+      privacyDescription: 'Política de Privacidad de Maestro de Escalas de Guitarra. Conoce cómo manejamos la información personal.',
+      companyTitle: 'Información de la Empresa',
+      companyDescription: 'Información sobre Motecoro Inc., la empresa que opera Maestro de Escalas de Guitarra.',
+      pentatonicTitle: 'Introducción a la Escala Pentatónica',
+      pentatonicDescription: 'Aprende los fundamentos de escalas pentatónicas, perfectas para principiantes. Entiende la diferencia entre pentatónicas mayores y menores.',
+      modeScalesTitle: 'Guía Completa de Escalas Modales',
+      modeScalesDescription: 'Explicando 7 escalas modales incluyendo Dórica, Lidia y Mixolidia. Aprende características y aplicaciones prácticas de cada modo.',
+      bluesScaleTitle: 'Escala de Blues y Notas Blue',
+      bluesScaleDescription: 'Aprende la estructura de la escala de blues y el uso efectivo de notas blue. Incluye técnicas como bending y vibrato.',
+      harmonicMinorTitle: 'Aplicaciones de la Escala Menor Armónica',
+      harmonicMinorDescription: 'Aprende las características y aplicaciones prácticas de la escala menor armónica con su sonido clásico y exótico.',
+      scalePracticeTitle: 'Métodos de Práctica de Escalas - Aprendizaje Efectivo',
+      scalePracticeDescription: 'Métodos de práctica paso a paso para dominar escalas de guitarra eficientemente. Técnicas prácticas para principiantes y avanzados.',
+    },
   },
 };
 

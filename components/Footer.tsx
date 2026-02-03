@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import LocaleLink from '@/components/LocaleLink';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Footer() {
@@ -23,24 +23,24 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-white mb-4">{t.footerContents}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
+                <LocaleLink href="/" className="hover:text-white transition-colors">
                   {t.home}
-                </Link>
+                </LocaleLink>
               </li>
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <LocaleLink href="/about" className="hover:text-white transition-colors">
                   {t.aboutSite}
-                </Link>
+                </LocaleLink>
               </li>
               <li>
-                <Link href="/articles" className="hover:text-white transition-colors">
+                <LocaleLink href="/articles" className="hover:text-white transition-colors">
                   {t.articles}
-                </Link>
+                </LocaleLink>
               </li>
               <li>
-                <Link href="/analysis" className="hover:text-white transition-colors">
+                <LocaleLink href="/analysis" className="hover:text-white transition-colors">
                   {t.audioAnalysis}
-                </Link>
+                </LocaleLink>
               </li>
             </ul>
           </div>
@@ -50,24 +50,24 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-white mb-4">{t.footerSupport}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <LocaleLink href="/contact" className="hover:text-white transition-colors">
                   {t.contact}
-                </Link>
+                </LocaleLink>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-white transition-colors">
+                <LocaleLink href="/privacy" className="hover:text-white transition-colors">
                   {t.privacyPolicy}
-                </Link>
+                </LocaleLink>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-white transition-colors">
+                <LocaleLink href="/terms" className="hover:text-white transition-colors">
                   {t.termsOfService}
-                </Link>
+                </LocaleLink>
               </li>
               <li>
-                <Link href="/company" className="hover:text-white transition-colors">
+                <LocaleLink href="/company" className="hover:text-white transition-colors">
                   {t.companyInfo}
-                </Link>
+                </LocaleLink>
               </li>
             </ul>
           </div>

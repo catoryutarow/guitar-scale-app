@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import LocaleLink from '@/components/LocaleLink';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Article {
@@ -126,7 +125,7 @@ export default function ArticleCarousel() {
     <section className="mt-8 mb-8 max-w-2xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-800">{t.articles}</h2>
-        <Link
+        <LocaleLink
           href="/articles"
           className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center"
         >
@@ -134,7 +133,7 @@ export default function ArticleCarousel() {
           <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </Link>
+        </LocaleLink>
       </div>
 
       <div className="relative">
@@ -151,7 +150,7 @@ export default function ArticleCarousel() {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {articles.map((article) => (
-              <Link
+              <LocaleLink
                 key={article.slug}
                 href={`/articles/${article.slug}`}
                 className="w-full flex-shrink-0"
@@ -205,7 +204,7 @@ export default function ArticleCarousel() {
                     </p>
                   </div>
                 </div>
-              </Link>
+              </LocaleLink>
             ))}
           </div>
         </div>

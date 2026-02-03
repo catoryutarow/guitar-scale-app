@@ -19,6 +19,7 @@ export function middleware(request: NextRequest) {
     '/apple-touch-icon.png',
     '/robots.txt',
     '/sitemap.xml',
+    '/ads.txt',
     '/manifest.webmanifest',
     '/.well-known/',
     '/opengraph-image',
@@ -26,7 +27,7 @@ export function middleware(request: NextRequest) {
   ];
 
   // 静的ファイル拡張子
-  const staticExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.webp', '.mp3', '.wav', '.ogg'];
+  const staticExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.webp', '.mp3', '.wav', '.ogg', '.txt', '.xml', '.json'];
 
   // スキップパターンに一致する場合はスルー
   if (skipPatterns.some(pattern => pathname.startsWith(pattern))) {
@@ -61,7 +62,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   // ミドルウェアを適用するパスのマッチャー
   matcher: [
-    // APIルート、_next、静的ファイル、OG画像を除外
-    '/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-touch-icon.png|robots.txt|sitemap.xml|manifest.webmanifest|opengraph-image|twitter-image).*)',
+    // APIルート、_next、静的ファイル、OG画像、ads.txtを除外
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-touch-icon.png|robots.txt|sitemap.xml|ads.txt|manifest.webmanifest|opengraph-image|twitter-image).*)',
   ],
 };

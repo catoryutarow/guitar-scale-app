@@ -47,15 +47,26 @@
 ```
 guitar-scale-app/
 ├── app/                    # Next.js App Router
-│   ├── page.tsx           # メインページ（スケール可視化）
-│   ├── analysis/          # 音声解析ページ
+│   ├── [locale]/          # 多言語ルーティング (ja/en/zh/es)
+│   │   ├── page.tsx       # メインページ（スケール可視化）
+│   │   ├── layout.tsx     # ロケール別レイアウト + SEOメタデータ
+│   │   ├── analysis/      # 音声解析ページ
+│   │   ├── articles/      # ブログ記事（5記事）
+│   │   ├── about/         # アバウトページ
+│   │   ├── contact/       # お問い合わせ
+│   │   ├── terms/         # 利用規約
+│   │   ├── privacy/       # プライバシーポリシー
+│   │   └── company/       # 会社概要
 │   ├── api/               # APIルート（upload, analysis proxy）
-│   └── articles/          # ブログ記事（5記事）
+│   ├── opengraph-image.tsx # OG画像動的生成（1200x630 PNG）
+│   ├── sitemap.ts         # 多言語サイトマップ（52エントリ）
+│   └── not-found.tsx      # 404ページ
 │
 ├── components/            # Reactコンポーネント
 │   ├── GuitarFretboard.tsx    # 指板表示（メイン）
 │   ├── AudioAnalyzer.tsx      # 音声解析オーケストレーター
 │   ├── ScalePlayer.tsx        # スケール再生
+│   ├── LocaleLink.tsx         # ロケール対応リンク
 │   └── [その他15+コンポーネント]
 │
 ├── lib/                   # ユーティリティ・コアロジック
@@ -63,11 +74,15 @@ guitar-scale-app/
 │   ├── scaleEngine.ts     # 音楽理論準拠エンジン
 │   ├── pitchSpelling.ts   # 音名・異名同音処理
 │   ├── tunings.ts         # チューニング定義（13種類）
-│   ├── i18n.ts            # 国際化（4言語）
+│   ├── i18n.ts            # 国際化（4言語 + SEO翻訳）
+│   ├── locale-config.ts   # ロケール設定
+│   ├── seo-utils.ts       # SEOメタデータ・JSON-LDヘルパー
 │   └── audioSynthesis.ts  # Web Audio合成
 │
 ├── contexts/              # React Context
-│   └── LanguageContext.tsx
+│   └── LanguageContext.tsx # URL連動言語切替
+│
+├── middleware.ts          # ロケールリダイレクト (/ → /ja)
 │
 ├── python-backend/        # FastAPIバックエンド
 │   ├── main.py            # APIエンドポイント
@@ -75,7 +90,8 @@ guitar-scale-app/
 │   └── docker-compose.yml
 │
 └── public/                # 静的ファイル
-    └── ads.txt           # AdSense設定
+    ├── ads.txt           # AdSense設定
+    └── og-image.svg      # OG画像SVG版（フォールバック）
 ```
 
 ---
@@ -93,10 +109,11 @@ guitar-scale-app/
 | Phase 5 | ⏳ Planned | 本番環境最適化 |
 
 ### Recent Commits
+- `f44a862` - google対策改善
+- `f2dc775` - google対策改善
+- `68df280` - ドメイン修正
+- `4424768` - google対策改善
 - `fc99041` - GA4トラッキングコード追加
-- `f5de676` - AdSense審査対策（利用規約・記事追加・カルーセル）
-- `0ced99b` - AdSense対応（必要ページ追加・多言語対応）
-- `5e65617` - ads.txt for Google AdSense
 
 ---
 
@@ -132,6 +149,24 @@ guitar-scale-app/
 
 ## 6. In Progress / TODO
 
+### ✅ Recently Completed (2026-02-03)
+
+#### 多言語SEO対応（タスク#7）- 完了
+- [x] URL構造変更: `/about` → `/ja/about`, `/en/about`, `/zh/about`, `/es/about`
+- [x] 308リダイレクト: `/` → `/ja`（末尾スラッシュなし統一）
+- [x] hreflangタグ: HTMLヘッダー + サイトマップ両方
+- [x] `<html lang>` 動的切替
+- [x] サイトマップ: 52エントリ（13ページ×4言語）、静的lastModified
+- [x] OG画像: Next.js ImageResponseで動的PNG生成（1200x630）
+- [x] 記事ページ: OG type `article`、Article/BreadcrumbList JSON-LD
+- [x] /ads.txt ミドルウェア除外（AdSense対応）
+
+#### SEO構造化データ
+- [x] WebApplication JSON-LD（トップページ）
+- [x] Organization JSON-LD
+- [x] Article JSON-LD（記事ページ）+ image フィールド
+- [x] BreadcrumbList JSON-LD（記事ページ）
+
 ### 🔄 High Priority
 
 #### Backend Implementation (Phase 4)
@@ -148,6 +183,11 @@ guitar-scale-app/
 
 ### ⚠️ Medium Priority
 
+#### AdSense/GDPR対応
+- [ ] EEA/UK/CH向けCMP導入（必要な場合のみ）
+  - Google認定CMP（Cookiebot等）
+  - TCF v2.3対応（2026年2月28日期限）
+
 #### Testing
 - [ ] E2Eテスト追加
 - [ ] ユニットテスト拡充
@@ -158,16 +198,16 @@ guitar-scale-app/
 - [ ] スケール計算メモ化
 - [ ] 遅延読み込み実装
 
-#### Content
-- [ ] ブログ記事本文作成
-- [ ] SEO最適化
-
 ### 📋 Low Priority
 
 #### Code Quality
 - [ ] console.log削除（169箇所）
 - [ ] 構造化ロギング導入
 - [ ] CI/CDパイプライン構築
+
+#### Post-SEO作業
+- [ ] Search Console サイトマップ再送信
+- [ ] 新言語版インデックス登録リクエスト（/en, /zh, /es）
 
 ---
 
@@ -264,10 +304,56 @@ TMP_DIR=/tmp/guitar-scale
 
 | Category | Key Files |
 |----------|-----------|
-| Entry Point | `app/page.tsx`, `app/layout.tsx` |
+| Entry Point | `app/[locale]/page.tsx`, `app/[locale]/layout.tsx` |
 | Scale Logic | `lib/scales.ts`, `lib/scaleEngine.ts` |
-| i18n | `lib/i18n.ts`, `contexts/LanguageContext.tsx` |
+| i18n | `lib/i18n.ts`, `lib/locale-config.ts`, `contexts/LanguageContext.tsx` |
+| SEO | `lib/seo-utils.ts`, `app/sitemap.ts`, `app/opengraph-image.tsx` |
+| Routing | `middleware.ts`, `components/LocaleLink.tsx` |
 | Audio | `lib/audioSynthesis.ts`, `components/ScalePlayer.tsx` |
 | Analysis | `components/AudioAnalyzer.tsx`, `python-backend/main.py` |
 | Config | `next.config.ts`, `tailwind.config.ts`, `.env.local` |
 | Spec | `scale_repare.md` (音楽理論仕様書) |
+
+---
+
+## 12. SEO Implementation Details (2026-02-03)
+
+### URL Structure
+```
+/           → 308 redirect to /ja
+/ja         → Japanese (default)
+/en         → English
+/zh         → Chinese
+/es         → Spanish
+/ja/about   → Japanese about page
+/en/about   → English about page
+...
+```
+
+### hreflang Implementation
+- **HTML**: `<link rel="alternate" hrefLang="ja" href="..."/>` (5 languages incl. x-default)
+- **Sitemap**: `<xhtml:link rel="alternate" hreflang="ja" href="..."/>` per entry
+
+### OG Image
+- Endpoint: `/opengraph-image` (Next.js ImageResponse)
+- Format: PNG (1200x630)
+- Dynamic generation via Edge runtime
+
+### Structured Data
+| Page Type | JSON-LD Types |
+|-----------|---------------|
+| Homepage | WebApplication, Organization, WebSite |
+| Articles | Article (with image), BreadcrumbList |
+
+### Middleware Skip Patterns
+```
+/api/, /_next/, /favicon.ico, /icon.png, /robots.txt,
+/sitemap.xml, /ads.txt, /opengraph-image, /twitter-image
+```
+
+### New Language URLs for Index Request
+```
+https://www.guitar-scale.com/en
+https://www.guitar-scale.com/zh
+https://www.guitar-scale.com/es
+```

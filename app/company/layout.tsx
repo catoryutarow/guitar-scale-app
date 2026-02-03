@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: '運営会社 | ギタースケールわかる君',
     description: 'ギタースケールわかる君の運営会社情報。モテコロ株式会社が運営しています。',
-    url: 'https://guitar-scale-wakarun.com/company',
+    url: 'https://www.guitar-scale.com/company',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://guitar-scale-wakarun.com/company',
+    canonical: 'https://www.guitar-scale.com/company',
   },
 };
 

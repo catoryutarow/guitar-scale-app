@@ -12,7 +12,7 @@ const kiwiMaru = Kiwi_Maru({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://guitar-scale-wakarun.com'),
+  metadataBase: new URL('https://www.guitar-scale.com'),
   title: {
     default: 'ギタースケールわかる君',
     template: '%s | ギタースケールわかる君',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
-    url: 'https://guitar-scale-wakarun.com',
+    url: 'https://www.guitar-scale.com',
     siteName: 'ギタースケールわかる君',
     title: 'ギタースケールわかる君',
     description: 'ギタースケールを視覚的に学べる無料ウェブアプリ。40種類以上のスケールをギター指板上で確認、音源自動解析でキー判定も可能。',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: 'ギタースケールを視覚的に学べる無料ウェブアプリ。40種類以上のスケールをギター指板上で確認、音源自動解析でキー判定も可能。',
   },
   alternates: {
-    canonical: 'https://guitar-scale-wakarun.com',
+    canonical: 'https://www.guitar-scale.com',
   },
   robots: {
     index: true,
@@ -49,10 +49,10 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'WebApplication',
-      '@id': 'https://guitar-scale-wakarun.com/#webapp',
+      '@id': 'https://www.guitar-scale.com/#webapp',
       name: 'ギタースケールわかる君',
       description: 'ギタースケールを視覚的に学べる無料ウェブアプリ。40種類以上のスケールをギター指板上で確認、音源自動解析でキー判定も可能。',
-      url: 'https://guitar-scale-wakarun.com',
+      url: 'https://www.guitar-scale.com',
       applicationCategory: 'MusicApplication',
       operatingSystem: 'Web Browser',
       offers: {
@@ -64,18 +64,18 @@ const jsonLd = {
     },
     {
       '@type': 'Organization',
-      '@id': 'https://guitar-scale-wakarun.com/#organization',
+      '@id': 'https://www.guitar-scale.com/#organization',
       name: 'モテコロ株式会社',
-      url: 'https://guitar-scale-wakarun.com',
-      logo: 'https://guitar-scale-wakarun.com/icon-512x512.png',
+      url: 'https://www.guitar-scale.com',
+      logo: 'https://www.guitar-scale.com/icon-512x512.png',
     },
     {
       '@type': 'WebSite',
-      '@id': 'https://guitar-scale-wakarun.com/#website',
-      url: 'https://guitar-scale-wakarun.com',
+      '@id': 'https://www.guitar-scale.com/#website',
+      url: 'https://www.guitar-scale.com',
       name: 'ギタースケールわかる君',
       publisher: {
-        '@id': 'https://guitar-scale-wakarun.com/#organization',
+        '@id': 'https://www.guitar-scale.com/#organization',
       },
       inLanguage: 'ja',
     },

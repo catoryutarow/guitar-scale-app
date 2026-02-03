@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'お問い合わせ | ギタースケールわかる君',
     description: 'ギタースケールわかる君へのお問い合わせフォーム。ご質問、ご要望、不具合報告などお気軽にご連絡ください。',
-    url: 'https://guitar-scale-wakarun.com/contact',
+    url: 'https://www.guitar-scale.com/contact',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://guitar-scale-wakarun.com/contact',
+    canonical: 'https://www.guitar-scale.com/contact',
   },
 };
 

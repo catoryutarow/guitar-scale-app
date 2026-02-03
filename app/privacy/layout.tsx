@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'プライバシーポリシー | ギタースケールわかる君',
     description: 'ギタースケールわかる君のプライバシーポリシー。個人情報の取り扱いについてご説明します。',
-    url: 'https://guitar-scale-wakarun.com/privacy',
+    url: 'https://www.guitar-scale.com/privacy',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://guitar-scale-wakarun.com/privacy',
+    canonical: 'https://www.guitar-scale.com/privacy',
   },
 };
 

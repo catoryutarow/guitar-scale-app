@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: '音源解析・キー判定 | ギタースケールわかる君',
     description: '音源ファイルをアップロードするだけで自動的にキー（調）を解析。楽曲のスケールを判定し、ギター指板上で確認できます。',
-    url: 'https://guitar-scale-wakarun.com/analysis',
+    url: 'https://www.guitar-scale.com/analysis',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://guitar-scale-wakarun.com/analysis',
+    canonical: 'https://www.guitar-scale.com/analysis',
   },
 };
 

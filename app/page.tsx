@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ギタースケールわかる君 | ギタースケールを視覚的に学べる無料アプリ',
     description: 'ギタースケールを視覚的に学べる無料ウェブアプリ。40種類以上のスケールをギター指板上で確認、音源自動解析でキー判定も可能。',
-    url: 'https://guitar-scale-wakarun.com',
+    url: 'https://www.guitar-scale.com',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://guitar-scale-wakarun.com',
+    canonical: 'https://www.guitar-scale.com',
   },
 };
 

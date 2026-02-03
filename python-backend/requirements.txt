@@ -22,16 +22,17 @@ python-multipart==0.0.6
 librosa==0.10.1
 soundfile==0.12.1
 numpy>=1.26,<1.27
-scipy<1.11  # librosa 0.10.1との互換性のため
+scipy>=1.10,<1.12  # librosa/essentia互換性
 
 # stem 分解（音源分離）
 # demucs==4.0.1
 # torch==2.1.0
 # torchaudio==2.1.0
 
-# コード解析
-# madmom==0.17.dev0
-# essentia==2.1b6.dev1110
+# コード解析（Essentia - 高精度キー検出・コード認識）
+# Note: Essentiaはオプション - Dockerビルド時にインストール
+# ローカルmacOSではlibrosaフォールバックを使用
+essentia>=2.1b5; sys_platform == 'linux'
 
 # その他ユーティリティ
 python-dotenv==1.0.0

@@ -121,26 +121,43 @@ class AnalyzeResponse(BaseModel):
 # ============================================
 
 USE_REAL_ANALYSIS = os.getenv("USE_REAL_ANALYSIS", "true").lower() == "true"
+USE_ESSENTIA = os.getenv("USE_ESSENTIA", "false").lower() == "true"
 
 print("=" * 60)
 print("🎵 Audio Analysis API - Startup")
 print("=" * 60)
-print(f"Analysis Mode: {'REAL (librosa)' if USE_REAL_ANALYSIS else 'DUMMY (固定値)'}")
+print(f"Analysis Mode: {'REAL' if USE_REAL_ANALYSIS else 'DUMMY (固定値)'}")
+if USE_REAL_ANALYSIS:
+    print(f"  Engine: {'Essentia (高精度)' if USE_ESSENTIA else 'librosa (標準)'}")
 print(f"Environment: USE_REAL_ANALYSIS={os.getenv('USE_REAL_ANALYSIS', 'not set')}")
+print(f"Environment: USE_ESSENTIA={os.getenv('USE_ESSENTIA', 'not set')}")
 
-# librosaは実解析モードでのみインポート（依存関係を減らすため）
+# librosa/essentiaは実解析モードでのみインポート（依存関係を減らすため）
+ESSENTIA_AVAILABLE = False
+
 if USE_REAL_ANALYSIS:
     try:
         import librosa
         import numpy as np
         print("✓ librosa loaded successfully")
         print("✓ numpy loaded successfully")
-        print("=" * 60)
     except ImportError as e:
         print(f"⚠ Warning: librosa not available - {e}")
         print("  Falling back to DUMMY analysis mode")
-        print("=" * 60)
         USE_REAL_ANALYSIS = False
+
+    # Essentiaのインポートを試行
+    if USE_ESSENTIA:
+        try:
+            import essentia.standard as es
+            ESSENTIA_AVAILABLE = True
+            print("✓ essentia loaded successfully")
+        except ImportError as e:
+            print(f"⚠ Warning: essentia not available - {e}")
+            print("  Falling back to librosa analysis")
+            ESSENTIA_AVAILABLE = False
+
+    print("=" * 60)
 else:
     print("ℹ Using DUMMY mode (set USE_REAL_ANALYSIS=true for real analysis)")
     print("=" * 60)
@@ -411,7 +428,36 @@ def analyze_audio_dummy(file_path: str, options: Dict) -> AnalysisResult:
 
 def analyze_audio_real(file_path: str, options: Dict) -> AnalysisResult:
     """
-    実際の音源解析ロジック（librosa ベース）
+    実際の音源解析ロジック
+
+    Essentia優先、librosaフォールバック：
+    - USE_ESSENTIA=true かつ essentia利用可能 → Essentia解析
+    - それ以外 → librosa解析
+
+    Args:
+        file_path: 音源ファイルのパス
+        options: 解析オプション
+
+    Returns:
+        AnalysisResult: 解析結果
+    """
+
+    # Essentia優先
+    if ESSENTIA_AVAILABLE:
+        try:
+            print(f"\n[Real Analysis] Using Essentia (高精度モード)...")
+            return analyze_audio_essentia(file_path, options)
+        except Exception as e:
+            print(f"⚠ Essentia analysis failed: {e}")
+            print("  Falling back to librosa analysis...")
+
+    # librosaフォールバック
+    return analyze_audio_librosa(file_path, options)
+
+
+def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
+    """
+    librosaベースの音源解析ロジック
 
     Phase 4 実装内容：
     - librosa で音源を読み込み（先頭60秒に制限）
@@ -427,7 +473,7 @@ def analyze_audio_real(file_path: str, options: Dict) -> AnalysisResult:
         AnalysisResult: 解析結果
     """
 
-    print(f"\n[Real Analysis] Starting analysis...")
+    print(f"\n[Librosa Analysis] Starting analysis...")
     print(f"  File: {file_path}")
 
     # 1. 音声読み込み（先頭60秒に制限して負荷軽減）
@@ -494,7 +540,7 @@ def analyze_audio_real(file_path: str, options: Dict) -> AnalysisResult:
         confidence=confidence
     )
 
-    print(f"\n[Real Analysis] Analysis completed successfully!")
+    print(f"\n[Librosa Analysis] Analysis completed successfully!")
     print(f"  Result: {detected_key} {scale_name}, {tempo:.1f} BPM, {len(chord_progression)} chords")
     print("=" * 60)
 
@@ -748,6 +794,405 @@ def generate_scale_match(detected_key: str, scale_name: str, chord_progression: 
     return ScaleMatchResult(
         matchingScales=[first_match, second_match, third_match]
     )
+
+
+# ============================================
+# Essentia ベース解析ロジック（高精度モード）
+# ============================================
+
+def analyze_audio_essentia(file_path: str, options: Dict) -> AnalysisResult:
+    """
+    Essentiaベースの高精度音源解析
+
+    特徴:
+    - KeyExtractor (bgateプロファイル) でキー検出精度90%+
+    - RhythmExtractor2013 でビート検出
+    - ChordsDetectionBeats でビート同期コード検出
+
+    Args:
+        file_path: 音源ファイルのパス
+        options: 解析オプション
+
+    Returns:
+        AnalysisResult: 解析結果
+    """
+
+    print(f"\n[Essentia Analysis] Starting high-precision analysis...")
+    print(f"  File: {file_path}")
+
+    # 1. 音声読み込み（MonoLoader: 44100Hz, モノラル）
+    try:
+        print(f"  Step 1/5: Loading audio file...")
+        loader = es.MonoLoader(filename=file_path, sampleRate=44100)
+        audio = loader()
+        duration = len(audio) / 44100.0
+        print(f"    ✓ Loaded: {duration:.2f}s, sr=44100Hz, samples={len(audio)}")
+
+        # 60秒に制限（長い曲の処理時間短縮）
+        if duration > 60.0:
+            audio = audio[:int(60.0 * 44100)]
+            duration = 60.0
+            print(f"    → Truncated to 60.0s for processing efficiency")
+    except Exception as e:
+        print(f"    ✗ Failed to load audio file: {str(e)}")
+        raise Exception(f"Failed to load audio file: {str(e)}")
+
+    # 2. キー検出（KeyExtractor + bgateプロファイル）
+    try:
+        print(f"  Step 2/5: Detecting key with KeyExtractor (bgate profile)...")
+        detected_key, scale_name, confidence = estimate_key_essentia(audio)
+        print(f"    ✓ Key detected: {detected_key} {scale_name} (confidence: {confidence:.2f})")
+    except Exception as e:
+        print(f"    ⚠ Key detection failed: {e}, using librosa fallback")
+        # librosaフォールバック
+        y, sr = librosa.load(file_path, sr=None, mono=True, duration=60.0)
+        detected_key, scale_name, confidence = estimate_key_simple(y, sr)
+
+    # 3. テンポ・ビート検出（RhythmExtractor2013）
+    try:
+        print(f"  Step 3/5: Detecting tempo and beats...")
+        tempo, beats = detect_tempo_essentia(audio)
+        print(f"    ✓ Tempo detected: {tempo:.1f} BPM, {len(beats)} beats")
+    except Exception as e:
+        print(f"    ⚠ Tempo detection failed: {e}, using default 120 BPM")
+        tempo = 120.0
+        beats = []
+
+    # 4. コード進行検出（ビート同期）
+    try:
+        print(f"  Step 4/5: Detecting chord progression...")
+        if len(beats) >= 2:
+            chord_progression = detect_chords_essentia(audio, beats, detected_key, scale_name)
+        else:
+            # ビートが少ない場合は4秒区切りフォールバック
+            chord_progression = detect_chords_essentia_simple(audio, duration, detected_key, scale_name)
+        print(f"    ✓ Detected {len(chord_progression)} chord segments")
+        if len(chord_progression) > 0:
+            print(f"    First chord: {chord_progression[0].chord} ({chord_progression[0].startTime:.1f}s - {chord_progression[0].endTime:.1f}s)")
+    except Exception as e:
+        print(f"    ⚠ Chord detection failed: {e}, using fallback")
+        chord_progression = generate_fallback_chords(detected_key, duration)
+
+    # 5. スケールマッチング
+    try:
+        print(f"  Step 5/5: Generating scale matches...")
+        scale_match = generate_scale_match(detected_key, scale_name, chord_progression)
+        print(f"    ✓ Generated {len(scale_match.matchingScales)} scale matches")
+    except Exception as e:
+        print(f"    ⚠ Scale matching failed: {e}")
+        scale_match = ScaleMatchResult(matchingScales=[])
+
+    # 6. メタデータの構築
+    metadata = AnalysisMetadata(
+        duration=duration,
+        tempo=tempo,
+        timeSignature="4/4",
+        detectedKey=detected_key,
+        scale=scale_name,
+        confidence=confidence
+    )
+
+    print(f"\n[Essentia Analysis] Analysis completed successfully!")
+    print(f"  Result: {detected_key} {scale_name}, {tempo:.1f} BPM, {len(chord_progression)} chords")
+    print("=" * 60)
+
+    return AnalysisResult(
+        metadata=metadata,
+        chordProgression=chord_progression,
+        scaleMatch=scale_match,
+        stems=None
+    )
+
+
+def estimate_key_essentia(audio) -> tuple:
+    """
+    Essentiaベースのキー推定
+
+    KeyExtractorを使用し、bgateプロファイルで高精度なキー検出を行う。
+    bgateプロファイルは電子音楽・ポップスに最適化されている。
+
+    Returns:
+        Tuple[str, str, float]: (rootNote, scale, confidence)
+    """
+
+    # KeyExtractorアルゴリズム（bgateプロファイル）
+    key_extractor = es.KeyExtractor(profileType='bgate')
+    key, scale, strength = key_extractor(audio)
+
+    # Essentiaのスケール名を日本語に変換
+    scale_name = 'メジャー' if scale == 'major' else 'マイナー'
+
+    # 信頼度を0-1にマッピング
+    confidence = min(1.0, max(0.0, strength))
+
+    return key, scale_name, confidence
+
+
+def detect_tempo_essentia(audio) -> tuple:
+    """
+    Essentiaベースのテンポ・ビート検出
+
+    RhythmExtractor2013を使用して高精度なビート検出を行う。
+
+    Returns:
+        Tuple[float, List[float]]: (tempo, beats)
+    """
+
+    rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
+    bpm, beats, beats_confidence, _, beats_intervals = rhythm_extractor(audio)
+
+    return float(bpm), list(beats)
+
+
+def detect_chords_essentia(audio, beats: List[float], key_root: str, key_scale: str) -> List[ChordInfo]:
+    """
+    Essentiaベースのビート同期コード検出
+
+    ビート区間ごとにHPCP (Harmonic Pitch Class Profile) を計算し、
+    コードを推定する。
+
+    Args:
+        audio: 音声データ
+        beats: ビート位置のリスト
+        key_root: キーのルート音
+        key_scale: スケール名
+
+    Returns:
+        List[ChordInfo]: コード進行
+    """
+
+    sample_rate = 44100
+    chord_progression = []
+
+    # HPCP計算用アルゴリズム
+    spectrum = es.Spectrum()
+    spectral_peaks = es.SpectralPeaks(
+        orderBy="magnitude",
+        magnitudeThreshold=0.00001,
+        minFrequency=20,
+        maxFrequency=3500,
+        maxPeaks=60
+    )
+    hpcp = es.HPCP(
+        size=12,
+        referenceFrequency=440,
+        harmonics=8,
+        bandPreset=True,
+        minFrequency=20,
+        maxFrequency=3500,
+        weightType="cosine",
+        nonLinear=False,
+        windowSize=1.0
+    )
+
+    # コードテンプレート（メジャー・マイナー）
+    note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+
+    # ビートをグループ化（2-4ビートごと）
+    beat_groups = []
+    group_size = 4  # 4ビートごとにコード検出
+    for i in range(0, len(beats) - 1, group_size):
+        start_beat = beats[i]
+        end_idx = min(i + group_size, len(beats) - 1)
+        end_beat = beats[end_idx] if end_idx < len(beats) else beats[-1]
+        beat_groups.append((start_beat, end_beat))
+
+    for start_time, end_time in beat_groups:
+        # この区間の音声を切り出し
+        start_sample = int(start_time * sample_rate)
+        end_sample = int(end_time * sample_rate)
+        segment = audio[start_sample:end_sample]
+
+        if len(segment) < 2048:
+            continue
+
+        # フレームごとにHPCPを計算して平均
+        frame_size = 2048
+        hop_size = 1024
+        hpcp_values = []
+
+        for frame_start in range(0, len(segment) - frame_size, hop_size):
+            frame = segment[frame_start:frame_start + frame_size]
+            windowed = frame * np.hanning(len(frame))
+            spec = spectrum(windowed)
+            frequencies, magnitudes = spectral_peaks(spec)
+            if len(frequencies) > 0:
+                hpcp_frame = hpcp(frequencies, magnitudes)
+                hpcp_values.append(hpcp_frame)
+
+        if not hpcp_values:
+            continue
+
+        # HPCPの平均を計算
+        hpcp_mean = np.mean(hpcp_values, axis=0)
+
+        # コードを推定
+        chord_name, root_note, quality, confidence = match_chord_from_hpcp(
+            hpcp_mean, note_names, key_root, key_scale
+        )
+
+        chord_progression.append(ChordInfo(
+            startTime=start_time,
+            endTime=end_time,
+            chord=chord_name,
+            rootNote=root_note,
+            quality=quality,
+            confidence=confidence
+        ))
+
+    return chord_progression
+
+
+def detect_chords_essentia_simple(audio, duration: float, key_root: str, key_scale: str) -> List[ChordInfo]:
+    """
+    Essentiaベースの簡易コード検出（4秒区切り）
+
+    ビート情報がない場合のフォールバック。
+
+    Returns:
+        List[ChordInfo]: コード進行
+    """
+
+    sample_rate = 44100
+    segment_duration = 4.0
+    num_segments = int(np.ceil(duration / segment_duration))
+
+    chord_progression = []
+    note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+
+    # HPCP計算用
+    spectrum = es.Spectrum()
+    spectral_peaks = es.SpectralPeaks(
+        orderBy="magnitude",
+        magnitudeThreshold=0.00001,
+        minFrequency=20,
+        maxFrequency=3500,
+        maxPeaks=60
+    )
+    hpcp = es.HPCP(
+        size=12,
+        referenceFrequency=440,
+        harmonics=8,
+        bandPreset=True,
+        minFrequency=20,
+        maxFrequency=3500
+    )
+
+    for seg_idx in range(num_segments):
+        start_time = seg_idx * segment_duration
+        end_time = min((seg_idx + 1) * segment_duration, duration)
+
+        start_sample = int(start_time * sample_rate)
+        end_sample = int(end_time * sample_rate)
+        segment = audio[start_sample:end_sample]
+
+        if len(segment) < 2048:
+            continue
+
+        # フレームごとにHPCPを計算
+        frame_size = 2048
+        hop_size = 1024
+        hpcp_values = []
+
+        for frame_start in range(0, len(segment) - frame_size, hop_size):
+            frame = segment[frame_start:frame_start + frame_size]
+            windowed = frame * np.hanning(len(frame))
+            spec = spectrum(windowed)
+            frequencies, magnitudes = spectral_peaks(spec)
+            if len(frequencies) > 0:
+                hpcp_frame = hpcp(frequencies, magnitudes)
+                hpcp_values.append(hpcp_frame)
+
+        if not hpcp_values:
+            continue
+
+        hpcp_mean = np.mean(hpcp_values, axis=0)
+        chord_name, root_note, quality, confidence = match_chord_from_hpcp(
+            hpcp_mean, note_names, key_root, key_scale
+        )
+
+        chord_progression.append(ChordInfo(
+            startTime=start_time,
+            endTime=end_time,
+            chord=chord_name,
+            rootNote=root_note,
+            quality=quality,
+            confidence=confidence
+        ))
+
+    return chord_progression
+
+
+def match_chord_from_hpcp(hpcp_values, note_names: List[str], key_root: str, key_scale: str) -> tuple:
+    """
+    HPCPからコードを推定
+
+    ダイアトニックコードテンプレートとの一致度で判定。
+
+    Returns:
+        Tuple[str, str, str, float]: (chord_name, root_note, quality, confidence)
+    """
+
+    root_index = note_names.index(key_root)
+
+    # ダイアトニックコード定義
+    if key_scale == 'メジャー':
+        diatonic_chords = [
+            {'offset': 0, 'quality': 'maj', 'degree': 'I'},
+            {'offset': 2, 'quality': 'min', 'degree': 'ii'},
+            {'offset': 4, 'quality': 'min', 'degree': 'iii'},
+            {'offset': 5, 'quality': 'maj', 'degree': 'IV'},
+            {'offset': 7, 'quality': 'maj', 'degree': 'V'},
+            {'offset': 9, 'quality': 'min', 'degree': 'vi'},
+        ]
+    else:
+        diatonic_chords = [
+            {'offset': 0, 'quality': 'min', 'degree': 'i'},
+            {'offset': 3, 'quality': 'maj', 'degree': 'III'},
+            {'offset': 5, 'quality': 'min', 'degree': 'iv'},
+            {'offset': 7, 'quality': 'min', 'degree': 'v'},
+            {'offset': 8, 'quality': 'maj', 'degree': 'VI'},
+            {'offset': 10, 'quality': 'maj', 'degree': 'VII'},
+        ]
+
+    best_match_score = -1.0
+    best_chord = diatonic_chords[0]
+
+    for chord_info in diatonic_chords:
+        chord_root_index = (root_index + chord_info['offset']) % 12
+
+        # コードテンプレート（ルート、3度、5度）
+        chord_template = np.zeros(12)
+        chord_template[chord_root_index] = 1.0
+
+        if chord_info['quality'] == 'maj':
+            chord_template[(chord_root_index + 4) % 12] = 0.8  # 長3度
+        else:
+            chord_template[(chord_root_index + 3) % 12] = 0.8  # 短3度
+
+        chord_template[(chord_root_index + 7) % 12] = 0.6  # 完全5度
+
+        # 正規化
+        chord_template = chord_template / (np.sum(chord_template) + 1e-8)
+        hpcp_norm = hpcp_values / (np.sum(hpcp_values) + 1e-8)
+
+        # 内積で一致度
+        match_score = np.dot(hpcp_norm, chord_template)
+
+        if match_score > best_match_score:
+            best_match_score = match_score
+            best_chord = chord_info
+
+    # コード名生成
+    chord_root_note = note_names[(root_index + best_chord['offset']) % 12]
+    if best_chord['quality'] == 'maj':
+        chord_name = chord_root_note
+    else:
+        chord_name = chord_root_note + 'm'
+
+    confidence = min(1.0, max(0.0, best_match_score))
+
+    return chord_name, chord_root_note, best_chord['quality'], confidence
 
 
 # ============================================

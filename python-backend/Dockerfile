@@ -1,27 +1,33 @@
-# Python 3.11 + ffmpeg ’+€ıÏ¤áü¸
+# Python 3.11 + ffmpeg ï¿½+ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½
 FROM python:3.11-slim
 
-# ffmpeg hÅj·¹Æàé¤Öéê’¤ó¹Èüë
+# ffmpeg + Essentiaä¾å­˜ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 RUN apt-get update && apt-get install -y \
     ffmpeg \
     libsndfile1 \
+    libfftw3-dev \
+    libyaml-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libswresample-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# \mÇ£ì¯Èê’-š
+# \mÇ£ï¿½ï¿½ï¿½-ï¿½
 WORKDIR /app
 
-# requirements.txt ’³ÔüWfX¢Â’¤ó¹Èüë
+# requirements.txt ï¿½ï¿½ï¿½ï¿½Wfï¿½Xï¿½Â’ï¿½ï¿½ï¿½ï¿½ï¿½
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ¢×ê±ü·çó³üÉ’³Ôü
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É’ï¿½ï¿½ï¿½
 COPY . .
 
-# ¢Ã×íüÉÕ¡¤ëİX(Ç£ì¯Èê’\
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¡ï¿½ï¿½ï¿½X(Ç£ï¿½ï¿½ï¿½\
 RUN mkdir -p /app/uploads
 
-# İüÈ 8000 ’l‹
+# ï¿½ï¿½ï¿½ 8000 ï¿½lï¿½
 EXPOSE 8000
 
-# uvicorn g¢×ê’wÕ
+# uvicorn gï¿½ï¿½ï¿½wï¿½
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

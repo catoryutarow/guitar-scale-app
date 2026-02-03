@@ -12,6 +12,8 @@ services:
     environment:
       # 実音源解析モードを有効化
       - USE_REAL_ANALYSIS=true
+      # Essentiaベースの高精度解析を有効化
+      - USE_ESSENTIA=true
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]

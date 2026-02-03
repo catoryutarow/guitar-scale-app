@@ -73,7 +73,6 @@ export default function AnalysisPageClient() {
             <li>{t.audioInstruction2}</li>
             <li>{t.audioInstruction3}</li>
             <li>{t.audioInstruction4}</li>
-            <li>{t.audioInstruction5}</li>
           </ul>
         </div>
       </main>

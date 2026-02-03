@@ -55,6 +55,7 @@ export interface Translations {
   scrollToResults: string;
   detectedKey: string;
   confidence: string;
+  multipleKeysDetected: string;
   openingChords: string;
   aiEstimate: string;
   matchingScales: string;
@@ -76,7 +77,6 @@ export interface Translations {
   audioInstruction2: string;
   audioInstruction3: string;
   audioInstruction4: string;
-  audioInstruction5: string;
 
   // スケール名の翻訳
   scaleNames: {
@@ -495,7 +495,7 @@ export const translations: Record<Language, Translations> = {
 
     audioAnalysis: '音源解析',
     audioAnalysisSubtitle: 'Audio Analysis for Guitar Scales',
-    uploadDescription: '音源ファイルをアップロードして、コード進行とスケールを自動解析します',
+    uploadDescription: '音源ファイルをアップロードして、キーとコード進行を自動解析します',
 
     referenceSongs: 'この曲に合わせてみよう',
     scale: 'スケール',
@@ -510,7 +510,7 @@ export const translations: Record<Language, Translations> = {
     uploading: 'アップロード中',
     uploadingMessage: '音源ファイルをアップロードしています...',
     analyzing: '解析中',
-    analyzingMessage: 'コード進行を解析しています...',
+    analyzingMessage: 'キーとコード進行を解析しています...',
     completed: '解析完了',
     completedMessage: '解析が完了しました！',
     processing: '処理中',
@@ -518,8 +518,9 @@ export const translations: Record<Language, Translations> = {
     scrollToResults: '下にスクロールして解析結果をご確認ください',
     detectedKey: '検出されたキー',
     confidence: '信頼度',
-    openingChords: '冒頭のコード進行（推定）',
-    aiEstimate: 'AIによる推定結果です。実際のコード進行と異なる場合があります。',
+    multipleKeysDetected: 'この曲には転調が含まれている可能性があります',
+    openingChords: 'コード進行（推定）',
+    aiEstimate: '音源全体を解析した推定結果です。実際と異なる場合があります。',
     matchingScales: 'マッチするスケール',
     matchingScalesDesc: '検出されたコード進行にマッチする可能性の高いスケールです',
     noMatchingScales: 'マッチするスケールが見つかりませんでした',
@@ -535,10 +536,9 @@ export const translations: Record<Language, Translations> = {
 
     audioHowToUse: '音源解析の使い方',
     audioInstruction1: 'MP3、WAV、M4Aなどの音源ファイルをアップロード',
-    audioInstruction2: 'AIが自動的にキー（ルート音）とスケールを検出',
-    audioInstruction3: '検出されたコード進行をタイムライン表示',
-    audioInstruction4: 'マッチするスケールの候補を複数提案',
-    audioInstruction5: '「このスケールで練習する」ボタンで指板表示画面に移動',
+    audioInstruction2: '音源全体を解析してキーを検出（転調がある場合は複数表示）',
+    audioInstruction3: 'マッチするスケールの候補を複数提案',
+    audioInstruction4: '「このスケールで練習する」ボタンで指板表示画面に移動',
 
     scaleNames: {
       'メジャー': 'メジャー',
@@ -1054,7 +1054,7 @@ export const translations: Record<Language, Translations> = {
 
     audioAnalysis: 'Audio Analysis',
     audioAnalysisSubtitle: 'Audio Analysis for Guitar Scales',
-    uploadDescription: 'Upload audio files to automatically analyze chord progressions and scales',
+    uploadDescription: 'Upload audio files to automatically analyze key and chord progressions',
 
     referenceSongs: 'Reference Songs for This Scale',
     scale: 'Scale',
@@ -1069,7 +1069,7 @@ export const translations: Record<Language, Translations> = {
     uploading: 'Uploading',
     uploadingMessage: 'Uploading audio file...',
     analyzing: 'Analyzing',
-    analyzingMessage: 'Analyzing chord progression...',
+    analyzingMessage: 'Analyzing key and chord progression...',
     completed: 'Analysis Complete',
     completedMessage: 'Analysis completed successfully!',
     processing: 'Processing',
@@ -1077,8 +1077,9 @@ export const translations: Record<Language, Translations> = {
     scrollToResults: 'Scroll down to view the analysis results',
     detectedKey: 'Detected Key',
     confidence: 'Confidence',
-    openingChords: 'Opening Chords (Estimated)',
-    aiEstimate: '※ AI-estimated results. May differ from actual chord progression.',
+    multipleKeysDetected: 'This song may contain key changes',
+    openingChords: 'Chord Progression (Estimated)',
+    aiEstimate: '※ Estimated results based on full audio analysis. May differ from actual.',
     matchingScales: 'Matching Scales',
     matchingScalesDesc: 'Scales that are likely to match the detected chord progression',
     noMatchingScales: 'No matching scales found',
@@ -1094,10 +1095,9 @@ export const translations: Record<Language, Translations> = {
 
     audioHowToUse: 'How to Use Audio Analysis',
     audioInstruction1: 'Upload audio files (MP3, WAV, M4A, etc.)',
-    audioInstruction2: 'AI automatically detects key (root note) and scale',
-    audioInstruction3: 'View detected chord progression timeline',
-    audioInstruction4: 'Multiple matching scale candidates suggested',
-    audioInstruction5: 'Click "Practice with this Scale" to view fretboard',
+    audioInstruction2: 'Full audio analysis detects key (shows multiple if modulation exists)',
+    audioInstruction3: 'Multiple matching scale candidates suggested',
+    audioInstruction4: 'Click "Practice with this Scale" to view fretboard',
 
     scaleNames: {
       'メジャー': 'Major',
@@ -1613,7 +1613,7 @@ export const translations: Record<Language, Translations> = {
 
     audioAnalysis: '音频分析',
     audioAnalysisSubtitle: 'Audio Analysis for Guitar Scales',
-    uploadDescription: '上传音频文件，自动分析和弦进行和音阶',
+    uploadDescription: '上传音频文件，自动分析调性和和弦进行',
 
     referenceSongs: '此音阶的参考歌曲',
     scale: '音阶',
@@ -1628,7 +1628,7 @@ export const translations: Record<Language, Translations> = {
     uploading: '上传中',
     uploadingMessage: '正在上传音频文件...',
     analyzing: '分析中',
-    analyzingMessage: '正在分析和弦进行...',
+    analyzingMessage: '正在分析调性和和弦进行...',
     completed: '分析完成',
     completedMessage: '分析成功完成！',
     processing: '处理中',
@@ -1636,8 +1636,9 @@ export const translations: Record<Language, Translations> = {
     scrollToResults: '向下滚动查看分析结果',
     detectedKey: '检测到的调',
     confidence: '置信度',
-    openingChords: '开头和弦进行（估计）',
-    aiEstimate: '※ AI估计结果。可能与实际和弦进行不同。',
+    multipleKeysDetected: '此曲可能包含转调',
+    openingChords: '和弦进行（估计）',
+    aiEstimate: '※ 基于全曲分析的估计结果。可能与实际不同。',
     matchingScales: '匹配的音阶',
     matchingScalesDesc: '与检测到的和弦进行可能匹配的音阶',
     noMatchingScales: '未找到匹配的音阶',
@@ -1653,10 +1654,9 @@ export const translations: Record<Language, Translations> = {
 
     audioHowToUse: '音频分析使用方法',
     audioInstruction1: '上传音频文件（MP3、WAV、M4A等）',
-    audioInstruction2: 'AI自动检测调（根音）和音阶',
-    audioInstruction3: '查看检测到的和弦进行时间线',
-    audioInstruction4: '提供多个匹配的音阶候选',
-    audioInstruction5: '点击"用这个音阶练习"查看指板',
+    audioInstruction2: '全曲分析检测调性（有转调时显示多个）',
+    audioInstruction3: '提供多个匹配的音阶候选',
+    audioInstruction4: '点击"用这个音阶练习"查看指板',
 
     scaleNames: {
       'メジャー': 'Major',
@@ -2172,7 +2172,7 @@ export const translations: Record<Language, Translations> = {
 
     audioAnalysis: 'Análisis de Audio',
     audioAnalysisSubtitle: 'Análisis de Audio para Escalas de Guitarra',
-    uploadDescription: 'Sube archivos de audio para analizar automáticamente progresiones de acordes y escalas',
+    uploadDescription: 'Sube archivos de audio para analizar automáticamente tonalidad y progresiones de acordes',
 
     referenceSongs: 'Canciones de Referencia para Esta Escala',
     scale: 'Escala',
@@ -2187,7 +2187,7 @@ export const translations: Record<Language, Translations> = {
     uploading: 'Subiendo',
     uploadingMessage: 'Subiendo archivo de audio...',
     analyzing: 'Analizando',
-    analyzingMessage: 'Analizando progresión de acordes...',
+    analyzingMessage: 'Analizando tonalidad y progresión de acordes...',
     completed: 'Análisis Completo',
     completedMessage: '¡Análisis completado exitosamente!',
     processing: 'Procesando',
@@ -2195,8 +2195,9 @@ export const translations: Record<Language, Translations> = {
     scrollToResults: 'Desplázate hacia abajo para ver los resultados del análisis',
     detectedKey: 'Tonalidad Detectada',
     confidence: 'Confianza',
-    openingChords: 'Acordes de Apertura (Estimados)',
-    aiEstimate: '※ Resultados estimados por IA. Pueden diferir de la progresión de acordes real.',
+    multipleKeysDetected: 'Esta canción puede contener cambios de tonalidad',
+    openingChords: 'Progresión de Acordes (Estimada)',
+    aiEstimate: '※ Resultados estimados basados en análisis completo. Pueden diferir de lo real.',
     matchingScales: 'Escalas Coincidentes',
     matchingScalesDesc: 'Escalas que probablemente coincidan con la progresión de acordes detectada',
     noMatchingScales: 'No se encontraron escalas coincidentes',
@@ -2212,10 +2213,9 @@ export const translations: Record<Language, Translations> = {
 
     audioHowToUse: 'Cómo Usar el Análisis de Audio',
     audioInstruction1: 'Sube archivos de audio (MP3, WAV, M4A, etc.)',
-    audioInstruction2: 'La IA detecta automáticamente la tonalidad (nota raíz) y la escala',
-    audioInstruction3: 'Ver línea de tiempo de la progresión de acordes detectada',
-    audioInstruction4: 'Se sugieren múltiples candidatos de escalas coincidentes',
-    audioInstruction5: 'Haz clic en "Practicar con Esta Escala" para ver el diapasón',
+    audioInstruction2: 'Análisis completo detecta tonalidad (muestra múltiples si hay modulación)',
+    audioInstruction3: 'Se sugieren múltiples candidatos de escalas coincidentes',
+    audioInstruction4: 'Haz clic en "Practicar con Esta Escala" para ver el diapasón',
 
     scaleNames: {
       'メジャー': 'Mayor',

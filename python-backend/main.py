@@ -36,14 +36,17 @@ app = FastAPI(
 )
 
 # CORS設定（Next.js からのリクエストを許可）
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "").split(",") if os.getenv("ALLOWED_ORIGINS") else [
+    "http://localhost:3000",  # Next.js 開発サーバー
+    "http://127.0.0.1:3000",
+    "https://guitar-scale.com",  # 本番ドメイン
+    "https://www.guitar-scale.com",  # www付き
+    "https://*.vercel.app",  # Vercel デプロイ（プレビュー）
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",  # Next.js 開発サーバー
-        "http://127.0.0.1:3000",
-        "https://*.vercel.app",  # Vercel デプロイ（プレビュー）
-        "*",  # 本番環境用（一時的に全許可、後で制限）
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -66,14 +69,23 @@ class AnalyzeRequest(BaseModel):
     options: Optional[AnalysisOptions] = None
 
 
+class DetectedKeyInfo(BaseModel):
+    """検出されたキー情報"""
+    key: str
+    scale: str
+    confidence: float
+    occurrence: float  # 出現割合（0.0-1.0）
+
+
 class AnalysisMetadata(BaseModel):
     """メタデータ"""
     duration: float
     tempo: float
     timeSignature: str
-    detectedKey: str
+    detectedKey: str  # 主要キー（最も多く出現）
     scale: str
     confidence: float
+    detectedKeys: Optional[List[DetectedKeyInfo]] = None  # 複数キー検出時
 
 
 class ChordInfo(BaseModel):
@@ -486,31 +498,53 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
         print(f"    ✗ Failed to load audio file: {str(e)}")
         raise Exception(f"Failed to load audio file: {str(e)}")
 
-    # 2. ラウドネスベースの最適区間選択
+    # 2. HPSS（ハーモニック・パーカッシブ分離）- 全体に適用
     try:
-        print(f"  Step 2/6: Selecting optimal segment by loudness...")
+        print(f"  Step 2/7: Applying Harmonic-Percussive separation (full track)...")
+        y_harmonic_full, y_percussive_full = librosa.effects.hpss(y_full)
+        print(f"    ✓ Separated harmonic and percussive components")
+    except Exception as e:
+        print(f"    ⚠ HPSS failed: {e}, using original signal")
+        y_harmonic_full = y_full
+
+    # 3. セグメント分割キー検出（転調対応）
+    try:
+        print(f"  Step 3/7: Detecting keys with modulation analysis...")
+        detected_keys_info, detected_key, scale_name, confidence = detect_keys_with_modulation(
+            y_harmonic_full, sr, segment_duration=15.0
+        )
+
+        if len(detected_keys_info) == 1:
+            print(f"    ✓ Single key detected: {detected_key} {scale_name} (confidence: {confidence:.2f})")
+        else:
+            print(f"    ✓ Multiple keys detected:")
+            for ki in detected_keys_info:
+                print(f"      - {ki['key']} {ki['scale']}: {ki['occurrence']*100:.0f}%")
+    except Exception as e:
+        print(f"    ⚠ Key detection failed: {e}, using default C major")
+        detected_key = "C"
+        scale_name = "メジャー"
+        confidence = 0.5
+        detected_keys_info = [{"key": "C", "scale": "メジャー", "confidence": 0.5, "occurrence": 1.0}]
+
+    # 4. ラウドネスベースの最適区間選択（コード検出用）
+    try:
+        print(f"  Step 4/7: Selecting optimal segment for chord detection...")
         y, start_time, end_time = select_loudest_segment(y_full, sr, target_duration=30.0)
+        y_harmonic, _ = librosa.effects.hpss(y)  # 選択区間のHPSS
         duration = len(y) / sr
         print(f"    ✓ Selected segment: {start_time:.1f}s - {end_time:.1f}s ({duration:.1f}s)")
     except Exception as e:
         print(f"    ⚠ Segment selection failed: {e}, using first 30s")
         y = y_full[:int(30.0 * sr)]
+        y_harmonic = y_harmonic_full[:int(30.0 * sr)]
         duration = len(y) / sr
         start_time = 0.0
         end_time = duration
 
-    # 3. HPSS（ハーモニック・パーカッシブ分離）
+    # 5. テンポ・ビート推定（選択区間から）
     try:
-        print(f"  Step 3/6: Applying Harmonic-Percussive separation...")
-        y_harmonic, y_percussive = librosa.effects.hpss(y)
-        print(f"    ✓ Separated harmonic and percussive components")
-    except Exception as e:
-        print(f"    ⚠ HPSS failed: {e}, using original signal")
-        y_harmonic = y
-
-    # 4. テンポ・ビート推定（パーカッシブ成分を使用）
-    try:
-        print(f"  Step 4/6: Detecting tempo and beats...")
+        print(f"  Step 5/7: Detecting tempo and beats...")
         tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
         tempo = float(tempo)
         beats = librosa.frames_to_time(beat_frames, sr=sr)
@@ -520,20 +554,9 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
         tempo = 120.0
         beats = []
 
-    # 5. キー/スケール推定（ハーモニック成分 + 改良版アルゴリズム）
+    # 6. ビート同期コード進行検出（選択区間のハーモニック成分を使用）
     try:
-        print(f"  Step 5/6: Estimating key and scale (enhanced)...")
-        detected_key, scale_name, confidence = estimate_key_enhanced(y_harmonic, sr)
-        print(f"    ✓ Key detected: {detected_key} {scale_name} (confidence: {confidence:.2f})")
-    except Exception as e:
-        print(f"    ⚠ Key detection failed: {e}, using default G major")
-        detected_key = "G"
-        scale_name = "メジャー"
-        confidence = 0.5
-
-    # 6. ビート同期コード進行検出（ハーモニック成分を使用）
-    try:
-        print(f"  Step 6/6: Detecting chord progression (beat-synced)...")
+        print(f"  Step 6/7: Detecting chord progression (beat-synced)...")
         if len(beats) >= 4:
             chord_progression = detect_chords_beat_synced(
                 y_harmonic, sr, beats, detected_key, scale_name, start_time
@@ -549,7 +572,9 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
         print(f"    ⚠ Chord detection failed: {e}, using fallback")
         chord_progression = generate_fallback_chords(detected_key, full_duration)
 
-    # スケールマッチング
+    # 7. スケールマッチング（キーに基づいて）
+    print(f"  Step 7/7: Generating scale matches...")
+
     try:
         scale_match = generate_scale_match(detected_key, scale_name, chord_progression)
         print(f"    ✓ Generated {len(scale_match.matchingScales)} scale matches")
@@ -558,13 +583,27 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
         scale_match = ScaleMatchResult(matchingScales=[])
 
     # メタデータの構築
+    # 複数キーが検出された場合はdetectedKeysに格納
+    detected_keys_list = None
+    if len(detected_keys_info) > 1:
+        detected_keys_list = [
+            DetectedKeyInfo(
+                key=ki['key'],
+                scale=ki['scale'],
+                confidence=ki['confidence'],
+                occurrence=ki['occurrence']
+            )
+            for ki in detected_keys_info
+        ]
+
     metadata = AnalysisMetadata(
-        duration=full_duration,  # 元ファイルの長さを返す
+        duration=full_duration,
         tempo=tempo,
         timeSignature="4/4",
         detectedKey=detected_key,
         scale=scale_name,
-        confidence=confidence
+        confidence=confidence,
+        detectedKeys=detected_keys_list
     )
 
     print(f"\n[Librosa Analysis] Analysis completed successfully!")
@@ -578,6 +617,99 @@ def analyze_audio_librosa(file_path: str, options: Dict) -> AnalysisResult:
         scaleMatch=scale_match,
         stems=None  # Phase 4 では未実装
     )
+
+
+def detect_keys_with_modulation(y_harmonic, sr, segment_duration=15.0, min_occurrence=0.15):
+    """
+    セグメント分割によるキー検出（転調対応）
+
+    曲をセグメントに分割し、各セグメントでキーを推定。
+    検出されたキーを集計し、出現割合とともに返す。
+
+    Args:
+        y_harmonic: ハーモニック成分
+        sr: サンプリングレート
+        segment_duration: セグメントの長さ（秒）
+        min_occurrence: 報告する最小出現割合（これ以下は無視）
+
+    Returns:
+        Tuple[List[dict], str, str, float]:
+            - detected_keys_info: 検出されたキーのリスト
+            - primary_key: 主要キー
+            - primary_scale: 主要スケール
+            - confidence: 信頼度
+    """
+    full_duration = len(y_harmonic) / sr
+    num_segments = max(1, int(np.ceil(full_duration / segment_duration)))
+
+    # 各セグメントでキーを推定
+    segment_keys = []
+
+    for i in range(num_segments):
+        start_time = i * segment_duration
+        end_time = min((i + 1) * segment_duration, full_duration)
+
+        start_sample = int(start_time * sr)
+        end_sample = int(end_time * sr)
+        segment = y_harmonic[start_sample:end_sample]
+
+        # 短すぎるセグメントはスキップ
+        if len(segment) < sr * 5:  # 5秒未満
+            continue
+
+        try:
+            key, scale, conf = estimate_key_enhanced(segment, sr)
+            segment_keys.append({
+                'key': key,
+                'scale': scale,
+                'confidence': conf
+            })
+        except Exception:
+            continue
+
+    if not segment_keys:
+        # フォールバック: 全体からキー推定
+        key, scale, conf = estimate_key_enhanced(y_harmonic, sr)
+        return [{"key": key, "scale": scale, "confidence": conf, "occurrence": 1.0}], key, scale, conf
+
+    # キー+スケールの組み合わせで集計
+    key_counts = {}
+    for sk in segment_keys:
+        key_scale = f"{sk['key']}_{sk['scale']}"
+        if key_scale not in key_counts:
+            key_counts[key_scale] = {
+                'key': sk['key'],
+                'scale': sk['scale'],
+                'count': 0,
+                'confidences': []
+            }
+        key_counts[key_scale]['count'] += 1
+        key_counts[key_scale]['confidences'].append(sk['confidence'])
+
+    # 出現割合を計算
+    total_segments = len(segment_keys)
+    detected_keys_info = []
+
+    for key_scale, data in key_counts.items():
+        occurrence = data['count'] / total_segments
+        if occurrence >= min_occurrence:
+            detected_keys_info.append({
+                'key': data['key'],
+                'scale': data['scale'],
+                'confidence': np.mean(data['confidences']),
+                'occurrence': occurrence
+            })
+
+    # 出現割合でソート（降順）
+    detected_keys_info.sort(key=lambda x: x['occurrence'], reverse=True)
+
+    # 主要キー（最も多く出現）
+    primary = detected_keys_info[0]
+    primary_key = primary['key']
+    primary_scale = primary['scale']
+    primary_confidence = primary['confidence']
+
+    return detected_keys_info, primary_key, primary_scale, primary_confidence
 
 
 def select_loudest_segment(y, sr, target_duration=30.0, hop_length=512):

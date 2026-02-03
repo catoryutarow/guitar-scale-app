@@ -62,15 +62,26 @@ export interface AnalysisResult {
 }
 
 /**
+ * 検出されたキー情報（転調対応）
+ */
+export interface DetectedKeyInfo {
+  key: string;                                // キー（例: "G"）
+  scale: string;                              // スケール（例: "メジャー"）
+  confidence: number;                         // 信頼度 0.0-1.0
+  occurrence: number;                         // 出現割合 0.0-1.0
+}
+
+/**
  * 音源のメタデータ
  */
 export interface AnalysisMetadata {
   duration: number;                           // 曲の長さ（秒）
   tempo: number;                              // BPM
   timeSignature: string;                      // 拍子（例: "4/4"）
-  detectedKey: string;                        // 推定キー（例: "G"）
+  detectedKey: string;                        // 推定キー（例: "G"）- 主要キー
   scale: string;                              // 推定スケール（例: "メジャー"）
   confidence: number;                         // 信頼度 0.0-1.0
+  detectedKeys?: DetectedKeyInfo[];           // 複数キー検出時（転調がある曲）
 }
 
 /**

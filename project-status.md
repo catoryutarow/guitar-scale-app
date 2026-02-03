@@ -105,15 +105,13 @@ guitar-scale-app/
 | Phase 1 | ✅ Complete | 基本UI・スケール表示 |
 | Phase 2 | ✅ Complete | 多言語対応・チューニング拡張 |
 | Phase 3 | ✅ Complete | 音声解析UI・ダミーAPI |
-| Phase 4 | 🔄 In Progress | 実音声解析実装 |
+| Phase 4 | ✅ Complete | 実音声解析実装（librosa） |
 | Phase 5 | ⏳ Planned | 本番環境最適化 |
 
 ### Recent Commits
+- `72fe8dc` - docs: project-status.md更新（AdSense/CMP対応完了）
 - `9df44b8` - AdSense対応強化（CMP追加、firebase-debug.log除外）
 - `4e37f05` - google対策改善2
-- `f44a862` - google対策改善
-- `f2dc775` - google対策改善
-- `68df280` - ドメイン修正
 
 ---
 
@@ -137,8 +135,10 @@ guitar-scale-app/
 ### ✅ Backend
 - [x] FastAPI基本セットアップ
 - [x] Dockerコンテナ化
-- [x] ダミー解析エンドポイント
 - [x] Vercel Blob連携
+- [x] librosa音声解析（キー検出、コード進行検出）
+- [x] 転調検出（セグメント分割解析）
+- [x] ローカル開発用アップロードAPI
 
 ### ✅ Music Theory
 - [x] 理論準拠スケールエンジン
@@ -174,19 +174,24 @@ guitar-scale-app/
   - 審査通過後、AdSense管理画面でGDPRメッセージ設定が必要
 - [x] firebase-debug.log を .gitignore に追加
 
-### 🔄 High Priority
+#### Phase 4: 音声解析実装 - 完了 (2026-02-03)
+- [x] librosaによる実音声解析
+- [x] キー検出アルゴリズム（CQT/CENSクロマ + Krumhansl-Kessler）
+- [x] 転調（モジュレーション）検出（15秒セグメント分割解析）
+- [x] ビート同期コード進行検出
+- [x] スケールマッチングアルゴリズム
+- [x] ローカル開発用ファイルアップロードAPI（/api/upload-local）
+- [x] 解析ページ文言改善（4言語対応）
 
-#### Backend Implementation (Phase 4)
-- [ ] librosaによる実音声解析
-- [ ] キー検出アルゴリズム
-- [ ] コード進行検出
-- [ ] スケールマッチングアルゴリズム
-- [ ] 非同期ジョブキュー
+### 🔄 High Priority
 
 #### Error Handling
 - [ ] ネットワークエラーリカバリー
 - [ ] 解析失敗時のリトライ
 - [ ] バリデーション強化
+
+#### Backend Deployment
+- [ ] 本番環境へのPythonバックエンドデプロイ（Railway/Render等）
 
 ### ⚠️ Medium Priority
 
@@ -219,8 +224,7 @@ guitar-scale-app/
 - なし
 
 ### Major
-1. **音声解析がダミー** - Phase 4で実装予定
-2. **バックエンドデプロイ戦略未定** - ローカルDockerのみ
+1. **バックエンドデプロイ戦略未定** - ローカルDockerのみ（Railway無料枠終了）
 
 ### Minor
 1. モバイルでの指板タッチ操作改善余地
@@ -285,15 +289,15 @@ TMP_DIR=/tmp/guitar-scale
 
 ## 10. Next Steps
 
-### Immediate (Phase 4 Completion)
-1. Pythonバックエンドの実音声解析実装
-2. コード検出・スケールマッチングアルゴリズム
-3. 非同期処理・ジョブキュー導入
-
-### Short-term
-1. 本番バックエンドデプロイ
+### Immediate (Phase 5)
+1. 本番バックエンドデプロイ（Railway/Render/Fly.io等）
 2. エラーハンドリング強化
 3. テストカバレッジ向上
+
+### Short-term
+1. 解析精度向上（Essentia導入検討 - ARM64対応待ち）
+2. リアルタイム進捗更新
+3. 解析結果キャッシュ
 
 ### Mid-term
 1. ユーザーアカウント機能

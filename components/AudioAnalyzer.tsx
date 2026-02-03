@@ -290,13 +290,41 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border-2 border-blue-200">
               <div className="flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-sm text-gray-600 mb-2">検出されたキー</div>
-                  <div className="text-4xl font-bold text-gray-800 mb-2">
-                    {analysisResult.metadata.detectedKey} {analysisResult.metadata.scale}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    信頼度: {Math.round(analysisResult.metadata.confidence * 100)}%
-                  </div>
+                  <div className="text-sm text-gray-600 mb-2">{t.detectedKey}</div>
+                  {analysisResult.metadata.detectedKeys && analysisResult.metadata.detectedKeys.length > 1 ? (
+                    // 複数キー検出時（転調あり）
+                    <div>
+                      <div className="flex flex-wrap justify-center gap-3 mb-3">
+                        {analysisResult.metadata.detectedKeys.map((keyInfo, index) => (
+                          <div
+                            key={index}
+                            className={`px-4 py-2 rounded-lg ${
+                              index === 0
+                                ? 'bg-blue-500 text-white'
+                                : 'bg-gray-200 text-gray-700'
+                            }`}
+                          >
+                            <span className="text-2xl font-bold">
+                              {keyInfo.key} {keyInfo.scale}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="text-sm text-purple-600 font-medium">
+                        ※ {t.multipleKeysDetected}
+                      </div>
+                    </div>
+                  ) : (
+                    // 単一キー
+                    <div>
+                      <div className="text-4xl font-bold text-gray-800 mb-2">
+                        {analysisResult.metadata.detectedKey} {analysisResult.metadata.scale}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {t.confidence}: {Math.round(analysisResult.metadata.confidence * 100)}%
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -318,7 +346,7 @@ export default function AudioAnalyzer({ onScaleSelect }: AudioAnalyzerProps) {
                 onClick={handleReset}
                 className="px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors"
               >
-                別の音源を解析
+                {t.analyzeAnother}
               </button>
             </div>
           </div>

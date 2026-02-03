@@ -1,8 +1,17 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Company Information | Guitar Scale Master',
-  description: 'Company information for Guitar Scale Master. Operated by Motechoro Co., Ltd.',
+  title: '運営会社',
+  description: 'ギタースケールわかる君の運営会社情報。モテコロ株式会社が運営しています。',
+  openGraph: {
+    title: '運営会社 | ギタースケールわかる君',
+    description: 'ギタースケールわかる君の運営会社情報。モテコロ株式会社が運営しています。',
+    url: 'https://guitar-scale-wakarun.com/company',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://guitar-scale-wakarun.com/company',
+  },
 };
 
 export default function CompanyLayout({

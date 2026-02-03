@@ -1,8 +1,21 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Mode Scales Complete Guide | Guitar Scale Master',
-  description: 'A detailed explanation of the 7 mode scales (Dorian, Phrygian, Lydian, etc.) and how to use them. Step up from intermediate to advanced.',
+  title: 'モードスケール完全ガイド | ギタースケールわかる君',
+  description:
+    '7つのモードスケール（ドリアン、フリジアン、リディアン等）を詳しく解説。中級から上級へステップアップするための理論と実践。',
+  keywords: ['モードスケール', 'ドリアン', 'フリジアン', 'リディアン', 'ミクソリディアン', 'ロクリアン', 'ギター'],
+  openGraph: {
+    title: 'モードスケール完全ガイド | ギタースケールわかる君',
+    description: '7つのモードスケールの理論と実践を詳しく解説。',
+    url: 'https://www.guitar-scale.com/articles/mode-scales',
+    siteName: 'ギタースケールわかる君',
+    locale: 'ja_JP',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://www.guitar-scale.com/articles/mode-scales',
+  },
 };
 
 export default function ModeScalesLayout({

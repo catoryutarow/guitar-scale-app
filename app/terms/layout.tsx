@@ -1,8 +1,17 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Guitar Scale Master',
-  description: 'Terms of Service for Guitar Scale Master. Please read the terms and conditions of use.',
+  title: '利用規約',
+  description: 'ギタースケールわかる君の利用規約。サービスのご利用条件についてご確認ください。',
+  openGraph: {
+    title: '利用規約 | ギタースケールわかる君',
+    description: 'ギタースケールわかる君の利用規約。サービスのご利用条件についてご確認ください。',
+    url: 'https://guitar-scale-wakarun.com/terms',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://guitar-scale-wakarun.com/terms',
+  },
 };
 
 export default function TermsLayout({

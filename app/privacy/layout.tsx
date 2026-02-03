@@ -1,8 +1,17 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Guitar Scale Master',
-  description: 'Privacy policy for Guitar Scale Master. Information about how we handle personal data.',
+  title: 'プライバシーポリシー',
+  description: 'ギタースケールわかる君のプライバシーポリシー。個人情報の取り扱いについてご説明します。',
+  openGraph: {
+    title: 'プライバシーポリシー | ギタースケールわかる君',
+    description: 'ギタースケールわかる君のプライバシーポリシー。個人情報の取り扱いについてご説明します。',
+    url: 'https://guitar-scale-wakarun.com/privacy',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://guitar-scale-wakarun.com/privacy',
+  },
 };
 
 export default function PrivacyLayout({

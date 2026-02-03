@@ -432,6 +432,11 @@ export interface Translations {
   homeFeature3Desc: string;
   homeTargetUsers: string;
   homeTargetList: string[];
+
+  // 404ページ
+  notFoundTitle: string;
+  notFoundMessage: string;
+  notFoundBackHome: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -955,6 +960,11 @@ export const translations: Record<Language, Translations> = {
       '楽曲のキーやスケールを知りたい作曲者・アレンジャー',
       '音楽理論をより深く理解したい方',
     ],
+
+    // 404ページ
+    notFoundTitle: 'ページが見つかりません',
+    notFoundMessage: 'お探しのページは存在しないか、移動した可能性があります。',
+    notFoundBackHome: 'ホームに戻る',
   },
 
   en: {
@@ -1477,6 +1487,11 @@ export const translations: Record<Language, Translations> = {
       'Composers and arrangers who want to know the key and scale of a song',
       'Anyone wanting to deepen their understanding of music theory',
     ],
+
+    // 404 Page
+    notFoundTitle: 'Page Not Found',
+    notFoundMessage: 'The page you are looking for does not exist or may have been moved.',
+    notFoundBackHome: 'Back to Home',
   },
 
   zh: {
@@ -1999,6 +2014,11 @@ export const translations: Record<Language, Translations> = {
       '想了解歌曲调性和音阶的作曲家和编曲者',
       '想深入理解音乐理论的人',
     ],
+
+    // 404页面
+    notFoundTitle: '页面未找到',
+    notFoundMessage: '您查找的页面不存在或可能已被移动。',
+    notFoundBackHome: '返回首页',
   },
 
   es: {
@@ -2521,6 +2541,11 @@ export const translations: Record<Language, Translations> = {
       'Compositores y arreglistas que quieren conocer la tonalidad y escala de una canción',
       'Cualquiera que quiera profundizar su comprensión de la teoría musical',
     ],
+
+    // Página 404
+    notFoundTitle: 'Página No Encontrada',
+    notFoundMessage: 'La página que busca no existe o puede haber sido movida.',
+    notFoundBackHome: 'Volver al Inicio',
   },
 };
 
